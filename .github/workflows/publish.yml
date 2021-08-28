@@ -1,0 +1,45 @@
+name: Build & Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install Dependencies
+        run: |
+          script/deploy-prepare
+        env:
+          CI: true
+      - name: Install Dependencies
+        run: npm i
+        env:
+          CI: true
+      - name: Build
+        run: npm run build
+        env:
+          CI: true
+      - name: Archive Build
+        uses: actions/upload-artifact@master
+        with:
+          name: public
+          path: public
+
+deploy:
+  name: Deploy
+  needs: build
+  runs-on: ubuntu-latest
+  steps:
+    - name: Checkout Repo
+      uses: actions/checkout@master
+    - name: Download Artifact
+      uses: actions/download-artifact@master
+      with:
+        name: public
+    - name: GitHub Pages action
+      uses: peaceiris/actions-gh-pages@v3.7.3
