@@ -16,7 +16,7 @@ $ npm run build
 $ npm test
 ```
 
-Edit the main file `src/column.ts`.
+Edit the main file `src/column.ts` and the manifest in `public/glide.json`.
 
 ## Deployment
 
