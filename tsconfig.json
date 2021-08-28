@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "lib": [
+            "es6", "DOM"
+        ],
+        "declaration": true,
+        "removeComments": false,
+        "stripInternal": true,
+        "alwaysStrict": true,
+        "noImplicitAny": false,
+        "noImplicitThis": true,
+        "strictNullChecks": true
+    },
+}

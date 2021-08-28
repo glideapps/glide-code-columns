@@ -1,0 +1,20 @@
+{
+  "name": "Generated Faces Column",
+  "description": "Pictures of people who don't exist. Provided by generated.photos.",
+  "author": "David Siegel <david@glideapps.com>",
+  "params": [
+    {
+      "name": "seed",
+      "displayName": "Seed",
+      "type": "primitive"
+    },
+    {
+      "name": "key",
+      "displayName": "API Key",
+      "type": "string"
+    }
+  ],
+  "result": {
+    "type": "image-uri"
+  }
+}

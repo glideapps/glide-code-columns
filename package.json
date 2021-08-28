@@ -1,0 +1,23 @@
+{
+  "name": "glide-generated-faces",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --outfile=public/bundle.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dvdsgl/glide-generated-faces.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dvdsgl/glide-generated-faces/issues"
+  },
+  "homepage": "https://github.com/dvdsgl/glide-generated-faces#readme",
+  "devDependencies": {
+    "esbuild": "^0.12.24"
+  }
+}
