@@ -1,4 +1,4 @@
-# Generated Faces Column
+# Glide Computed Column
 
 This is an [Experimental Code Column](https://docs.glideapps.com/all/reference/data-editor/computed-columns/experimental-code-column) for Glide that echoes what you pass to it.
 
