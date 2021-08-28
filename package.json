@@ -1,5 +1,5 @@
 {
-  "name": "glide-generated-faces",
+  "name": "glide-computed-column",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dvdsgl/glide-generated-faces.git"
+    "url": "git+https://github.com/dvdsgl/glide-computed-column.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dvdsgl/glide-generated-faces/issues"
+    "url": "https://github.com/dvdsgl/glide-computed-column/issues"
   },
-  "homepage": "https://github.com/dvdsgl/glide-generated-faces#readme",
+  "homepage": "https://github.com/dvdsgl/glide-computed-column#readme",
   "devDependencies": {
     "@types/jest": "^27.0.1",
     "esbuild": "^0.12.24",
