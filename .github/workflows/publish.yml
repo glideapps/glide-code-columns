@@ -32,10 +32,9 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: public
-      - name: list public files
-        run: ls && ls public
+          path: deploy
       - name: GitHub Pages action
         uses: peaceiris/actions-gh-pages@v3.7.3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: public
+          publish_dir: deploy
