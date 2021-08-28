@@ -19,7 +19,7 @@ window.addEventListener("message", async function (event) {
   let result;
   let error;
   try {
-    result = await (main as any)(...params);
+    result = await main(...params);
   } catch (e) {
     result = undefined;
     try {
@@ -38,6 +38,6 @@ window.addEventListener("message", async function (event) {
     response.error = error;
   }
 
-  console.log("in message handler");
+  // TODO fix this type
   (event.source?.postMessage as any)(response, "*");
 });

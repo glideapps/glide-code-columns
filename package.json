@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "esbuild src/index.ts --bundle --outfile=public/bundle.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,14 @@
   },
   "homepage": "https://github.com/dvdsgl/glide-generated-faces#readme",
   "devDependencies": {
-    "esbuild": "^0.12.24"
+    "@types/jest": "^27.0.1",
+    "esbuild": "^0.12.24",
+    "jest": "^27.1.0",
+    "ts-jest": "^27.0.5",
+    "typescript": "^4.4.2"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "whatwg-fetch": "^3.6.2"
   }
 }
