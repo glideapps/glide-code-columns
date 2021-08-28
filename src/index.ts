@@ -38,5 +38,6 @@ window.addEventListener("message", async function (event) {
     response.error = error;
   }
 
+  console.log("in message handler");
   (event.source?.postMessage as any)(response, "*");
 });

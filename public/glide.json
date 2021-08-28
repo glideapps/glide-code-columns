@@ -15,6 +15,6 @@
     }
   ],
   "result": {
-    "type": "image-uri"
+    "type": "string"
   }
 }
