@@ -9,11 +9,6 @@
       "type": "primitive"
     },
     {
-      "name": "emotion",
-      "displayName": "Emotion (neutral|joy|surprise)",
-      "type": "string"
-    },
-    {
       "name": "key",
       "displayName": "API Key",
       "type": "string"
