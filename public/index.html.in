@@ -6,6 +6,6 @@
     <meta http-equiv="pragma" content="no-cache" />
   </head>
   <body>
-    <script src="bundle.js"></script>
+    <script src="BUNDLE"></script>
   </body>
 </html>

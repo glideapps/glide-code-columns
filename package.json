@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "esbuild src/index.ts --bundle --outfile=public/bundle.js",
+    "clean": "rm -f public/{index.html,bundle-*.js}",
+    "compile": "esbuild src/index.ts --entry-names=[dir]/bundle-[hash] --outbase=src --bundle --outdir=public --minify",
+    "build": "npm run clean && npm run compile && npm run bundle",
+    "bundle": "node script/bundle.js",
     "test": "jest"
   },
   "repository": {
