@@ -12,18 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Install Dependencies
-        run: |
-          script/deploy-prepare
-        env:
-          CI: true
       - name: Install Dependencies
         run: npm i
-        env:
-          CI: true
       - name: Build
         run: npm run build
-        env:
-          CI: true
       - name: Archive Build
         uses: actions/upload-artifact@master
         with:
