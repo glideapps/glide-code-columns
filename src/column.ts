@@ -33,10 +33,12 @@ export default glide.column(async (seed, key) => {
   if (key.value === undefined) throw new Error("Missing key");
   if (seed.value === undefined) return undefined;
 
-  let face = assigned[seed.value];
+  const faceKey = `${seed.value}`;
+
+  let face = assigned[faceKey];
   while (face === undefined) {
     if (unassigned.length > 0) {
-      face = assigned[seed.value] = unassigned.pop()!;
+      face = assigned[faceKey] = unassigned.pop()!;
     } else {
       await getMoreFaces(key.value);
     }
