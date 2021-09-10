@@ -9,6 +9,13 @@ export async function sumNodes(
   count: number,
   updated: string
 ): Promise<number> {
+  console.log("sumNodes", {
+    redis,
+    counter,
+    node,
+    count,
+    updated,
+  });
   const client = createClient({
     socket: {
       url: redis,
