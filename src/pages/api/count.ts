@@ -2,6 +2,26 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 import { createClient } from "redis";
 
+const allowCors = (fn) => async (req, res) => {
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  // another common pattern
+  // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+  );
+  if (req.method === "OPTIONS") {
+    res.status(200).end();
+    return;
+  }
+  return await fn(req, res);
+};
+
 export async function sumNodes(
   redis: string,
   counter: string,
@@ -9,13 +29,6 @@ export async function sumNodes(
   count: number,
   updated: string
 ): Promise<number> {
-  console.log("sumNodes", {
-    redis,
-    counter,
-    node,
-    count,
-    updated,
-  });
   const client = createClient({
     socket: {
       url: redis,
@@ -45,17 +58,16 @@ export async function sumNodes(
   return countSum;
 }
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-  console.log({ body: req.body });
-  console.log({ req });
-  const count = await sumNodes(
-    req.body.redis,
-    req.body.counter,
-    req.body.node,
-    req.body.count,
-    req.body.updated
+export default allowCors(async (req: NextApiRequest, res: NextApiResponse) => {
+  const { redis, counter, node, count, updated } = req.query as any;
+  const totalCount = await sumNodes(
+    redis,
+    counter,
+    node,
+    Number.parseInt(count),
+    updated
   );
   res.status(200).json({
-    count,
+    count: totalCount,
   });
-};
+});

@@ -18,19 +18,16 @@ const main = glide.column(async (redis, counter, node, count, updated) => {
   if (count.value === undefined) return undefined;
   if (updated.value === undefined) return undefined;
 
-  const response = await fetch("/api/count", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      redis: redis.value,
-      counter: counter.value,
-      node: node.value,
-      count: count.value,
-      updated: updated.value,
-    }),
-  }).then((x) => x.json());
+  const route = [
+    `/api/count`,
+    `?redis=${encodeURIComponent(redis.value)}`,
+    `&counter=${encodeURIComponent(counter.value)}`,
+    `&node=${encodeURIComponent(node.value)}`,
+    `&count=${encodeURIComponent(count.value)}`,
+    `&updated=${encodeURIComponent(updated.value)}`,
+  ].join("");
+
+  const response = await fetch(route).then((x) => x.json());
   return response.count;
 });
 
@@ -45,6 +42,7 @@ async function listen(event) {
   try {
     result = await main(...params);
   } catch (e) {
+    console.trace(e);
     result = undefined;
     try {
       error = e.toString();
