@@ -53,6 +53,14 @@ export async function sumNodes(
     .map((c) => Number.parseInt(c, 10))
     .reduce((acc, n) => acc + n, 0);
 
+  console.log({
+    counter,
+    node,
+    localCount: count,
+    nodes: { ...(await client.hGetAll(counter)) },
+    total: countSum,
+  });
+
   await client.disconnect();
 
   return countSum;
