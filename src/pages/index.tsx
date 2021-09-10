@@ -1,76 +1,37 @@
 import { useEffect } from "react";
 import * as glide from "../glide";
+import { ColumnValue } from "../glide";
+import { fetchWithColumns } from "../glide-next";
 
-function convert(x: any) {
-  if (x instanceof Date) {
-    return x.toISOString();
-  } else if (Array.isArray(x)) {
-    return x.map(convert);
-  } else {
-    return x;
+async function fetchCount(
+  redis: ColumnValue,
+  counter: ColumnValue,
+  node: ColumnValue,
+  count: ColumnValue,
+  updated: ColumnValue
+) {
+  if (
+    [redis, counter, node, count, updated].some((f) => f.value === undefined)
+  ) {
+    return undefined;
   }
-}
 
-const main = glide.column(async (redis, counter, node, count, updated) => {
-  if (redis.value === undefined) return undefined;
-  if (counter.value === undefined) return undefined;
-  if (node.value === undefined) return undefined;
-  if (count.value === undefined) return undefined;
-  if (updated.value === undefined) return undefined;
+  const response = await fetchWithColumns(`/api/count`, {
+    redis,
+    counter,
+    node,
+    count,
+    updated,
+  });
 
-  const route = [
-    `/api/count`,
-    `?redis=${encodeURIComponent(redis.value)}`,
-    `&counter=${encodeURIComponent(counter.value)}`,
-    `&node=${encodeURIComponent(node.value)}`,
-    `&count=${encodeURIComponent(count.value)}`,
-    `&updated=${encodeURIComponent(updated.value)}`,
-  ].join("");
-
-  const response = await fetch(route).then((x) => x.json());
   return response.count;
-});
-
-async function listen(event) {
-  const {
-    origin,
-    data: { key, params },
-  } = event;
-
-  let result;
-  let error;
-  try {
-    result = await main(...params);
-  } catch (e) {
-    console.trace(e);
-    result = undefined;
-    try {
-      error = e.toString();
-    } catch (e) {
-      error = "Exception can't be stringified.";
-    }
-  }
-
-  const response: any = { key };
-  if (result !== undefined) {
-    result = convert(result);
-    response.result = { type: "string", value: result };
-  }
-  if (error !== undefined) {
-    response.error = error;
-  }
-
-  // TODO fix this type
-  (event.source?.postMessage as any)(response, "*");
 }
 
 function Index() {
   useEffect(() => {
-    window.addEventListener("message", listen);
-    return () => {
-      window.removeEventListener("message", listen);
-    };
+    glide.column(fetchCount);
   });
+
   return <div>redis counter</div>;
 }
 
