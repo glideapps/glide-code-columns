@@ -1,15 +1,35 @@
 {
-  "name": "Echo Column",
-  "description": "Echoes what you type.",
+  "name": "Coordinated Counter",
+  "description": "Count across nodes.",
   "author": "David Siegel <david@glideapps.com>",
   "params": [
     {
-      "name": "message",
-      "displayName": "Message",
+      "name": "redis",
+      "displayName": "Redis URL",
       "type": "string"
+    },
+    {
+      "name": "counter",
+      "displayName": "Counter",
+      "type": "string"
+    },
+    {
+      "name": "node",
+      "displayName": "Node",
+      "type": "string"
+    },
+    {
+      "name": "count",
+      "displayName": "Count",
+      "type": "number"
+    },
+    {
+      "name": "updated",
+      "displayName": "Last Updated",
+      "type": "date-time"
     }
   ],
   "result": {
-    "type": "string"
+    "type": "number"
   }
 }
