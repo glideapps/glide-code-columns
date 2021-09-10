@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "esbuild src/index.ts --bundle --outfile=public/bundle.js",
+    "build": "next build",
+    "dev": "next dev",
     "test": "jest"
   },
   "repository": {
@@ -19,13 +20,17 @@
   "homepage": "https://github.com/dvdsgl/glide-computed-column#readme",
   "devDependencies": {
     "@types/jest": "^27.0.1",
-    "esbuild": "^0.12.24",
+    "@types/react": "^17.0.20",
+    "@types/react-dom": "^17.0.9",
     "jest": "^27.1.0",
     "ts-jest": "^27.0.5",
     "typescript": "^4.4.2"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
+    "next": "^11.1.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "redis": "^4.0.0-rc.1"
   }
 }

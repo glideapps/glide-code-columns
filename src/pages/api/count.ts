@@ -1,4 +1,4 @@
-import * as glide from "./glide";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 import { createClient } from "redis";
 
@@ -38,18 +38,15 @@ export async function sumNodes(
   return countSum;
 }
 
-export default glide.column(async (redis, counter, node, count, updated) => {
-  if (redis.value === undefined) return undefined;
-  if (counter.value === undefined) return undefined;
-  if (node.value === undefined) return undefined;
-  if (count.value === undefined) return undefined;
-  if (updated.value === undefined) return undefined;
-
-  return await sumNodes(
-    redis.value,
-    counter.value,
-    node.value,
-    count.value,
-    updated.value
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+  const count = await sumNodes(
+    req.body.redis,
+    req.body.counter,
+    req.body.node,
+    req.body.count,
+    req.body.updated
   );
-});
+  res.status(200).json({
+    count,
+  });
+};
