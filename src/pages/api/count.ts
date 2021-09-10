@@ -46,6 +46,8 @@ export async function sumNodes(
 }
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+  console.log({ body: req.body });
+  console.log({ req });
   const count = await sumNodes(
     req.body.redis,
     req.body.counter,
