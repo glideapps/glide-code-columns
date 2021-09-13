@@ -7,6 +7,11 @@
       "name": "url",
       "displayName": "URL",
       "type": "uri"
+    },
+    {
+      "name": "query",
+      "displayName": "jq Query",
+      "type": "string"
     }
   ],
   "result": {
