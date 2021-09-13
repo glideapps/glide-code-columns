@@ -1,56 +1,32 @@
 import { allowCors } from "../../glide-next";
-
-import type { NextApiRequest, NextApiResponse } from "next";
-import { createClient } from "redis";
+import { connect } from "../../redis";
 
 export async function sumNodes(
-  redis: string,
   counter: string,
   node: string,
   count: number,
   updated: string
 ): Promise<number> {
-  const client = createClient({
-    socket: {
-      url: redis,
-    },
-  });
-
-  client.on("error", (err: any) => {
-    throw new Error(`Redis Client Error ${err}`);
-  });
-
-  await client.connect();
-
-  const counterNode = `${counter}:${node}`;
-  const lastUpdate = await client.get(counterNode);
-  if (new Date(lastUpdate).getTime() < new Date(updated).getTime()) {
-    await client.set(counterNode, updated);
-    await client.hSet(counter, { [node]: `${count}` });
-  }
-
-  const counts = await client.hVals(counter);
-  const countSum = counts
-    .map((c) => Number.parseInt(c, 10))
-    .reduce((acc, n) => acc + n, 0);
+  const client = await connect();
+  await client.updateCount(counter, node, count, updated);
+  const total = await client.getCount(counter);
 
   console.log({
     counter,
     node,
     localCount: count,
-    nodes: { ...(await client.hGetAll(counter)) },
-    total: countSum,
+    nodes: await client.getNodes(counter),
+    total,
   });
 
   await client.disconnect();
 
-  return countSum;
+  return total;
 }
 
-export default allowCors(async (req: NextApiRequest, res: NextApiResponse) => {
-  const { redis, counter, node, count, updated } = req.query as any;
+export default allowCors(async (req, res) => {
+  const { counter, node, count, updated } = req.query as any;
   const totalCount = await sumNodes(
-    redis,
     counter,
     node,
     Number.parseInt(count),

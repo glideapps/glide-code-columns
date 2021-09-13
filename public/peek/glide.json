@@ -1,0 +1,25 @@
+{
+  "name": "Peek Count",
+  "description": "Count across nodes.",
+  "author": "David Siegel <david@glideapps.com>",
+  "params": [
+    {
+      "name": "counter",
+      "displayName": "Counter",
+      "type": "string"
+    },
+    {
+      "name": "node",
+      "displayName": "Node",
+      "type": "string"
+    },
+    {
+      "name": "updated",
+      "displayName": "Last Updated",
+      "type": "date-time"
+    }
+  ],
+  "result": {
+    "type": "number"
+  }
+}
