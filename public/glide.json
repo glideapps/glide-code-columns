@@ -1,20 +1,15 @@
 {
-  "name": "Glide Atomic Counter",
-  "description": "Read atomic counts.",
+  "name": "Glide Fetch Column",
+  "description": "Fetch from URL",
   "author": "David Siegel <david@glideapps.com>",
   "params": [
     {
-      "name": "counter",
-      "displayName": "Counter",
-      "type": "string"
-    },
-    {
-      "name": "updated",
-      "displayName": "Last Updated",
-      "type": "date-time"
+      "name": "url",
+      "displayName": "URL",
+      "type": "uri"
     }
   ],
   "result": {
-    "type": "number"
+    "type": "primitive"
   }
 }

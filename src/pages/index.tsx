@@ -1,26 +1,18 @@
 import { useEffect } from "react";
 import * as glide from "../glide";
 import { ColumnValue } from "../glide";
-import { fetchWithColumns } from "../glide-next";
 
-async function fetchCount(counter: ColumnValue) {
-  if (counter.value === undefined) {
+async function column(endpoint: ColumnValue) {
+  if (endpoint.value === undefined) {
     return undefined;
   }
-
-  const response = await fetchWithColumns(`/api/peek`, {
-    counter,
-  });
-
-  return response.count;
+  return await fetch(endpoint.value).then((x) => x.text());
 }
 
-function PeekPage() {
+export default () => {
   useEffect(() => {
-    glide.column(fetchCount);
+    glide.column(column);
   });
 
-  return <div>peek count</div>;
-}
-
-export default PeekPage;
+  return <div>fetch column</div>;
+};
