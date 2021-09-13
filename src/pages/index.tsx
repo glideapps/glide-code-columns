@@ -11,7 +11,9 @@ function tranform(json: ColumnValue, query: ColumnValue) {
     return json.value;
   }
   const val = jq.json(JSON.parse(json.value), query.value);
-  return (typeof val === "object" || Array.isArray(val) ? JSON.stringify(val) : val;
+  return typeof val === "object" || Array.isArray(val)
+    ? JSON.stringify(val)
+    : val;
 }
 
 export default () => {
