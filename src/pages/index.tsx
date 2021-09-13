@@ -3,36 +3,24 @@ import * as glide from "../glide";
 import { ColumnValue } from "../glide";
 import { fetchWithColumns } from "../glide-next";
 
-async function fetchCount(
-  redis: ColumnValue,
-  counter: ColumnValue,
-  node: ColumnValue,
-  count: ColumnValue,
-  updated: ColumnValue
-) {
-  if (
-    [redis, counter, node, count, updated].some((f) => f.value === undefined)
-  ) {
+async function fetchCount(counter: ColumnValue) {
+  if (counter.value === undefined) {
     return undefined;
   }
 
-  const response = await fetchWithColumns(`/api/count`, {
-    redis,
+  const response = await fetchWithColumns(`/api/peek`, {
     counter,
-    node,
-    count,
-    updated,
   });
 
   return response.count;
 }
 
-function Index() {
+function PeekPage() {
   useEffect(() => {
     glide.column(fetchCount);
   });
 
-  return <div>redis counter</div>;
+  return <div>peek count</div>;
 }
 
-export default Index;
+export default PeekPage;
