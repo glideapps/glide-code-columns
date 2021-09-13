@@ -9,7 +9,7 @@ export async function sumNodes(
 ): Promise<number> {
   const client = await connect();
   await client.updateCount(counter, node, count, updated);
-  const total = await client.getCount(counter);
+  const total = await client.getDistributedNodeCount(counter);
 
   console.log({
     counter,
