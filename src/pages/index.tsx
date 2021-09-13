@@ -12,7 +12,7 @@ async function fetchAndQuery(url: ColumnValue, query: ColumnValue) {
     json = jq.json(json, query.value);
   }
 
-  return JSON.stringify(json, null, 2);
+  return typeof json === "object" ? JSON.stringify(json) : json;
 }
 
 export default () => {
