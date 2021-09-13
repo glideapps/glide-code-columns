@@ -1,20 +1,20 @@
 {
-  "name": "Glide Fetch Column",
-  "description": "Fetch from URL",
+  "name": "Glide JQ Column",
+  "description": "Transform JSON with JQ",
   "author": "David Siegel <david@glideapps.com>",
   "params": [
     {
-      "name": "url",
-      "displayName": "URL",
-      "type": "uri"
+      "name": "json",
+      "displayName": "JSON",
+      "type": "string"
     },
     {
       "name": "query",
-      "displayName": "jq Query",
+      "displayName": "JQ Query",
       "type": "string"
     }
   ],
   "result": {
-    "type": "primitive"
+    "type": "string"
   }
 }

@@ -3,22 +3,19 @@ import * as glide from "../glide";
 import { ColumnValue } from "../glide";
 import jq from "jq-web";
 
-async function fetchAndQuery(url: ColumnValue, query: ColumnValue) {
-  if (url.value === undefined) {
+function tranform(json: ColumnValue, query: ColumnValue) {
+  if (json.value === undefined) {
     return undefined;
   }
-  let json = await fetch(url.value).then((x) => x.json());
-  if (query.value !== undefined) {
-    json = jq.json(json, query.value);
+  if (query.value === undefined) {
+    return json.value;
   }
-
-  return typeof json === "object" ? JSON.stringify(json) : json;
+  return jq.raw(json.value, query.value);
 }
 
 export default () => {
   useEffect(() => {
-    glide.column(fetchAndQuery);
+    glide.column(tranform);
   });
-
-  return <div>fetch column</div>;
+  return <div>jq column</div>;
 };
