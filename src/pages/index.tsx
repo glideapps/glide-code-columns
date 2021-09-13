@@ -10,7 +10,7 @@ function tranform(json: ColumnValue, query: ColumnValue) {
   if (query.value === undefined) {
     return json.value;
   }
-  return jq.raw(json.value, query.value);
+  return JSON.stringify(jq.json(JSON.parse(json.value), query.value));
 }
 
 export default () => {
