@@ -4,11 +4,11 @@ This is an [Experimental Code Column](https://docs.glideapps.com/all/reference/d
 
 ## Increment
 
-Add a webhook for `https://glide-atomic-counter.vercel.app/api/increment` and pass the value `counter` to increment the counter with that name by `1`.
+Add a webhook for `https://glide-atomic-counter.vercel.app/api/inc` and pass the value `counter` to increment the counter with that name by `1`.
 
 ## Decrement
 
-Add a webhook for `https://glide-atomic-counter.vercel.app/api/decrement` and pass the value `counter` to decrement the counter with that name by `1`.
+Add a webhook for `https://glide-atomic-counter.vercel.app/api/dec` and pass the value `counter` to decrement the counter with that name by `1`.
 
 ## Reading the counter
 
