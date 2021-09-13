@@ -7,9 +7,7 @@ async function fetchAndQuery(url: ColumnValue, query: ColumnValue) {
   if (url.value === undefined) {
     return undefined;
   }
-
-  const path = `/api/fetch?url=${encodeURI(url.value)}`;
-  let json = await fetch(path).then((x) => x.json());
+  let json = await fetch(url.value).then((x) => x.json());
   if (query.value !== undefined) {
     json = jq.json(json, query.value);
   }
