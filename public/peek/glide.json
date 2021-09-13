@@ -9,11 +9,6 @@
       "type": "string"
     },
     {
-      "name": "node",
-      "displayName": "Node",
-      "type": "string"
-    },
-    {
       "name": "updated",
       "displayName": "Last Updated",
       "type": "date-time"

@@ -10,8 +10,8 @@ function lastUpdatedKey(counter: Counter, node: Node): string {
   return `${counter}:${node}`;
 }
 
-function basicCountKey(counter: Counter, node: Node): string {
-  return `${counter}:${node}-count`;
+function basicCountKey(counter: Counter): string {
+  return `${counter}-count`;
 }
 
 export class CounterClient {
@@ -19,7 +19,7 @@ export class CounterClient {
     private readonly client: RedisClientType<RedisModules, RedisLuaScripts>
   ) {}
 
-  public async getCount(counter: Counter): Promise<number> {
+  public async getDistributedNodeCount(counter: Counter): Promise<number> {
     const counts = await this.client.hVals(counter);
     const countSum = counts
       .map((c) => Number.parseInt(c, 10))
@@ -42,13 +42,19 @@ export class CounterClient {
     }
   }
 
-  public async increment(counter: Counter, node: Node) {
-    const basicCount = basicCountKey(counter, node);
+  public async getBasicCount(counter: Counter): Promise<number> {
+    const basicCount = basicCountKey(counter);
+    const s = (await this.client.get(basicCount)) ?? "0";
+    return Number.parseInt(s);
+  }
+
+  public async increment(counter: Counter) {
+    const basicCount = basicCountKey(counter);
     return await this.client.incr(basicCount);
   }
 
-  public async decrement(counter: Counter, node: Node) {
-    const basicCount = basicCountKey(counter, node);
+  public async decrement(counter: Counter) {
+    const basicCount = basicCountKey(counter);
     return await this.client.decr(basicCount);
   }
 
