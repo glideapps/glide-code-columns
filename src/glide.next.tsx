@@ -39,7 +39,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
     return null;
   }
 
-  const installUrl = `https://column.sh/${router.asPath}`;
+  const installUrl = `https://column.sh${router.asPath}`;
   const github = `https://github.com/glideapps/glide-code-columns/blob/master/src/pages${router.asPath}.tsx`;
 
   return (
