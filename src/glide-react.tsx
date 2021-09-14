@@ -33,6 +33,6 @@ export const Column: React.FC<ColumnProps> = (props) => {
   );
 };
 
-export function column(props: ColumnProps): React.VFC {
-  return () => <Column {...props} />;
+export function column(column: glide.GlideColumn): React.VFC {
+  return () => <Column calculate={column} />;
 }
