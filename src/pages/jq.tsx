@@ -1,4 +1,5 @@
-import * as glide from "../glide-react";
+import * as glide from "../glide.next";
+
 import jq from "jq-web";
 
 export default glide.column((json, query) => {
