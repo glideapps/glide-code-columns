@@ -1,0 +1,15 @@
+{
+  "name": "Echo Column",
+  "description": "Echoes what you send to it",
+  "author": "David Siegel <david@glideapps.com>",
+  "params": [
+    {
+      "name": "message",
+      "displayName": "Message",
+      "type": "primitive"
+    }
+  ],
+  "result": {
+    "type": "string"
+  }
+}

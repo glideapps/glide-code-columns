@@ -23,8 +23,21 @@ export const Column: React.FC<ColumnProps> = (props) => {
     glide.column(calculate);
   }, []);
 
+  if (manifest === undefined) {
+    return null;
+  }
+
+  const github = `https://github.com/glideapps/glide-code-columns/blob/master/src/pages${router.asPath}.tsx`;
+
   return (
-    <div>
+    <div className="relative rounded-lg shadow bg-white border p-5 space-y-10">
+      <a
+        className="inline-block absolute top-4 right-4 rounded border bg-gray-100 shadow px-4 py-1"
+        href={github}
+        target="_blank"
+      >
+        View Source
+      </a>
       <pre>{JSON.stringify(manifest, null, 2)}</pre>
       {children}
     </div>
@@ -32,5 +45,9 @@ export const Column: React.FC<ColumnProps> = (props) => {
 };
 
 export function column(column: glide.GlideColumn): React.VFC {
-  return () => <Column calculate={column} />;
+  return () => (
+    <div className="bg-gray-100 p-10" style={{ height: "100vh" }}>
+      <Column calculate={column} />
+    </div>
+  );
 }

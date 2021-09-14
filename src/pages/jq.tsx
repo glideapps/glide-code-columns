@@ -2,7 +2,7 @@ import * as glide from "../glide.next";
 
 import jq from "jq-web";
 
-export default glide.column((json, query) => {
+export default glide.column(async (json, query) => {
   if (json.value === undefined) {
     return undefined;
   }
