@@ -1,4 +1,12 @@
+type ColumnType = "string" | "primitive";
+
 export type StringColumnValue = { type: "string"; value?: string };
+
+export type ColumnParam = {
+  name: string;
+  displayName: string;
+  type: ColumnType;
+};
 
 export type ColumnValue =
   | { type: "primitive"; value?: any }
@@ -53,3 +61,11 @@ export async function listen(event: MessageEvent<any>, main: GlideColumn) {
 export function column(column: GlideColumn): void {
   window.addEventListener("message", (e) => listen(e, column));
 }
+
+export type Manifest = {
+  name: string;
+  description: string;
+  author: string;
+  params: ColumnParam[];
+  result: { type: ColumnType };
+};

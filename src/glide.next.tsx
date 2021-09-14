@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import * as glide from "./glide";
 import { useRouter } from "next/dist/client/router";
+import { Manifest } from "./glide";
 
 export * from "./glide";
-
-// TODO type this
-export type Manifest = any;
 
 export interface ColumnProps {
   calculate: glide.GlideColumn;
