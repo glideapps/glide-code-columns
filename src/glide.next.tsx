@@ -9,6 +9,18 @@ export interface ColumnProps {
   calculate: glide.GlideColumn;
 }
 
+const Row: React.FC<{ title: string }> = (props) => {
+  const { children, title } = props;
+  return (
+    <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+      <dt className="text-sm font-medium text-gray-500">{title}</dt>
+      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+        {children}
+      </dd>
+    </div>
+  );
+};
+
 // Loads the expected manifest to display and wire the column
 export const Column: React.FC<ColumnProps> = (props) => {
   const { children, calculate } = props;
@@ -27,26 +39,41 @@ export const Column: React.FC<ColumnProps> = (props) => {
     return null;
   }
 
+  const installUrl = `https://column.sh/${router.asPath}`;
   const github = `https://github.com/glideapps/glide-code-columns/blob/master/src/pages${router.asPath}.tsx`;
 
   return (
-    <div className="relative rounded-lg shadow bg-white border p-5 space-y-10">
-      <a
-        className="inline-block absolute top-4 right-4 rounded border bg-gray-100 shadow px-4 py-1"
-        href={github}
-        target="_blank"
-      >
-        View Source
-      </a>
-      <pre>{JSON.stringify(manifest, null, 2)}</pre>
-      {children}
+    <div className="overflow-hidden bg-white shadow sm:rounded-lg">
+      <div className="px-4 py-5 sm:px-6">
+        <h3 className="text-lg font-medium leading-6 text-gray-900">
+          {manifest.name}
+        </h3>
+        <p className="max-w-2xl mt-1 text-sm text-gray-500">
+          {manifest.description}
+        </p>
+      </div>
+      <div className="px-4 py-5 border-t border-gray-200 sm:p-0">
+        <dl className="sm:divide-y sm:divide-gray-200">
+          <Row title="Author">{manifest.author}</Row>
+          <Row title="URL">
+            <a className="text-blue-500" href={installUrl} target="_blank">
+              {installUrl}
+            </a>
+          </Row>
+          <Row title="GitHub">
+            <a className="text-blue-500" href={github} target="_blank">
+              {github}
+            </a>
+          </Row>
+        </dl>
+      </div>
     </div>
   );
 };
 
 export function column(column: glide.GlideColumn): React.VFC {
   return () => (
-    <div className="bg-gray-100 p-10" style={{ height: "100vh" }}>
+    <div className="p-10 bg-gray-100" style={{ height: "100vh" }}>
       <Column calculate={column} />
     </div>
   );
