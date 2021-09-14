@@ -6,6 +6,7 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
+    "start": "npm run dev",
     "deploy": "vercel deploy",
     "test": "jest"
   },

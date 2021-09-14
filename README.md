@@ -1,6 +1,6 @@
-# Glide JQ Column
+# Glide Code Columns
 
-Transform JSON with [jq queries](https://stedolan.github.io/jq/tutorial/).
+- [column.sh/jq](https://column.sh/jq): transform JSON with [jq queries](https://stedolan.github.io/jq/tutorial/).
 
 ## Development
 
