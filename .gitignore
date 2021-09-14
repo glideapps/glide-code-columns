@@ -4,3 +4,4 @@ public/bundle.js
 .env
 .next
 .vercel
+build

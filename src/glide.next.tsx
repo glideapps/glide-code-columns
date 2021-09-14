@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import * as glide from "./glide";
 import { useRouter } from "next/dist/client/router";
-import { Manifest } from "./glide";
+import { Manifest, GlideColumn } from "./glide";
 
 export * from "./glide";
 
 export interface ColumnProps {
-  calculate: glide.GlideColumn;
+  manifest: Manifest;
 }
 
 const Row: React.FC<{ title: string }> = (props) => {
@@ -22,17 +22,14 @@ const Row: React.FC<{ title: string }> = (props) => {
 };
 
 // Loads the expected manifest to display and wire the column
-export const Column: React.FC<ColumnProps> = (props) => {
-  const { children, calculate } = props;
+export const Column: React.VFC<Manifest & { children: GlideColumn }> = (
+  props
+) => {
+  const { children: run, ...manifest } = props;
   const router = useRouter();
-  const [manifest, setManifest] = useState<Manifest | undefined>(undefined);
 
   useEffect(() => {
-    fetch(`${router.asPath}/glide.json`)
-      .then((x) => x.json())
-      .then(setManifest);
-
-    glide.column(calculate);
+    glide.column(run);
   }, []);
 
   if (manifest === undefined) {
@@ -43,38 +40,32 @@ export const Column: React.FC<ColumnProps> = (props) => {
   const github = `https://github.com/glideapps/glide-code-columns/blob/master/src/pages${router.asPath}.tsx`;
 
   return (
-    <div className="overflow-hidden bg-white shadow sm:rounded-lg">
-      <div className="px-4 py-5 sm:px-6">
-        <h3 className="text-lg font-medium leading-6 text-gray-900">
-          {manifest.name}
-        </h3>
-        <p className="max-w-2xl mt-1 text-sm text-gray-500">
-          {manifest.description}
-        </p>
-      </div>
-      <div className="px-4 py-5 border-t border-gray-200 sm:p-0">
-        <dl className="sm:divide-y sm:divide-gray-200">
-          <Row title="Author">{manifest.author}</Row>
-          <Row title="URL">
-            <a className="text-blue-500" href={installUrl} target="_blank">
-              {installUrl}
-            </a>
-          </Row>
-          <Row title="GitHub">
-            <a className="text-blue-500" href={github} target="_blank">
-              View source code
-            </a>
-          </Row>
-        </dl>
+    <div className="p-10 bg-gray-100" style={{ height: "100vh" }}>
+      <div className="overflow-hidden bg-white shadow sm:rounded-lg">
+        <div className="px-4 py-5 sm:px-6">
+          <h3 className="text-lg font-medium leading-6 text-gray-900">
+            {manifest.name}
+          </h3>
+          <p className="max-w-2xl mt-1 text-sm text-gray-500">
+            {manifest.description}
+          </p>
+        </div>
+        <div className="px-4 py-5 border-t border-gray-200 sm:p-0">
+          <dl className="sm:divide-y sm:divide-gray-200">
+            <Row title="Author">{manifest.author}</Row>
+            <Row title="URL">
+              <a className="text-blue-500" href={installUrl} target="_blank">
+                {installUrl}
+              </a>
+            </Row>
+            <Row title="GitHub">
+              <a className="text-blue-500" href={github} target="_blank">
+                View source code
+              </a>
+            </Row>
+          </dl>
+        </div>
       </div>
     </div>
   );
 };
-
-export function column(column: glide.GlideColumn): React.VFC {
-  return () => (
-    <div className="p-10 bg-gray-100" style={{ height: "100vh" }}>
-      <Column calculate={column} />
-    </div>
-  );
-}
