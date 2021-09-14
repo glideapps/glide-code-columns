@@ -62,7 +62,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
           </Row>
           <Row title="GitHub">
             <a className="text-blue-500" href={github} target="_blank">
-              {github}
+              View source code
             </a>
           </Row>
         </dl>
