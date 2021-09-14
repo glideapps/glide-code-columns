@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
 public/bundle.js
+public/**/glide.json
 .env
 .next
 .vercel
