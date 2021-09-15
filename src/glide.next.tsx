@@ -6,10 +6,6 @@ import { Manifest, GlideColumn } from "./glide";
 export * from "./glide";
 import { DuplicateIcon } from "@heroicons/react/solid";
 
-import copy from "copy-text-to-clipboard";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
 export interface ColumnProps {
   manifest: Manifest;
 }
@@ -64,12 +60,7 @@ export const Column: React.VFC<Manifest & { children: GlideColumn }> = (
                 <DuplicateIcon
                   className="w-5 h-5 text-gray-400 cursor-pointer hover:text-gray-600"
                   onClick={() => {
-                    copy(installUrl);
-                    toast(`Copied "${installUrl}"`, {
-                      theme: "colored",
-                      position: "top-right",
-                      autoClose: 2000,
-                    });
+                    void navigator.clipboard.writeText(installUrl);
                   }}
                 />
               </div>
@@ -82,7 +73,6 @@ export const Column: React.VFC<Manifest & { children: GlideColumn }> = (
           </dl>
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 };
