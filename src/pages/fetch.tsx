@@ -1,8 +1,20 @@
-import { Column } from "../glide.next";
+import { Column, ColumnComponent } from "../glide.next";
 import jq from "jq-web";
 
+const run: Column = async (url, query) => {
+  if (url.value === undefined) {
+    return undefined;
+  }
+  let json = await fetch(url.value).then((x) => x.json());
+  if (query.value !== undefined) {
+    json = jq.json(json, query.value);
+  }
+
+  return typeof json === "object" ? JSON.stringify(json) : json;
+};
+
 const EchoColumn = () => (
-  <Column
+  <ColumnComponent
     name="Fetch Column"
     description="Fetch and optionally transform JSON."
     author="David Siegel <david@glideapps.com>"
@@ -19,19 +31,8 @@ const EchoColumn = () => (
       },
     ]}
     result={{ type: "primitive" }}
-  >
-    {async function fetchAndQuery(url, query) {
-      if (url.value === undefined) {
-        return undefined;
-      }
-      let json = await fetch(url.value).then((x) => x.json());
-      if (query.value !== undefined) {
-        json = jq.json(json, query.value);
-      }
-
-      return typeof json === "object" ? JSON.stringify(json) : json;
-    }}
-  </Column>
+    run={run}
+  />
 );
 
 export default EchoColumn;

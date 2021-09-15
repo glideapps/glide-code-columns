@@ -1,7 +1,14 @@
-import { Column } from "../glide.next";
+import { Column, ColumnComponent } from "../glide.next";
+
+const run: Column = async (message) => {
+  if (message.value === undefined) {
+    return undefined;
+  }
+  return `echo ${message.value}`;
+};
 
 const EchoColumn = () => (
-  <Column
+  <ColumnComponent
     name="Echo Column"
     description="Echo what you send it"
     author="David Siegel <david@glideapps.com>"
@@ -13,14 +20,8 @@ const EchoColumn = () => (
       },
     ]}
     result={{ type: "string" }}
-  >
-    {async (message) => {
-      if (message.value === undefined) {
-        return undefined;
-      }
-      return `echo ${message.value}`;
-    }}
-  </Column>
+    run={run}
+  />
 );
 
 export default EchoColumn;

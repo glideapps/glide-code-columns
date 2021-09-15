@@ -1,9 +1,22 @@
 import jq from "jq-web";
 import React from "react";
-import { Column } from "../glide.next";
+import { Column, ColumnComponent } from "../glide.next";
+
+const run: Column = async (json, query) => {
+  if (json.value === undefined) {
+    return undefined;
+  }
+  if (query.value === undefined) {
+    return json.value;
+  }
+  const val = jq.json(JSON.parse(json.value), query.value);
+  return typeof val === "object" || Array.isArray(val)
+    ? JSON.stringify(val)
+    : val;
+};
 
 const JQColumn = () => (
-  <Column
+  <ColumnComponent
     name="JQ Column"
     description="Transform JSON with JQ"
     author="David Siegel <david@glideapps.com>"
@@ -20,20 +33,8 @@ const JQColumn = () => (
       },
     ]}
     result={{ type: "string" }}
-  >
-    {async (json, query) => {
-      if (json.value === undefined) {
-        return undefined;
-      }
-      if (query.value === undefined) {
-        return json.value;
-      }
-      const val = jq.json(JSON.parse(json.value), query.value);
-      return typeof val === "object" || Array.isArray(val)
-        ? JSON.stringify(val)
-        : val;
-    }}
-  </Column>
+    run={run}
+  />
 );
 
 export default JQColumn;

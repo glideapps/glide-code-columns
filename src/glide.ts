@@ -12,9 +12,7 @@ export type ColumnValue =
   | { type: "primitive"; value?: any }
   | StringColumnValue;
 
-export type GlideColumn = (
-  ...values: ColumnValue[]
-) => Promise<any | undefined>;
+export type Column = (...values: ColumnValue[]) => Promise<any | undefined>;
 
 function convert(x: any) {
   if (x instanceof Date) {
@@ -26,7 +24,7 @@ function convert(x: any) {
   }
 }
 
-export async function listen(event: MessageEvent<any>, main: GlideColumn) {
+export async function listen(event: MessageEvent<any>, main: Column) {
   const {
     origin,
     data: { key, params },
@@ -58,7 +56,7 @@ export async function listen(event: MessageEvent<any>, main: GlideColumn) {
   (event.source?.postMessage as any)(response, "*");
 }
 
-export function column(column: GlideColumn): void {
+export function column(column: Column): void {
   window.addEventListener("message", (e) => listen(e, column));
 }
 

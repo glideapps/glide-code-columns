@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import * as glide from "./glide";
 import { useRouter } from "next/dist/client/router";
-import { Manifest, GlideColumn } from "./glide";
+import { Manifest, Column } from "./glide";
 
 export * from "./glide";
 import { DuplicateIcon } from "@heroicons/react/solid";
@@ -21,10 +21,10 @@ const Row: React.FC<{ title: string }> = (props) => {
 };
 
 // Loads the expected manifest to display and wire the column
-export const Column: React.VFC<Manifest & { children: GlideColumn }> = (
+export const ColumnComponent: React.VFC<Manifest & { run: Column }> = (
   props
 ) => {
-  const { children: run, ...manifest } = props;
+  const { run, ...manifest } = props;
   const router = useRouter();
   const [host, setHost] = useState<string>();
 
