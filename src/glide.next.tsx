@@ -4,6 +4,11 @@ import { useRouter } from "next/dist/client/router";
 import { Manifest, GlideColumn } from "./glide";
 
 export * from "./glide";
+import { DuplicateIcon } from "@heroicons/react/solid";
+
+import copy from "copy-text-to-clipboard";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export interface ColumnProps {
   manifest: Manifest;
@@ -36,7 +41,7 @@ export const Column: React.VFC<Manifest & { children: GlideColumn }> = (
     return null;
   }
 
-  const installUrl = `https://column.sh${router.asPath}`;
+  const installUrl = `column.sh${router.asPath}`;
   const github = `https://github.com/glideapps/glide-code-columns/blob/master/src/pages${router.asPath}.tsx`;
 
   return (
@@ -54,9 +59,20 @@ export const Column: React.VFC<Manifest & { children: GlideColumn }> = (
           <dl className="sm:divide-y sm:divide-gray-200">
             <Row title="Author">{manifest.author}</Row>
             <Row title="URL">
-              <a className="text-blue-500" href={installUrl} target="_blank">
-                {installUrl}
-              </a>
+              <div className="flex items-center space-x-2">
+                <div className="text-gray-600">{installUrl}</div>
+                <DuplicateIcon
+                  className="w-5 h-5 text-gray-400 cursor-pointer hover:text-gray-600"
+                  onClick={() => {
+                    copy(installUrl);
+                    toast(`Copied "${installUrl}"`, {
+                      theme: "colored",
+                      position: "top-right",
+                      autoClose: 2000,
+                    });
+                  }}
+                />
+              </div>
             </Row>
             <Row title="GitHub">
               <a className="text-blue-500" href={github} target="_blank">
@@ -66,6 +82,7 @@ export const Column: React.VFC<Manifest & { children: GlideColumn }> = (
           </dl>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

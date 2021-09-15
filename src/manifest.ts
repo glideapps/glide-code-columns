@@ -4,7 +4,7 @@ import { Manifest } from "./glide.next";
 
 const pages = fs
   .readdirSync(`${__dirname}/pages`)
-  .filter((p) => !p.startsWith("_"))
+  .filter((p) => !["_app.js", "index.js"].includes(p))
   .filter((p) => p.endsWith(".js"));
 
 for (const page of pages) {
