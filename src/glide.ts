@@ -1,4 +1,4 @@
-type ColumnType = "string" | "primitive";
+type ColumnType = "string" | "primitive" | "number" | "image-uri";
 
 export type StringColumnValue = { type: "string"; value?: string };
 
@@ -10,6 +10,7 @@ export type ColumnParam = {
 
 export type ColumnValue =
   | { type: "primitive"; value?: any }
+  | { type: "number"; value?: number }
   | StringColumnValue;
 
 export type Column = (...values: ColumnValue[]) => Promise<any | undefined>;
