@@ -37,7 +37,7 @@ export const Column: React.VFC<Manifest & { children: GlideColumn }> = (
     return null;
   }
 
-  const installUrl = `${host}${router.asPath}`;
+  const installUrl = host === undefined ? undefined : `${host}${router.asPath}`;
   const github = `https://github.com/glideapps/glide-code-columns/blob/master/src/pages${router.asPath}.tsx`;
 
   return (
@@ -53,15 +53,17 @@ export const Column: React.VFC<Manifest & { children: GlideColumn }> = (
           <dl className="">
             <Row title="Author">{manifest.author}</Row>
             <Row title="URL">
-              <div className="flex items-center space-x-2">
-                <div className="opacity-70">{installUrl}</div>
-                <DuplicateIcon
-                  className="w-5 h-5 cursor-pointer opacity-80 hover:opacity-100"
-                  onClick={() => {
-                    void navigator.clipboard.writeText(installUrl);
-                  }}
-                />
-              </div>
+              {installUrl && (
+                <div className="flex items-center space-x-2">
+                  <div className="opacity-70">{installUrl}</div>
+                  <DuplicateIcon
+                    className="w-5 h-5 cursor-pointer opacity-80 hover:opacity-100"
+                    onClick={() => {
+                      void navigator.clipboard.writeText(installUrl);
+                    }}
+                  />
+                </div>
+              )}
             </Row>
             <Row title="GitHub">
               <a className="text-blue-500" href={github} target="_blank">
