@@ -26,8 +26,10 @@ export const Column: React.VFC<Manifest & { children: GlideColumn }> = (
 ) => {
   const { children: run, ...manifest } = props;
   const router = useRouter();
+  const [host, setHost] = useState<string>();
 
   useEffect(() => {
+    setHost(window.location.host);
     glide.column(run);
   }, []);
 
@@ -35,7 +37,7 @@ export const Column: React.VFC<Manifest & { children: GlideColumn }> = (
     return null;
   }
 
-  const installUrl = `column.sh${router.asPath}`;
+  const installUrl = `${host}${router.asPath}`;
   const github = `https://github.com/glideapps/glide-code-columns/blob/master/src/pages${router.asPath}.tsx`;
 
   return (
