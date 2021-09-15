@@ -5,12 +5,12 @@ import { Column, ColumnComponent } from "../glide.next";
 const run: Column = async (sizeValue, categoryValue, randomSeed) => {
   const { value: size = 600 } = sizeValue;
   const { value: seed = "1" } = randomSeed;
-  let { value: category = "" } = categoryValue;
-  if (category === "random") {
-    category = "";
-  }
+  const { value: category = "" } = categoryValue;
 
-  return `https://doodleipsum.com/${size}/${category}?n=${encodeURIComponent(
+  const categoryPath =
+    category === "random" || category === "" ? "" : `/${category}`;
+
+  return `https://doodleipsum.com/${size}${categoryPath}.png?n=${encodeURIComponent(
     seed
   )}`;
 };
