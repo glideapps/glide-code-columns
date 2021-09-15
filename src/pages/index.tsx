@@ -44,34 +44,39 @@ const Index = ({ manifests }: Props) => {
   );
   const [selectedColumn, setSelectedColumn] = useState(columns[0]);
   return (
-    <div className="flex w-full" style={{ height: "100vh" }}>
-      <div className="w-1/4 p-4 space-y-2 border-r">
-        {columns.map((column) => {
-          const manifest = manifests[column];
-          return (
-            <div
-              className={classNames(
-                "p-4 border rounded-lg transition-shadow flex items-center space-x-2",
-                {
-                  "text-gray-600 bg-gray-50 cursor-pointer hover:shadow-md hover:bg-white":
-                    column !== selectedColumn,
-                  "text-black bg-white shadow-lg": column === selectedColumn,
-                }
-              )}
-              key={column}
-              onClick={() => setSelectedColumn(column)}
-            >
-              <BeakerIcon className="w-8 h-8 text-green-600" />
-              <div className="flex-grow">
-                <div className="font-medium">{manifest.name}</div>
-                <div className="text-sm opacity-80">{manifest.description}</div>
+    <div className="flex flex-col h-screen">
+      <div className="h-16 bg-[#12CCE5] shadow hidden">Header</div>
+      <div className="flex flex-grow w-full">
+        <div className="w-1/3 p-4 space-y-2 border-r">
+          {columns.map((column) => {
+            const manifest = manifests[column];
+            return (
+              <div
+                className={classNames(
+                  "p-4 border rounded-lg transition-shadow flex items-center space-x-2",
+                  {
+                    "text-gray-600 bg-gray-50 cursor-pointer hover:shadow-md hover:bg-white":
+                      column !== selectedColumn,
+                    "text-black bg-white shadow": column === selectedColumn,
+                  }
+                )}
+                key={column}
+                onClick={() => setSelectedColumn(column)}
+              >
+                <BeakerIcon className="w-8 h-8 text-green-600" />
+                <div className="flex-grow">
+                  <div className="font-medium">{manifest.name}</div>
+                  <div className="text-sm opacity-80">
+                    {manifest.description}
+                  </div>
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
-      <div className="flex-grow bg-gray-100">
-        <iframe className="w-full h-full" src={`/${selectedColumn}`}></iframe>
+            );
+          })}
+        </div>
+        <div className="flex-grow bg-gray-100">
+          <iframe className="w-full h-full" src={`/${selectedColumn}`}></iframe>
+        </div>
       </div>
     </div>
   );

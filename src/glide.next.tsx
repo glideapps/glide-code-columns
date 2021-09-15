@@ -14,10 +14,8 @@ const Row: React.FC<{ title: string }> = (props) => {
   const { children, title } = props;
   return (
     <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-      <dt className="text-sm font-medium text-gray-500">{title}</dt>
-      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-        {children}
-      </dd>
+      <dt className="font-medium text-gray-500">{title}</dt>
+      <dd className="mt-1 text-gray-900 sm:mt-0 sm:col-span-2">{children}</dd>
     </div>
   );
 };
@@ -41,13 +39,13 @@ export const Column: React.VFC<Manifest & { children: GlideColumn }> = (
   const github = `https://github.com/glideapps/glide-code-columns/blob/master/src/pages${router.asPath}.tsx`;
 
   return (
-    <div className="p-10 bg-gray-100" style={{ height: "100vh" }}>
+    <div className="h-screen p-4 bg-gray-100">
       <div className="overflow-hidden bg-white shadow sm:rounded-lg">
         <div className="px-4 py-5 sm:px-6">
-          <h3 className="text-lg font-medium leading-6 text-gray-900">
+          <h3 className="text-3xl font-medium text-gray-900">
             {manifest.name}
           </h3>
-          <p className="max-w-2xl mt-1 text-sm text-gray-500">
+          <p className="max-w-2xl mt-1 text-lg text-gray-500">
             {manifest.description}
           </p>
         </div>

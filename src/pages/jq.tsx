@@ -4,7 +4,7 @@ import { Column } from "../glide.next";
 
 const JQColumn = () => (
   <Column
-    name="Glide JQ Column"
+    name="JQ Column"
     description="Transform JSON with JQ"
     author="David Siegel <david@glideapps.com>"
     params={[
