@@ -44,20 +44,21 @@ const Index = ({ manifests }: Props) => {
   );
   const [selectedColumn, setSelectedColumn] = useState(columns[0]);
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen text-gray-700 dark:text-gray-50">
       <div className="h-16 bg-[#12CCE5] shadow hidden">Header</div>
       <div className="flex flex-grow w-full">
-        <div className="w-1/3 p-4 space-y-2 border-r">
+        <div className="w-1/3 p-4 space-y-2 border-r dark:bg-gray-900 dark:border-transparent">
           {columns.map((column) => {
             const manifest = manifests[column];
             return (
               <div
                 className={classNames(
-                  "p-4 border rounded-lg transition-shadow flex items-center space-x-2",
+                  "p-4  dark:border-gray-700 rounded-lg transition-shadow flex items-center space-x-4",
                   {
-                    "text-gray-600 bg-gray-50 cursor-pointer hover:shadow-md hover:bg-white":
+                    " dark:bg-gray-900 cursor-pointer hover:shadow-md hover:bg-white dark:hover:bg-gray-800 border dark:border-transparent":
                       column !== selectedColumn,
-                    "text-black bg-white shadow": column === selectedColumn,
+                    "bg-white dark:bg-gray-800 shadow-lg border dark:border-transparent":
+                      column === selectedColumn,
                   }
                 )}
                 key={column}
@@ -74,7 +75,7 @@ const Index = ({ manifests }: Props) => {
             );
           })}
         </div>
-        <div className="flex-grow bg-gray-100">
+        <div className="flex-grow bg-gray-100 dark:bg-black">
           <iframe className="w-full h-full" src={`/${selectedColumn}`}></iframe>
         </div>
       </div>
