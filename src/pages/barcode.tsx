@@ -8,8 +8,12 @@ enum Symbology {
 }
 
 const run: Column = async (dataValue, sizeValue) => {
-  const { value: size = 600 } = sizeValue;
-  const { value: content = "1" } = dataValue;
+  const { value: content } = dataValue;
+  const { value: size = 500 } = sizeValue;
+
+  if (content === undefined) {
+    return undefined;
+  }
 
   return url(`https://mobiledemand-barcode.azurewebsites.net/barcode/image`, {
     content,
