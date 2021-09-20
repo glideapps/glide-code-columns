@@ -1,4 +1,4 @@
-type ColumnType = "string" | "primitive" | "number" | "image-uri";
+type ColumnType = "string" | "primitive" | "number" | "image-uri" | "uri";
 
 export type StringColumnValue = { type: "string"; value?: string };
 
