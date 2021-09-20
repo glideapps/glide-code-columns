@@ -37,7 +37,8 @@ export const ColumnComponent: React.VFC<Manifest & { run: Column }> = (
     return null;
   }
 
-  const installUrl = host === undefined ? undefined : `${host}${router.asPath}`;
+  const installUrl =
+    host === undefined ? undefined : `https://${host}${router.asPath}`;
   const github = `https://github.com/glideapps/glide-code-columns/blob/master/src/pages${router.asPath}.tsx`;
 
   return (
