@@ -5,8 +5,6 @@ import { GetStaticProps } from "next";
 import { useState } from "react";
 import { Manifest } from "../glide";
 
-import { BeakerIcon } from "@heroicons/react/solid";
-
 export async function getAllColumnComponents(): Promise<string[]> {
   return fs
     .readdirSync(`src/pages`)
@@ -47,27 +45,28 @@ const Index = ({ manifests }: Props) => {
     <div className="flex flex-col h-screen text-gray-700 dark:text-gray-50">
       <div className="h-16 bg-[#12CCE5] shadow hidden">Header</div>
       <div className="flex flex-grow w-full">
-        <div className="w-1/3 p-4 space-y-2 border-r dark:bg-gray-900 dark:border-transparent">
+        <div className="w-1/3 max-w-sm border-r dark:bg-gray-900 dark:border-transparent">
           {columns.map((column) => {
             const manifest = manifests[column];
             return (
               <div
                 className={classNames(
-                  "p-4  dark:border-gray-700 rounded-lg transition-shadow flex items-center space-x-4",
+                  "p-4 flex items-center space-x-4 overflow-hidden cursor-pointer border-b",
                   {
-                    " dark:bg-gray-900 cursor-pointer hover:shadow-md hover:bg-white dark:hover:bg-gray-800 border dark:border-transparent":
+                    " dark:bg-gray-900 cursor-pointer hover:bg-white dark:hover:bg-gray-800":
                       column !== selectedColumn,
-                    "bg-white dark:bg-gray-800 shadow-lg border dark:border-transparent":
-                      column === selectedColumn,
+                    "bg-blue-500 text-white": column === selectedColumn,
                   }
                 )}
                 key={column}
                 onClick={() => setSelectedColumn(column)}
               >
-                <BeakerIcon className="w-8 h-8 text-green-600" />
                 <div className="flex-grow">
                   <div className="font-medium">{manifest.name}</div>
-                  <div className="text-sm opacity-80">
+                  <div
+                    className="hidden text-sm md:block opacity-80"
+                    style={{ lineClamp: 2 }}
+                  >
                     {manifest.description}
                   </div>
                 </div>

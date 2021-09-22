@@ -13,7 +13,7 @@ export interface ColumnProps {
 const Row: React.FC<{ title: string }> = (props) => {
   const { children, title } = props;
   return (
-    <div className="py-4 sm:py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+    <div className="py-3 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
       <dt className="font-medium opacity-80">{title}</dt>
       <dd className="mt-1 sm:mt-0 sm:col-span-3">{children}</dd>
     </div>
@@ -38,12 +38,13 @@ const REPL: React.VFC<Manifest & { run: Column }> = (props) => {
         } as glide.ColumnValue)
     );
     run(...args).then(setResult);
-  }, [values]);
+  }, [values.join("")]);
 
-  const inputClassName = "w-full p-2 bg-white border-2 border-gray-300 rounded";
+  const inputClassName =
+    "w-full py-2 px-3 border border-gray-400 rounded-lg text-sm";
   return (
     <div className="p-5 mt-5 overflow-hidden bg-white shadow sm:rounded-lg dark:bg-gray-900">
-      <div className="space-y-4">
+      <div className="space-y-6">
         {params.map((p, i) => (
           <div>
             <div className="mb-1 text-xs font-semibold uppercase opacity-70">
@@ -100,17 +101,15 @@ export const ColumnComponent: React.VFC<Manifest & { run: Column }> = (
   const github = `https://github.com/glideapps/glide-code-columns/blob/master/src/pages${router.asPath}.tsx`;
 
   return (
-    <div className="h-screen px-10 py-4 bg-gray-100 dark:bg-black dark:text-white">
+    <div className="h-screen max-w-2xl px-4 py-4 mx-auto bg-gray-100 dark:bg-black dark:text-white">
       <div className="overflow-hidden bg-white shadow sm:rounded-lg dark:bg-gray-900">
         <div className="px-4 py-5 sm:px-6">
-          <h3 className="text-3xl font-medium">{manifest.name}</h3>
-          <p className="max-w-2xl mt-1 text-lg opacity-80">
-            {manifest.description}
-          </p>
+          <h3 className="text-2xl font-medium">{manifest.name}</h3>
+          <p className="max-w-2xl mt-1 opacity-80">{manifest.description}</p>
         </div>
         <div className="px-4 py-5 border-t border-gray-200 dark:border-gray-700 sm:p-0">
           <dl className="">
-            <Row title="Author">{manifest.author}</Row>
+            {/* <Row title="Author">{manifest.author}</Row> */}
             <Row title="URL">
               {installUrl && (
                 <div className="flex items-center space-x-2">
