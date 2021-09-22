@@ -20,6 +20,64 @@ const Row: React.FC<{ title: string }> = (props) => {
   );
 };
 
+const REPL: React.VFC<Manifest & { run: Column }> = (props) => {
+  const {
+    params,
+    result: { type: resultType },
+    run,
+  } = props;
+  const [result, setResult] = useState<any>();
+  const [values, setValues] = useState<any[]>(params.map(() => undefined));
+
+  useEffect(() => {
+    const args = values.map(
+      (value, i) =>
+        ({
+          ...params[i],
+          value,
+        } as glide.ColumnValue)
+    );
+    run(...args).then(setResult);
+  }, [values]);
+
+  const inputClassName = "w-full p-2 bg-white border-2 border-gray-300 rounded";
+  return (
+    <div className="p-5 mt-5 overflow-hidden bg-white shadow sm:rounded-lg dark:bg-gray-900">
+      <div className="space-y-4">
+        {params.map((p, i) => (
+          <div>
+            <div className="mb-1 text-xs font-semibold uppercase opacity-70">
+              {p.displayName}
+            </div>
+            <input
+              className={inputClassName}
+              onChange={(e) => {
+                setValues([
+                  ...values.slice(0, i),
+                  e.target.value,
+                  ...values.slice(i + 1, values.length - i),
+                ]);
+              }}
+              placeholder={p.displayName}
+            ></input>
+          </div>
+        ))}
+      </div>
+      <hr className="my-8" />
+      <div className="">
+        <div className="mb-1 text-xs font-semibold uppercase opacity-70">
+          Result
+        </div>
+        {resultType === "image-uri" ? (
+          <img className="object-contain max-w-lg mx-auto" src={result} />
+        ) : (
+          <input disabled className={inputClassName} value={result}></input>
+        )}
+      </div>
+    </div>
+  );
+};
+
 // Loads the expected manifest to display and wire the column
 export const ColumnComponent: React.VFC<Manifest & { run: Column }> = (
   props
@@ -74,6 +132,7 @@ export const ColumnComponent: React.VFC<Manifest & { run: Column }> = (
           </dl>
         </div>
       </div>
+      <REPL {...props} />
     </div>
   );
 };
