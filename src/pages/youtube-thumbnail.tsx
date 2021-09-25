@@ -34,6 +34,7 @@ const YouTubeThumbnailColumn = () => (
       },
     ]}
     result={{ type: "image-uri" }}
+    example={{ videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }}
     run={run}
   />
 );

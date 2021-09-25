@@ -10,6 +10,11 @@ export interface ColumnProps {
   manifest: Manifest;
 }
 
+// TODO type this once Manifest is better-typed
+type ExampleArguments = any;
+
+type Props = Manifest & { run: Column; example?: ExampleArguments };
+
 const Row: React.FC<{ title: string }> = (props) => {
   const { children, title } = props;
   return (
@@ -20,14 +25,17 @@ const Row: React.FC<{ title: string }> = (props) => {
   );
 };
 
-const REPL: React.VFC<Manifest & { run: Column }> = (props) => {
+const REPL: React.VFC<Props> = (props) => {
   const {
     params,
     result: { type: resultType },
     run,
+    example = {},
   } = props;
   const [result, setResult] = useState<any>();
-  const [values, setValues] = useState<any[]>(params.map(() => undefined));
+  const [values, setValues] = useState<any[]>(
+    params.map((p) => example[p.name])
+  );
 
   useEffect(() => {
     const args = values.map(
@@ -52,6 +60,7 @@ const REPL: React.VFC<Manifest & { run: Column }> = (props) => {
             </div>
             <input
               className={inputClassName}
+              defaultValue={values[i]}
               onChange={(e) => {
                 setValues([
                   ...values.slice(0, i),
@@ -80,9 +89,7 @@ const REPL: React.VFC<Manifest & { run: Column }> = (props) => {
 };
 
 // Loads the expected manifest to display and wire the column
-export const ColumnComponent: React.VFC<Manifest & { run: Column }> = (
-  props
-) => {
+export const ColumnComponent: React.VFC<Props> = (props) => {
   const { run, ...manifest } = props;
   const router = useRouter();
   const [host, setHost] = useState<string>();
@@ -111,7 +118,6 @@ export const ColumnComponent: React.VFC<Manifest & { run: Column }> = (
         </div>
         <div className="px-4 py-5 border-t border-gray-200 dark:border-gray-700 sm:p-0">
           <dl className="">
-            {/* <Row title="Author">{manifest.author}</Row> */}
             <Row title="URL">
               {installUrl && (
                 <div className="flex items-center space-x-2">

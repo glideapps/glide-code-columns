@@ -13,7 +13,7 @@ const run: Column = async (url, query) => {
   return typeof json === "object" ? JSON.stringify(json) : json;
 };
 
-const EchoColumn = () => (
+const FetchColumn = () => (
   <ColumnComponent
     name="Fetch Column"
     description="Fetch and optionally transform JSON."
@@ -31,8 +31,12 @@ const EchoColumn = () => (
       },
     ]}
     result={{ type: "primitive" }}
+    example={{
+      url: "https://pokeapi.co/api/v2/pokemon/1",
+      query: `.name + " has moves: " + (.moves | map(.move.name) | join(", "))`,
+    }}
     run={run}
   />
 );
 
-export default EchoColumn;
+export default FetchColumn;

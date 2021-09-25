@@ -34,6 +34,10 @@ const JQColumn = () => (
     ]}
     result={{ type: "string" }}
     run={run}
+    example={{
+      json: `{ "name": "David" }`,
+      query: ".name",
+    }}
   />
 );
 

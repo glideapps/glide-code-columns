@@ -41,6 +41,7 @@ const BarcodeColumn = () => (
         type: "number",
       },
     ]}
+    example={{ content: 12345678910, size: 250 }}
     result={{ type: "image-uri" }}
     run={run}
   />

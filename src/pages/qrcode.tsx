@@ -35,6 +35,7 @@ const QRCodeColumn = () => (
         type: "number",
       },
     ]}
+    example={{ content: "https://glideapps.com", size: 250 }}
     result={{ type: "image-uri" }}
     run={run}
   />
