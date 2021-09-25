@@ -33,8 +33,8 @@ const JQColumn = () => (
     result={{ type: "string" }}
     run={run}
     example={{
-      json: `{ "name": "David" }`,
-      query: ".name",
+      json: `{ "name": "David", "moves": [{ "move": "Slap" }, { "move": "Toss" }] }`,
+      query: `.name + " has moves: " + (.moves | map(.move) | join(", "))`,
     }}
   />
 );

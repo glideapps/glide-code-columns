@@ -31,7 +31,7 @@ const FetchColumn = () => (
     result={{ type: "primitive" }}
     example={{
       url: "https://pokeapi.co/api/v2/pokemon/1",
-      query: `.name + " has moves: " + (.moves | map(.move.name) | join(", "))`,
+      query: `.name + " has types: " + (.types | map(.type.name) | join(", "))`,
     }}
     run={run}
   />
