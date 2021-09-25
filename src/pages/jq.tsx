@@ -17,7 +17,7 @@ const run: Column = async (json, query) => {
 
 const JQColumn = () => (
   <ColumnComponent
-    name="JQ Column"
+    name="Transform JSON (jq)"
     description="Transform JSON with JQ"
     author="David Siegel <david@glideapps.com>"
     params={{
