@@ -9,7 +9,7 @@ import type { ManifestConvenient } from "./manifest";
 
 type Props<TColumnParams> = ManifestConvenient<TColumnParams> & {
   run: Column;
-  example?: TColumnParams;
+  example?: Partial<TColumnParams>;
 };
 
 const Row: React.FC<{ title: string }> = (props) => {
