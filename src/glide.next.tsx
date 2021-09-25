@@ -7,10 +7,10 @@ export * from "./glide";
 import { DuplicateIcon } from "@heroicons/react/solid";
 import type { ManifestConvenient } from "./manifest";
 
-// TODO type this once Manifest is better-typed
-type ExampleArguments = any;
-
-type Props = ManifestConvenient & { run: Column; example?: ExampleArguments };
+type Props<TColumnParams> = ManifestConvenient<TColumnParams> & {
+  run: Column;
+  example?: TColumnParams;
+};
 
 const Row: React.FC<{ title: string }> = (props) => {
   const { children, title } = props;
@@ -22,7 +22,7 @@ const Row: React.FC<{ title: string }> = (props) => {
   );
 };
 
-const REPL: React.VFC<Props> = (props) => {
+const REPL: React.VFC<Props<any>> = (props) => {
   const {
     params,
     result: { type: resultType },
@@ -86,7 +86,7 @@ const REPL: React.VFC<Props> = (props) => {
 };
 
 // Loads the expected manifest to display and wire the column
-export const ColumnComponent: React.VFC<Props> = (props) => {
+export function ColumnComponent<TColumnParams>(props: Props<TColumnParams>) {
   const { run, ...manifest } = props;
   const router = useRouter();
   const [host, setHost] = useState<string>();
@@ -139,4 +139,4 @@ export const ColumnComponent: React.VFC<Props> = (props) => {
       <REPL {...props} />
     </div>
   );
-};
+}
