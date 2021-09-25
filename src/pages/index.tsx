@@ -51,7 +51,7 @@ const Index = ({ manifests }: Props) => {
             return (
               <div
                 className={classNames(
-                  "p-4 flex items-center space-x-4 overflow-hidden cursor-pointer border-b",
+                  "p-4 flex items-center space-x-4 overflow-hidden cursor-pointer border-b dark:border-gray-600",
                   {
                     " dark:bg-gray-900 cursor-pointer hover:bg-white dark:hover:bg-gray-800":
                       column !== selectedColumn,
@@ -63,12 +63,6 @@ const Index = ({ manifests }: Props) => {
               >
                 <div className="flex-grow">
                   <div className="font-medium">{manifest.name}</div>
-                  <div
-                    className="hidden text-sm md:block opacity-80"
-                    style={{ lineClamp: 2 }}
-                  >
-                    {manifest.description}
-                  </div>
                 </div>
               </div>
             );

@@ -41,7 +41,7 @@ const REPL: React.VFC<Manifest & { run: Column }> = (props) => {
   }, [values.join("")]);
 
   const inputClassName =
-    "w-full py-2 px-3 border border-gray-400 rounded-lg text-sm";
+    "w-full py-2 px-3 border border-gray-400 rounded-md text-sm dark:bg-gray-700";
   return (
     <div className="p-5 mt-5 overflow-hidden bg-white shadow sm:rounded-lg dark:bg-gray-900">
       <div className="space-y-6">
@@ -64,7 +64,7 @@ const REPL: React.VFC<Manifest & { run: Column }> = (props) => {
           </div>
         ))}
       </div>
-      <hr className="my-8" />
+      <hr className="my-8 dark:border-gray-500" />
       <div className="">
         <div className="mb-1 text-xs font-semibold uppercase opacity-70">
           Result
@@ -104,8 +104,10 @@ export const ColumnComponent: React.VFC<Manifest & { run: Column }> = (
     <div className="h-screen max-w-2xl px-4 py-4 mx-auto bg-gray-100 dark:bg-black dark:text-white">
       <div className="overflow-hidden bg-white shadow sm:rounded-lg dark:bg-gray-900">
         <div className="px-4 py-5 sm:px-6">
-          <h3 className="text-2xl font-medium">{manifest.name}</h3>
-          <p className="max-w-2xl mt-1 opacity-80">{manifest.description}</p>
+          <h3 className="text-xl font-medium">{manifest.name}</h3>
+          <p className="max-w-2xl mt-1 text-sm opacity-80">
+            {manifest.description}
+          </p>
         </div>
         <div className="px-4 py-5 border-t border-gray-200 dark:border-gray-700 sm:p-0">
           <dl className="">
