@@ -1,6 +1,26 @@
 import * as fs from "fs";
 
-import { Manifest } from "./glide.next";
+import { ColumnParam, Manifest } from "./glide.next";
+
+export type ManifestConvenient = Omit<Manifest, "params"> & {
+  params: Record<ColumnParam["name"], Omit<ColumnParam, "name">>;
+};
+
+function toStrictManifest(convenient: ManifestConvenient): Manifest {
+  // We carefully pick out just the props in manifest, because more
+  // could come in from the component.
+  const { name, description, author, result, params } = convenient;
+  return {
+    name,
+    description,
+    author,
+    result,
+    params: Object.entries(params).map(([name, param]) => ({
+      name,
+      ...param,
+    })),
+  };
+}
 
 const pages = fs
   .readdirSync(`${__dirname}/pages`)
@@ -9,21 +29,15 @@ const pages = fs
 
 for (const page of pages) {
   const { default: exports } = require(`./pages/${page}`);
-  const { props: manifest } = exports() as { props: Manifest };
+  const { props: manifestConvenient } = exports() as {
+    props: ManifestConvenient;
+  };
   const manifestDir = `public/${page.split(".")[0]}`;
   const manifestFile = `${manifestDir}/glide.json`;
-
-  // Props can have extra stuff, so we copy
-  const strictManifest: Manifest = {
-    name: manifest.name,
-    description: manifest.description,
-    author: manifest.author,
-    params: manifest.params,
-    result: manifest.result,
-  };
+  const manifest = toStrictManifest(manifestConvenient);
 
   if (!fs.existsSync(manifestDir)) {
     fs.mkdirSync(manifestDir, { recursive: true });
   }
-  fs.writeFileSync(manifestFile, JSON.stringify(strictManifest, null, 2));
+  fs.writeFileSync(manifestFile, JSON.stringify(manifest, null, 2));
 }

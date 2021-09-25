@@ -20,24 +20,21 @@ const DoodleColumn = () => (
     name="Doodle Ipsum"
     description="Generate random doodles with https://doodleipsum.com/"
     author="David Siegel <david@glideapps.com>"
-    params={[
-      {
-        name: "size",
+    params={{
+      size: {
         displayName: "Size",
         type: "number",
       },
-      {
-        name: "category",
+      category: {
         displayName:
           "Category (random|flat|hand-drawn|outline|abstract|avatar)",
         type: "string",
       },
-      {
-        name: "random",
+      random: {
         displayName: "Random Seed",
         type: "primitive",
       },
-    ]}
+    }}
     example={{ size: 250, category: "avatar", random: 42 }}
     result={{ type: "image-uri" }}
     run={run}

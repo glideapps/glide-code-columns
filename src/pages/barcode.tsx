@@ -29,18 +29,16 @@ const BarcodeColumn = () => (
     name="Barcode"
     description="Generate barcodes with https://www.ruggedtabletpc.com/barcode-generator"
     author="David Siegel <david@glideapps.com>"
-    params={[
-      {
-        name: "content",
+    params={{
+      content: {
         displayName: "Content",
         type: "primitive",
       },
-      {
-        name: "size",
+      size: {
         displayName: "Size",
         type: "number",
       },
-    ]}
+    }}
     example={{ content: 12345678910, size: 250 }}
     result={{ type: "image-uri" }}
     run={run}
