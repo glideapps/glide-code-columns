@@ -1,19 +1,16 @@
 import { useEffect, useState } from "react";
 import * as glide from "./glide";
 import { useRouter } from "next/dist/client/router";
-import { Manifest, Column } from "./glide";
+import { Column } from "./glide";
 
 export * from "./glide";
 import { DuplicateIcon } from "@heroicons/react/solid";
-
-export interface ColumnProps {
-  manifest: Manifest;
-}
+import type { ManifestConvenient } from "./manifest";
 
 // TODO type this once Manifest is better-typed
 type ExampleArguments = any;
 
-type Props = Manifest & { run: Column; example?: ExampleArguments };
+type Props = ManifestConvenient & { run: Column; example?: ExampleArguments };
 
 const Row: React.FC<{ title: string }> = (props) => {
   const { children, title } = props;
@@ -34,7 +31,7 @@ const REPL: React.VFC<Props> = (props) => {
   } = props;
   const [result, setResult] = useState<any>();
   const [values, setValues] = useState<any[]>(
-    params.map((p) => example[p.name])
+    Object.keys(params).map((name) => example[name])
   );
 
   useEffect(() => {
@@ -53,7 +50,7 @@ const REPL: React.VFC<Props> = (props) => {
   return (
     <div className="p-5 mt-5 overflow-hidden bg-white shadow sm:rounded-lg dark:bg-gray-900">
       <div className="space-y-6">
-        {params.map((p, i) => (
+        {Object.values(params).map((p, i) => (
           <div>
             <div className="mb-1 text-xs font-semibold uppercase opacity-70">
               {p.displayName}

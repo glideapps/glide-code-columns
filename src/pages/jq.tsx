@@ -20,18 +20,16 @@ const JQColumn = () => (
     name="JQ Column"
     description="Transform JSON with JQ"
     author="David Siegel <david@glideapps.com>"
-    params={[
-      {
-        name: "json",
+    params={{
+      json: {
         displayName: "JSON",
         type: "string",
       },
-      {
-        name: "query",
+      query: {
         displayName: "JQ Query",
         type: "string",
       },
-    ]}
+    }}
     result={{ type: "string" }}
     run={run}
     example={{

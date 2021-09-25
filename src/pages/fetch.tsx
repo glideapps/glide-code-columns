@@ -18,18 +18,16 @@ const FetchColumn = () => (
     name="Fetch Column"
     description="Fetch and optionally transform JSON."
     author="David Siegel <david@glideapps.com>"
-    params={[
-      {
-        name: "url",
+    params={{
+      url: {
         displayName: "URL",
         type: "string",
       },
-      {
-        name: "query",
+      query: {
         displayName: "JQ Query",
         type: "string",
       },
-    ]}
+    }}
     result={{ type: "primitive" }}
     example={{
       url: "https://pokeapi.co/api/v2/pokemon/1",

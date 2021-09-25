@@ -23,18 +23,16 @@ const QRCodeColumn = () => (
     name="QR Code"
     description="Generate QR codes with https://api.qrserver.com/v1/create-qr-code/"
     author="David Siegel <david@glideapps.com>"
-    params={[
-      {
-        name: "content",
+    params={{
+      content: {
         displayName: "Content",
         type: "primitive",
       },
-      {
-        name: "size",
+      size: {
         displayName: "Size",
         type: "number",
       },
-    ]}
+    }}
     example={{ content: "https://glideapps.com", size: 250 }}
     result={{ type: "image-uri" }}
     run={run}

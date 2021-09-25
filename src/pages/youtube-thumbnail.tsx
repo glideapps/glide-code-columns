@@ -26,13 +26,12 @@ const YouTubeThumbnailColumn = () => (
     name="YouTube Thumbnail"
     description="Display a thumbnail image for a YouTube video link."
     author="David Siegel <david@glideapps.com>"
-    params={[
-      {
-        name: "videoUrl",
+    params={{
+      videoUrl: {
         displayName: "Video URL",
         type: "uri",
       },
-    ]}
+    }}
     result={{ type: "image-uri" }}
     example={{ videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }}
     run={run}
