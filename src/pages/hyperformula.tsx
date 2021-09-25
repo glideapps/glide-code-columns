@@ -18,7 +18,7 @@ const run: Column = async (formula, ...params) => {
 
 const HyperformulaColumn = () => (
   <ColumnComponent
-    name="Hyperformula (Excel Formulas)"
+    name="Hyperformula"
     description="https://handsontable.github.io/hyperformula/"
     author="David Siegel <david@glideapps.com>"
     params={{

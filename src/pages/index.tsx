@@ -45,7 +45,7 @@ const Index = ({ manifests }: Props) => {
     <div className="flex flex-col h-screen text-gray-700 dark:text-gray-50">
       <div className="h-16 bg-[#12CCE5] shadow hidden">Header</div>
       <div className="flex flex-grow w-full">
-        <div className="w-1/3 max-w-sm border-r dark:bg-gray-900 dark:border-transparent">
+        <div className="border-r w-72 dark:bg-gray-900 dark:border-transparent">
           {columns.map((column) => {
             const manifest = manifests[column];
             return (
@@ -62,7 +62,7 @@ const Index = ({ manifests }: Props) => {
                 onClick={() => setSelectedColumn(column)}
               >
                 <div className="flex-grow">
-                  <div className="font-medium">{manifest.name}</div>
+                  <div className="text-base">{manifest.name}</div>
                 </div>
               </div>
             );

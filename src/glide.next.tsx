@@ -15,7 +15,7 @@ type Props<TColumnParams> = ManifestConvenient<TColumnParams> & {
 const Row: React.FC<{ title: string }> = (props) => {
   const { children, title } = props;
   return (
-    <div className="py-3 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+    <div className="py-1 sm:grid sm:grid-cols-4 sm:gap-4">
       <dt className="font-medium opacity-80">{title}</dt>
       <dd className="mt-1 sm:mt-0 sm:col-span-3">{children}</dd>
     </div>
@@ -65,9 +65,10 @@ const REPL: React.VFC<Props<any>> = (props) => {
   }, [values.join("")]);
 
   const inputClassName =
-    "w-full py-2 px-3 border border-gray-400 rounded-md text-sm dark:bg-gray-700";
+    "w-full py-2 px-3 border border-gray-400 rounded-md text-sm dark:bg-gray-700 bg-gray-50";
+
   return (
-    <div className="p-5 mt-5 overflow-hidden bg-white shadow sm:rounded-lg dark:bg-gray-900">
+    <div className="p-5 overflow-hidden bg-white shadow sm:rounded-lg dark:bg-gray-900">
       <div className="space-y-6">
         {Object.values(params).map((p, i) => (
           <div>
@@ -124,36 +125,34 @@ export function ColumnComponent<TColumnParams>(props: Props<TColumnParams>) {
   const github = `https://github.com/glideapps/glide-code-columns/blob/master/src/pages${router.asPath}.tsx`;
 
   return (
-    <div className="h-screen max-w-2xl px-4 py-4 mx-auto bg-gray-100 dark:bg-black dark:text-white">
-      <div className="overflow-hidden bg-white shadow sm:rounded-lg dark:bg-gray-900">
-        <div className="px-4 py-5 sm:px-6">
-          <h3 className="text-xl font-medium">{manifest.name}</h3>
-          <p className="max-w-2xl mt-1 text-sm opacity-80">
+    <div className="p-5 space-y-2 bg-gray-100 dark:bg-black dark:text-white">
+      <div className="md:flex">
+        <div className="flex-grow">
+          <h3 className="text-2xl font-medium">{manifest.name}</h3>
+          <p className="max-w-2xl mt-1 mb-4 opacity-80">
             {manifest.description}
           </p>
         </div>
-        <div className="px-4 py-5 border-t border-gray-200 dark:border-gray-700 sm:p-0">
-          <dl className="">
-            <Row title="URL">
-              {installUrl && (
-                <div className="flex items-center space-x-2">
-                  <div className="opacity-70">{installUrl}</div>
-                  <DuplicateIcon
-                    className="w-5 h-5 cursor-pointer opacity-80 hover:opacity-100"
-                    onClick={() => {
-                      void navigator.clipboard.writeText(installUrl);
-                    }}
-                  />
-                </div>
-              )}
-            </Row>
-            <Row title="GitHub">
-              <a className="text-blue-500" href={github} target="_blank">
-                View source code
-              </a>
-            </Row>
-          </dl>
-        </div>
+        <dl className="">
+          <Row title="Column URL">
+            {installUrl && (
+              <div className="flex items-center space-x-2">
+                <div className="opacity-70">{installUrl}</div>
+                <DuplicateIcon
+                  className="w-5 h-5 cursor-pointer opacity-80 hover:opacity-100"
+                  onClick={() => {
+                    void navigator.clipboard.writeText(installUrl);
+                  }}
+                />
+              </div>
+            )}
+          </Row>
+          <Row title="Source">
+            <a className="text-blue-500" href={github} target="_blank">
+              Open on GitHub
+            </a>
+          </Row>
+        </dl>
       </div>
       <REPL {...props} />
       <div className="absolute right-4 bottom-4">
