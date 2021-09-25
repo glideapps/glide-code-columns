@@ -22,6 +22,25 @@ const Row: React.FC<{ title: string }> = (props) => {
   );
 };
 
+const Logo = () => (
+  <svg
+    className="w-10 h-10"
+    viewBox="0 0 98 98"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle cx="49" cy="49" r="49" fill="black" />
+    <path
+      d="M14.8667 52.3399L52.3404 14.8662V33.2624C52.3404 43.7986 43.7991 52.3399 33.2629 52.3399H14.8667Z"
+      fill="white"
+    />
+    <path
+      d="M45.527 64.604C45.527 54.0678 54.0683 45.5265 64.6045 45.5265H83.0007L45.527 83.0002V64.604Z"
+      fill="white"
+    />
+  </svg>
+);
+
 const REPL: React.VFC<Props<any>> = (props) => {
   const {
     params,
@@ -137,6 +156,11 @@ export function ColumnComponent<TColumnParams>(props: Props<TColumnParams>) {
         </div>
       </div>
       <REPL {...props} />
+      <div className="absolute right-4 bottom-4">
+        <a href="https://glideapps.com" target="_blank">
+          <Logo />
+        </a>
+      </div>
     </div>
   );
 }
