@@ -35,7 +35,7 @@ const DoodleColumn = () => (
         type: "primitive",
       },
     }}
-    example={{ size: 250, category: "avatar", random: 42 }}
+    example={{ size: 200, category: "avatar", random: 42 }}
     result={{ type: "image-uri" }}
     run={run}
   />
