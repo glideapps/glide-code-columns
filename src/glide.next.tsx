@@ -110,7 +110,11 @@ const REPL: React.VFC<Props<any>> = (props) => {
         {resultType === "image-uri" ? (
           <img className="object-contain max-w-lg mx-auto" src={result} />
         ) : (
-          <input disabled className={inputClassName} value={result}></input>
+          <input
+            disabled
+            className={inputClassName}
+            value={result ?? ""}
+          ></input>
         )}
       </div>
     </div>
