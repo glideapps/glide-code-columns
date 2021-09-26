@@ -72,16 +72,28 @@ const REPL: React.VFC<Props<any>> = (props) => {
       <div className="space-y-6">
         {Object.values(params).map((p, i) => (
           <div>
-            <div className="mb-1 text-xs font-semibold uppercase opacity-70">
+            <div className="mb-1 text-xs font-semibold opacity-70">
               {p.displayName}
             </div>
             <input
               className={inputClassName}
               defaultValue={values[i]}
               onChange={(e) => {
+                // TODO make this better
+                // We need to coerce the value depending on the parameter type.
+                let value: any = e.target.value;
+                if (p.type === "number") {
+                  value = Number.parseFloat(value);
+                } else if (p.type === "primitive") {
+                  try {
+                    value = Number.parseFloat(value);
+                  } catch {
+                    // Pass
+                  }
+                }
                 setValues([
                   ...values.slice(0, i),
-                  e.target.value,
+                  value,
                   ...values.slice(i + 1, values.length - i),
                 ]);
               }}
