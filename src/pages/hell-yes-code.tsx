@@ -1,13 +1,13 @@
 import { Column, ColumnComponent } from "../glide.next";
 
-const functions = new Map();
+const functions = new Map<string, any>();
 
 const run: Column = async (code, ...params) => {
-  if (code === undefined) return undefined;
+  if (code?.value === undefined) return undefined;
 
   const functionCode = `async (p1,p2,p3)=>{ ${code.value} }`;
   const fn = eval(functionCode);
-  functions.set(code, fn);
+  functions.set(code.value, fn);
 
   return fn(...params.map((p) => p.value));
 };
