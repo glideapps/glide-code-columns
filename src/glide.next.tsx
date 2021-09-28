@@ -132,11 +132,8 @@ export function ColumnComponent<TColumnParams>(props: Props<TColumnParams>) {
     glide.column(run);
 
     mixpanel.init("085a64083ef900e51ed4ac6b864431cc", { debug: false });
-    const parent =
-      window.location != window.parent.location
-        ? document.referrer
-        : document.location.href;
-    mixpanel.track("mount", { parent, name: manifest.name });
+    const ancestorOrigin = document.location.ancestorOrigins[0];
+    mixpanel.track("mount", { name: manifest.name, ancestorOrigin });
   }, []);
 
   if (manifest === undefined) {
