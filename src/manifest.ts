@@ -24,15 +24,18 @@ function toStrictManifest(convenient: ManifestConvenient<any>): Manifest {
 
 const pages = fs
   .readdirSync(`${__dirname}/pages`)
-  .filter((p) => !["_app.js", "index.js"].includes(p))
-  .filter((p) => p.endsWith(".js"));
+  .filter(p => !["_app.js", "index.js"].includes(p))
+  .filter(p => p.endsWith(".js"));
 
-for (const page of pages) {
-  const { default: exports } = require(`./pages/${page}`);
+let manifests: Record<string, Manifest> = {};
+
+for (const pageJSFile of pages) {
+  const { default: exports } = require(`./pages/${pageJSFile}`);
   const { props: manifestConvenient } = exports() as {
     props: ManifestConvenient<any>;
   };
-  const manifestDir = `public/${page.split(".")[0]}`;
+  const shortname = pageJSFile.split(".")[0];
+  const manifestDir = `public/${shortname}`;
   const manifestFile = `${manifestDir}/glide.json`;
   const manifest = toStrictManifest(manifestConvenient);
 
@@ -40,4 +43,8 @@ for (const page of pages) {
     fs.mkdirSync(manifestDir, { recursive: true });
   }
   fs.writeFileSync(manifestFile, JSON.stringify(manifest, null, 2));
+
+  manifests[shortname] = manifest;
 }
+
+fs.writeFileSync(`public/all.json`, JSON.stringify(manifests, null, 2));
