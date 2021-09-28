@@ -41,10 +41,6 @@ const FetchColumn = () => (
         displayName: "JQ Query",
         type: "string",
       },
-      cachesize: {
-        displayName: "Cache Size",
-        type: "number",
-      },
     }}
     result={{ type: "primitive" }}
     example={{
