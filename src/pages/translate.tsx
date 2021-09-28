@@ -46,7 +46,8 @@ const GoogleTranslateColumn = () => (
         type: "string",
       },
       language: {
-        displayName: "Target Language",
+        displayName:
+          "Target Language (https://cloud.google.com/translate/docs/languages)",
         type: "string",
       },
       key: {
