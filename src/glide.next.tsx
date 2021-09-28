@@ -65,7 +65,7 @@ const REPL: React.VFC<Props<any>> = (props) => {
   }, [values.join("")]);
 
   const inputClassName =
-    "w-full py-2 px-3 border border-gray-400 rounded-md text-sm dark:bg-gray-700 bg-gray-50";
+    "w-full py-2 px-3 border border-gray-400 rounded-md text-sm dark:bg-gray-700 bg-gray-50 font-mono";
 
   return (
     <div className="p-5 overflow-hidden bg-white shadow sm:rounded-lg dark:bg-gray-900">
@@ -104,9 +104,7 @@ const REPL: React.VFC<Props<any>> = (props) => {
       </div>
       <hr className="my-8 dark:border-gray-500" />
       <div className="">
-        <div className="mb-1 text-xs font-semibold uppercase opacity-70">
-          Result
-        </div>
+        <div className="mb-1 text-xs font-semibold opacity-70">Result</div>
         {resultType === "image-uri" ? (
           <img className="object-contain max-w-lg mx-auto" src={result} />
         ) : (
@@ -141,7 +139,7 @@ export function ColumnComponent<TColumnParams>(props: Props<TColumnParams>) {
   const github = `https://github.com/glideapps/glide-code-columns/blob/master/src/pages${router.asPath}.tsx`;
 
   return (
-    <div className="p-5 space-y-2 bg-gray-100 dark:bg-black dark:text-white">
+    <div className="h-screen max-w-screen-lg p-5 mx-auto space-y-2 bg-gray-100 dark:bg-black dark:text-white">
       <div className="md:flex">
         <div className="flex-grow">
           <h3 className="text-2xl font-medium">{manifest.name}</h3>
@@ -150,7 +148,7 @@ export function ColumnComponent<TColumnParams>(props: Props<TColumnParams>) {
           </p>
         </div>
         <dl className="">
-          <Row title="Column URL">
+          <Row title="URL">
             {installUrl && (
               <div className="flex items-center space-x-2">
                 <div className="opacity-70">{installUrl}</div>
