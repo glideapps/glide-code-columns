@@ -136,7 +136,7 @@ export function ColumnComponent<TColumnParams>(props: Props<TColumnParams>) {
       window.location != window.parent.location
         ? document.referrer
         : document.location.href;
-    mixpanel.track("mount", { parent });
+    mixpanel.track("mount", { parent, name: manifest.name });
   }, []);
 
   if (manifest === undefined) {
