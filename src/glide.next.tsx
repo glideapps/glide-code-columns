@@ -12,7 +12,7 @@ type Props<TColumnParams> = ManifestConvenient<TColumnParams> & {
   example?: Partial<TColumnParams>;
 };
 
-const Row: React.FC<{ title: string }> = (props) => {
+const Row: React.FC<{ title: string }> = props => {
   const { children, title } = props;
   return (
     <div className="py-1 sm:grid sm:grid-cols-4 sm:gap-4">
@@ -41,7 +41,7 @@ const Logo = () => (
   </svg>
 );
 
-const REPL: React.VFC<Props<any>> = (props) => {
+const REPL: React.VFC<Props<any>> = props => {
   const {
     params,
     result: { type: resultType },
@@ -50,7 +50,7 @@ const REPL: React.VFC<Props<any>> = (props) => {
   } = props;
   const [result, setResult] = useState<any>();
   const [values, setValues] = useState<any[]>(
-    Object.keys(params).map((name) => example[name])
+    Object.keys(params).map(name => example[name])
   );
 
   useEffect(() => {
@@ -78,7 +78,7 @@ const REPL: React.VFC<Props<any>> = (props) => {
             <input
               className={inputClassName}
               defaultValue={values[i]}
-              onChange={(e) => {
+              onChange={e => {
                 // TODO make this better
                 // We need to coerce the value depending on the parameter type.
                 let value: any = e.target.value;
@@ -93,7 +93,6 @@ const REPL: React.VFC<Props<any>> = (props) => {
                   ...values.slice(i + 1, values.length - i),
                 ]);
               }}
-              placeholder={p.displayName}
             ></input>
           </div>
         ))}
