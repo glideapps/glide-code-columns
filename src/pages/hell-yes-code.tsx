@@ -1,5 +1,7 @@
 import { Column, ColumnComponent } from "../glide.next";
 
+require("lodash");
+
 const functions = new Map<string, any>();
 
 const run: Column = async (code, ...params) => {
@@ -15,7 +17,7 @@ const run: Column = async (code, ...params) => {
 const HellYesCodeColumn = () => (
   <ColumnComponent
     name="Hell Yes-Code"
-    description="Runs JavaScript"
+    description="Runs JavaScript. Includes lodash (_)."
     author="Mark Probst <mark@glideapps.com>"
     params={{
       code: {
