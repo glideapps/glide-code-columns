@@ -82,13 +82,9 @@ const REPL: React.VFC<Props<any>> = (props) => {
                 // TODO make this better
                 // We need to coerce the value depending on the parameter type.
                 let value: any = e.target.value;
-                if (p.type === "number") {
-                  value = Number.parseFloat(value);
-                } else if (p.type === "primitive") {
-                  try {
-                    value = Number.parseFloat(value);
-                  } catch {
-                    // Pass
+                if (p.type === "number" || p.type === "primitive") {
+                  if (NaN !== Number(value)) {
+                    value = Number(value);
                   }
                 }
                 setValues([
