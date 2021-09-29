@@ -30,7 +30,8 @@ const run: Column = async (categoryValue, randomSeed) => {
 
   const images = await cache.fetch(`/glide-brand-image/images.json`);
   const is = images[category] ?? images[defaultCategory];
-  const image = is[hashCode(seed) % is.length];
+  const hash = Math.abs(hashCode(seed));
+  const image = is[hash % is.length];
 
   // TODO move these images to CDN, not Vercel
   return `https://column.sh${image}`;
