@@ -3,7 +3,7 @@ import { Cache } from "../cache";
 
 import * as cheerio from "cheerio";
 
-const cache = new Cache<string>({ timeoutSeconds: 5 * 60 });
+const cache = new Cache<string | undefined>({ timeoutSeconds: 5 * 60 });
 
 // This was causing a timeout on generating expert pages
 async function fetchAppIconPotentiallyBlockingIndefinitely(
@@ -30,9 +30,9 @@ export async function fetchAppIcon(
   ]);
 }
 
-const run: Column = async (url, query) => {
+const run: Column = async url => {
   if (url.value === undefined) return undefined;
-  return await cache.get(url.value, fetchAppIcon);
+  return await cache.getWith(url.value, fetchAppIcon);
 };
 
 const AppIconColumn = () => (
