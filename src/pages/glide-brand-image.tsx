@@ -32,6 +32,7 @@ const run: Column = async (categoryValue, randomSeed) => {
   const is = images[category] ?? images[defaultCategory];
   const image = is[hashCode(seed) % is.length];
 
+  // TODO move these images to CDN, not Vercel
   return `https://column.sh${image}`;
 };
 
