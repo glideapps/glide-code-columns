@@ -20,12 +20,21 @@ export class Cache<T = any> {
     this.props = { ...props, ...defaultProps };
   }
 
-  get(key: string): T | undefined {
+  async get(
+    key: string,
+    work?: (key: string) => Promise<T | undefined>
+  ): Promise<T | undefined> {
     const { timestamp, item } = this.cache.get(key) ?? {
       timestamp: new Date(0),
     };
     if (elapsedSeconds(timestamp) < this.props.timeoutSeconds) {
       return item;
+    } else if (work !== undefined) {
+      const found = await work(key);
+      if (found !== undefined) {
+        this.set(key, found);
+        return found;
+      }
     } else {
       this.cache.delete(key);
       return undefined;
@@ -37,8 +46,6 @@ export class Cache<T = any> {
   }
 
   async fetch(url: string, key = url): Promise<T | undefined> {
-    const item = this.get(key) ?? (await fetch(url).then(x => x.json()));
-    this.set(key, item);
-    return item;
+    return await this.get(key, () => fetch(url).then(x => x.json()));
   }
 }
