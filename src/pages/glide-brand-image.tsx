@@ -1,5 +1,4 @@
 import { Cache } from "../cache";
-
 import { Column, ColumnComponent } from "../glide.next";
 
 function hashCode(x: any): number {
@@ -29,12 +28,7 @@ const run: Column = async (categoryValue, randomSeed) => {
   const { value: seed } = randomSeed;
   if (seed === undefined) return undefined;
 
-  const images = (await cache.fetch(`/glide-brand-image/images.json`)) ?? {
-    "3d": [],
-    avatar: [],
-    gradient: [],
-  };
-
+  const images = await cache.fetch(`/glide-brand-image/images.json`);
   const is = images[category] ?? images[defaultCategory];
   const image = is[hashCode(seed) % is.length];
 

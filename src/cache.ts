@@ -20,24 +20,28 @@ export class Cache<T = any> {
     this.props = { ...props, ...defaultProps };
   }
 
-  async get(
-    key: string,
-    work?: (key: string) => Promise<T | undefined>
-  ): Promise<T | undefined> {
+  async get(key: string): Promise<T | undefined> {
     const { timestamp, item } = this.cache.get(key) ?? {
       timestamp: new Date(0),
     };
     if (elapsedSeconds(timestamp) < this.props.timeoutSeconds) {
       return item;
-    } else if (work !== undefined) {
-      const found = await work(key);
-      if (found !== undefined) {
-        this.set(key, found);
-        return found;
-      }
     } else {
       this.cache.delete(key);
       return undefined;
+    }
+  }
+
+  async getWith(key: string, work: (key: string) => Promise<T>): Promise<T> {
+    const { timestamp, item } = this.cache.get(key) ?? {
+      timestamp: new Date(0),
+    };
+    if (elapsedSeconds(timestamp) < this.props.timeoutSeconds) {
+      return item!;
+    } else {
+      const found = await work(key);
+      this.set(key, found);
+      return found;
     }
   }
 
@@ -45,7 +49,7 @@ export class Cache<T = any> {
     return this.cache.set(key, { timestamp: new Date(), item });
   }
 
-  async fetch(url: string, key = url): Promise<T | undefined> {
-    return await this.get(key, () => fetch(url).then(x => x.json()));
+  async fetch(url: string, key = url): Promise<T> {
+    return await this.getWith(key, () => fetch(url).then(x => x.json()));
   }
 }
