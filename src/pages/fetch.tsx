@@ -1,28 +1,17 @@
 import { Column, ColumnComponent } from "../glide.next";
 import jq from "jq-web";
 
+import { Cache } from "../cache";
+
 // Simple time-based cache to avoid spamming servers.
 // We tried Cache API before but it's disallowed by our sandboxing.
-const cacheMaxAgeSeconds = 5 * 60;
-const cache = new Map<string, { timestamp: Date; json: any }>();
-
-async function fetchCachedJSON(url: string): Promise<any> {
-  const { timestamp, json } = cache.get(url) ?? { timestamp: new Date(0) };
-  const ageSeconds = (new Date().getTime() - timestamp.getTime()) / 1000;
-  if (ageSeconds < cacheMaxAgeSeconds) {
-    return json;
-  }
-
-  const newJson = await fetch(url).then(x => x.json());
-  cache.set(url, { timestamp: new Date(), json: newJson });
-  return newJson;
-}
+const cache = new Cache({ timeoutSeconds: 5 * 60 });
 
 const run: Column = async (url, query) => {
   if (url.value === undefined) {
     return undefined;
   }
-  let json = await fetchCachedJSON(url.value);
+  let json = await cache.fetch(url.value);
   if (query.value !== undefined) {
     json = jq.json(json, query.value);
   }
