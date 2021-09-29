@@ -32,13 +32,6 @@ const run: Column = async (categoryValue, randomSeed) => {
   const is = images[category] ?? images[defaultCategory];
   const image = is[hashCode(seed) % is.length];
 
-  console.log({
-    category,
-    seed,
-    hash: hashCode(seed),
-    image,
-  });
-
   // TODO move these images to CDN, not Vercel
   return `https://column.sh${image}`;
 };
@@ -54,11 +47,11 @@ const GlideBrandImage = () => (
         type: "string",
       },
       random: {
-        displayName: "Random Seed",
-        type: "primitive",
+        displayName: "Seed Value",
+        type: "string",
       },
     }}
-    example={{ category: "3d", random: 42 }}
+    example={{ category: "3d", random: "glideapps.com" }}
     result={{ type: "image-uri" }}
     run={run}
   />
