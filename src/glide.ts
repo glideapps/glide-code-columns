@@ -58,7 +58,7 @@ export async function listen(event: MessageEvent<any>, main: Column) {
 }
 
 export function column(column: Column): void {
-  window.addEventListener("message", (e) => listen(e, column));
+  window.addEventListener("message", e => listen(e, column));
 }
 
 export type Manifest = {
@@ -67,4 +67,5 @@ export type Manifest = {
   author: string;
   params: ColumnParam[];
   result: { type: ColumnType };
+  icon?: string;
 };

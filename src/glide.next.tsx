@@ -12,16 +12,6 @@ type Props<TColumnParams> = ManifestConvenient<TColumnParams> & {
   example?: Partial<TColumnParams>;
 };
 
-const Row: React.FC<{ title: string }> = props => {
-  const { children, title } = props;
-  return (
-    <div className="py-1 sm:grid sm:grid-cols-4 sm:gap-4">
-      <dt className="font-medium opacity-80">{title}</dt>
-      <dd className="mt-1 sm:mt-0 sm:col-span-3">{children}</dd>
-    </div>
-  );
-};
-
 const Logo = () => (
   <svg
     className="w-10 h-10"

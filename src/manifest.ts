@@ -9,12 +9,13 @@ export type ManifestConvenient<T> = Omit<Manifest, "params"> & {
 function toStrictManifest(convenient: ManifestConvenient<any>): Manifest {
   // We carefully pick out just the props in manifest, because more
   // could come in from the component.
-  const { name, description, author, result, params } = convenient;
+  const { name, description, author, result, params, icon } = convenient;
   return {
     name,
     description,
     author,
     result,
+    icon,
     params: Object.entries(params).map(([name, param]) => ({
       name,
       ...param,
