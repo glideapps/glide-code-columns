@@ -17,7 +17,8 @@ const run: Column = async (code, ...params) => {
 const HellYesCodeColumn = () => (
   <ColumnComponent
     name="Hell Yes-Code"
-    description="Runs JavaScript. Includes lodash (_)."
+    description="Runs JavaScript"
+    about={`Inludes [lodash](https://lodash.com/docs).`}
     author="Mark Probst <mark@glideapps.com>"
     params={{
       code: {

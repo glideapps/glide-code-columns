@@ -27,7 +27,12 @@ const run: Column = async (dataValue, sizeValue) => {
 const BarcodeColumn = () => (
   <ColumnComponent
     name="Barcode"
-    description="Generate barcodes with ruggedtabletpc.com"
+    description="Generates barcode images"
+    about={`
+      Uses [ruggedtabletpc.com](https://ruggedtabletpc.com) to generate images of barcodes.
+
+      Only supports 11-digit barcodes for now.
+    `}
     author="David Siegel <david@glideapps.com>"
     params={{
       content: {

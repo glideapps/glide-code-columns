@@ -37,7 +37,7 @@ const run: Column = async (textColumn, langColumn, keyColumn) => {
 const GoogleTranslateColumn = () => (
   <ColumnComponent
     name="Google Translate"
-    description="Translate from one language to another."
+    description="Translate from one language to another"
     author="David Siegel <david@glideapps.com>"
     params={{
       text: {

@@ -22,7 +22,7 @@ const run: Column = async (url, query) => {
 const FetchColumn = () => (
   <ColumnComponent
     name="Fetch JSON"
-    description="Fetch and optionally transform JSON."
+    description="Fetch and optionally transform JSON"
     author="David Siegel <david@glideapps.com>"
     params={{
       url: {

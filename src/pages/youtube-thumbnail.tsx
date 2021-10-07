@@ -24,7 +24,7 @@ const run: Column = async link => {
 const YouTubeThumbnailColumn = () => (
   <ColumnComponent
     name="YouTube Thumbnail"
-    description="Display a thumbnail image for a YouTube video link."
+    description="Display thumbnail images for YouTube links"
     author="David Siegel <david@glideapps.com>"
     params={{
       videoUrl: {
