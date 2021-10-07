@@ -55,6 +55,7 @@ const GlideBrandImage = () => (
     example={{ category: "3d", random: "glideapps.com" }}
     result={{ type: "image-uri" }}
     run={run}
+    icon="glide"
   />
 );
 

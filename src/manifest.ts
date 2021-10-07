@@ -4,8 +4,27 @@ import { ColumnParam, Manifest } from "./glide.next";
 
 export type ManifestConvenient<T> = Omit<Manifest, "params" | "icon"> & {
   params: { [Name in keyof T]: Omit<ColumnParam, "name"> };
-  icon?: string;
+  icon?: "glide" | string;
 };
+
+const glideIcon = `
+        <svg
+          width="48"
+          height="48"
+          viewBox="0 0 26 27"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0 14.85L14.3 0V7.29C14.3 11.4653 11.0406 14.85 7.02 14.85H0Z"
+            fill="currentColor"
+          />
+          <path
+            d="M11.7 19.71C11.7 15.5347 14.9594 12.15 18.98 12.15H26L11.7 27V19.71Z"
+            fill="currentColor"
+          />
+        </svg>
+    `;
 
 const defaultIcon = `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M12.0002 34.828L2.58624 25.414C1.80524 24.633 1.80524 23.367 2.58624 22.586L12.0002 13.172L14.8292 16L6.82924 24L14.8292 32L12.0002 34.828Z" fill="currentColor"/>
@@ -16,15 +35,13 @@ const defaultIcon = `<svg width="48" height="48" viewBox="0 0 48 48" fill="none"
 function toStrictManifest(convenient: ManifestConvenient<any>): Manifest {
   // We carefully pick out just the props in manifest, because more
   // could come in from the component.
-  const {
-    name,
-    description,
-    author,
-    result,
-    params,
-    about,
-    icon = defaultIcon,
-  } = convenient;
+  const { name, description, author, result, params, about } = convenient;
+
+  let { icon = defaultIcon } = convenient;
+  if (icon === "glide") {
+    icon = glideIcon;
+  }
+
   return {
     name,
     description,
