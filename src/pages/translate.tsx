@@ -1,4 +1,3 @@
-import jq from "jq-web";
 import React from "react";
 import { Column, ColumnComponent } from "../glide.next";
 
