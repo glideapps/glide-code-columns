@@ -36,7 +36,7 @@ const REPL: React.VFC<Props<any>> = props => {
   }, [values.join("")]);
 
   const inputClassName =
-    "w-full py-2 px-3 border border-gray-400 rounded-md text-xs dark:bg-gray-700 bg-white font-mono";
+    "w-full py-2 px-3 border border-gray-400 rounded-md text-xs bg-white font-mono";
 
   return (
     <div className="p-5">
@@ -68,7 +68,7 @@ const REPL: React.VFC<Props<any>> = props => {
           </div>
         ))}
       </div>
-      <hr className="my-8 dark:border-gray-500" />
+      <hr className="my-8" />
       <div className="">
         <div className="mb-1 text-xs font-semibold opacity-70">Result</div>
         {resultType === "image-uri" ? (
