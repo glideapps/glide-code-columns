@@ -22,6 +22,7 @@ function toStrictManifest(convenient: ManifestConvenient<any>): Manifest {
     author,
     result,
     params,
+    about,
     icon = defaultIcon,
   } = convenient;
   return {
@@ -29,6 +30,7 @@ function toStrictManifest(convenient: ManifestConvenient<any>): Manifest {
     description,
     author,
     result,
+    about,
     icon,
     params: Object.entries(params).map(([name, param]) => ({
       name,

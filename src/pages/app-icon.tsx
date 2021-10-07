@@ -37,12 +37,12 @@ const run: Column = async url => {
 
 const AppIconColumn = () => (
   <ColumnComponent
-    name="Get Glide App Icon"
+    name="Glide App Icon"
     description="Gets a Glide app's icon"
     author="David Siegel <david@glideapps.com>"
     params={{
       url: {
-        displayName: "Glide App URL",
+        displayName: "Glide URL",
         type: "uri",
       },
     }}
@@ -51,6 +51,9 @@ const AppIconColumn = () => (
       url: "https://employees.glideapp.io",
     }}
     run={run}
+    about={`
+      Given a URL to a Glide app or page, this column produces a link to the icon for that app or page.
+    `}
   />
 );
 

@@ -68,4 +68,5 @@ export type Manifest = {
   params: ColumnParam[];
   result: { type: ColumnType };
   icon: string;
+  about?: string;
 };
