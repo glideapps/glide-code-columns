@@ -27,7 +27,7 @@ const run: Column = async (dataValue, sizeValue) => {
 const BarcodeColumn = () => (
   <ColumnComponent
     name="Barcode"
-    description="Generate barcodes with https://www.ruggedtabletpc.com/barcode-generator"
+    description="Generate barcodes with ruggedtabletpc.com"
     author="David Siegel <david@glideapps.com>"
     params={{
       content: {

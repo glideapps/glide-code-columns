@@ -18,7 +18,7 @@ const run: Column = async (sizeValue, categoryValue, randomSeed) => {
 const DoodleColumn = () => (
   <ColumnComponent
     name="Doodle Ipsum"
-    description="Generate random doodles with https://doodleipsum.com/"
+    description="Generate random doodles with doodleipsum.com"
     author="David Siegel <david@glideapps.com>"
     params={{
       size: {
