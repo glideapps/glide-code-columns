@@ -19,7 +19,12 @@ const run: Column = async (code, ...params) => {
 const LispColumn = () => (
   <ColumnComponent
     name="LISP"
-    description="Runs LISP using https://github.com/jcubic/lips"
+    description="Runs LISP code"
+    about={`
+      Uses [github.com/jcubic/lips](https://github.com/jcubic/lips), a 
+      "scheme-based powerful lisp interpreter written in JavaScript."
+    `}
+    video="https://www.youtube.com/watch?v=G3FDnNZF5uA"
     author="David Siegel <david@glideapps.com>"
     params={{
       code: {

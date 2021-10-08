@@ -20,6 +20,7 @@ const HellYesCodeColumn = () => (
     description="Runs JavaScript"
     about={`Inludes [lodash](https://lodash.com/docs).`}
     author="Mark Probst <mark@glideapps.com>"
+    video="https://www.youtube.com/watch?v=c-I5S_zTwAc"
     params={{
       code: {
         displayName: "JavaScript code",

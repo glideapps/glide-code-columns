@@ -21,7 +21,11 @@ const run: Column = async (dataValue, sizeValue) => {
 const QRCodeColumn = () => (
   <ColumnComponent
     name="QR Code"
-    description="Generate QR codes with qrserver.com"
+    description="Generate QR codes"
+    about={`
+      Uses [goQR.me](https://goqr.me/api/)'s QR code generation API.
+    `}
+    video="https://www.youtube.com/watch?v=142TGhaTMtI"
     author="David Siegel <david@glideapps.com>"
     params={{
       content: {

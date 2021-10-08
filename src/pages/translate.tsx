@@ -41,7 +41,7 @@ const GoogleTranslateColumn = () => (
     author="David Siegel <david@glideapps.com>"
     video="https://www.youtube.com/watch?v=A3knNbGfXh4"
     about={`
-      Find supported languages at https://cloud.google.com/translate/docs/languages.
+      Find supported languages at [cloud.google.com/translate/docs/languages](https://cloud.google.com/translate/docs/languages).
     `}
     params={{
       text: {
