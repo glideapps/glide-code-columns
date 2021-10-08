@@ -21,7 +21,7 @@ const DoodleColumn = () => (
     description="Generate random illustrations from data"
     video="https://www.youtube.com/watch?v=kvUU1N-B_Ok"
     about={`
-      Uses doodleipsum.com API.
+      [Doodle Ipsum](https://doodleipsum.com) is the *lorem ipsum* of illustrations. Learn more at [doodleipsum.com](https://doodleipsum.com).
     `}
     author="David Siegel <david@glideapps.com>"
     params={{
