@@ -69,4 +69,5 @@ export type Manifest = {
   result: { type: ColumnType };
   icon: string;
   about?: string;
+  video?: string;
 };

@@ -24,6 +24,7 @@ const HyperformulaColumn = () => (
       Uses [handsontable.github.io/hyperformula](https://handsontable.github.io/hyperformula) to evaluate
       Excel formulas.
     `}
+    video="https://www.youtube.com/watch?v=JJXUmACTDdk"
     author="David Siegel <david@glideapps.com>"
     params={{
       formula: {

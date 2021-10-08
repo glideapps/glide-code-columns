@@ -35,7 +35,8 @@ const defaultIcon = `<svg width="48" height="48" viewBox="0 0 48 48" fill="none"
 function toStrictManifest(convenient: ManifestConvenient<any>): Manifest {
   // We carefully pick out just the props in manifest, because more
   // could come in from the component.
-  const { name, description, author, result, params, about } = convenient;
+  const { name, description, author, result, params, about, video } =
+    convenient;
 
   let { icon = defaultIcon } = convenient;
   if (icon === "glide") {
@@ -49,6 +50,7 @@ function toStrictManifest(convenient: ManifestConvenient<any>): Manifest {
     result,
     about,
     icon,
+    video,
     params: Object.entries(params).map(([name, param]) => ({
       name,
       ...param,

@@ -20,6 +20,7 @@ const JQColumn = () => (
     name="Transform JSON"
     description="Transform JSON with JQ"
     author="David Siegel <david@glideapps.com>"
+    video="https://www.youtube.com/watch?v=EvpwhGeiH0U"
     params={{
       json: {
         displayName: "JSON",

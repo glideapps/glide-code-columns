@@ -19,6 +19,7 @@ const DoodleColumn = () => (
   <ColumnComponent
     name="Doodle Ipsum"
     description="Generate random illustrations from data"
+    video="https://www.youtube.com/watch?v=kvUU1N-B_Ok"
     about={`
       Uses doodleipsum.com API.
     `}
