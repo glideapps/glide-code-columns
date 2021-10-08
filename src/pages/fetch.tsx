@@ -23,7 +23,11 @@ const FetchColumn = () => (
   <ColumnComponent
     name="Fetch JSON"
     description="Fetch and optionally transform JSON"
+    about={`
+      Given a URL, this column fetches JSON data at that URL. An optional [jq query](https://stedolan.github.io/jq/manual/#Basicfilters) transforms the JSON.
+    `}
     author="David Siegel <david@glideapps.com>"
+    video="https://www.youtube.com/watch?v=EvpwhGeiH0U"
     params={{
       url: {
         displayName: "URL",
@@ -36,8 +40,8 @@ const FetchColumn = () => (
     }}
     result={{ type: "primitive" }}
     example={{
-      url: "https://pokeapi.co/api/v2/pokemon/1",
-      query: `.name + " has types: " + (.types | map(.type.name) | join(", "))`,
+      url: "https://api.icndb.com/jokes/random/3",
+      query: `.value[0].joke`,
     }}
     run={run}
   />
