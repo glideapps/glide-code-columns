@@ -12,7 +12,8 @@ type Props<TColumnParams> = ManifestConvenient<TColumnParams> & {
   example?: Partial<TColumnParams>;
 };
 
-const REPL: React.VFC<Props<any>> = props => {
+// Loads the expected manifest to display and wire the column
+export function ColumnComponent<TColumnParams>(props: Props<TColumnParams>) {
   const {
     params,
     result: { type: resultType },
@@ -23,6 +24,8 @@ const REPL: React.VFC<Props<any>> = props => {
   const [values, setValues] = useState<any[]>(
     Object.keys(params).map(name => example[name])
   );
+
+  useEffect(() => glide.column(run));
 
   useEffect(() => {
     const args = values.map(
@@ -83,13 +86,4 @@ const REPL: React.VFC<Props<any>> = props => {
       </div>
     </div>
   );
-};
-
-// Loads the expected manifest to display and wire the column
-export function ColumnComponent<TColumnParams>(props: Props<TColumnParams>) {
-  const { run } = props;
-  useEffect(() => {
-    glide.column(run);
-  }, []);
-  return <REPL {...props} />;
 }
