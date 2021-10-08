@@ -40,14 +40,16 @@ const GoogleTranslateColumn = () => (
     description="Translate from one language to another"
     author="David Siegel <david@glideapps.com>"
     video="https://www.youtube.com/watch?v=A3knNbGfXh4"
+    about={`
+      Find supported languages at https://cloud.google.com/translate/docs/languages.
+    `}
     params={{
       text: {
         displayName: "Text",
         type: "string",
       },
       language: {
-        displayName:
-          "Target Language (https://cloud.google.com/translate/docs/languages)",
+        displayName: "Target Language",
         type: "string",
       },
       key: {

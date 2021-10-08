@@ -21,6 +21,7 @@ const JQColumn = () => (
     description="Transform JSON with JQ"
     author="David Siegel <david@glideapps.com>"
     video="https://www.youtube.com/watch?v=EvpwhGeiH0U"
+    about={`Learn more about jq at https://stedolan.github.io/jq/`}
     params={{
       json: {
         displayName: "JSON",
@@ -34,8 +35,8 @@ const JQColumn = () => (
     result={{ type: "string" }}
     run={run}
     example={{
-      json: `{ "name": "David", "moves": [{ "move": "Slap" }, { "move": "Toss" }] }`,
-      query: `.name + " has moves: " + (.moves | map(.move) | join(", "))`,
+      json: `{ "name": "David", "favorite food": "sushi" }`,
+      query: `.name`,
     }}
   />
 );
