@@ -22,24 +22,14 @@ function writeGlideBrandImages() {
 }
 
 function writeManifests() {
-  const pages = fs
-    .readdirSync(`${__dirname}/columns`)
-    .filter(p => p.endsWith(".js"));
+  const columns = fs.readdirSync(`src/columns`).filter(p => p.endsWith(".ts"));
 
   let manifests: Record<string, Manifest> = {};
 
-  for (const pageJSFile of pages) {
-    const c = require(`./columns/${pageJSFile}`);
-    const shortname = pageJSFile.split(".")[0];
-    const manifestDir = `public/${shortname}`;
-    const manifestFile = `${manifestDir}/glide.json`;
-
-    if (!fs.existsSync(manifestDir)) {
-      fs.mkdirSync(manifestDir, { recursive: true });
-    }
-    fs.writeFileSync(manifestFile, JSON.stringify(c, null, 2));
-
-    manifests[shortname] = c;
+  for (const src of columns) {
+    const slug = src.split(".")[0];
+    const manifest = require(`../public/${slug}/glide.json`);
+    manifests[slug] = manifest;
   }
 
   fs.writeFileSync(`public/all.json`, JSON.stringify(manifests, null, 2));
