@@ -5,21 +5,10 @@ import { GetStaticProps } from "next";
 import { useState } from "react";
 import { Manifest } from "../glide";
 
-export async function getAllColumnComponents(): Promise<string[]> {
-  return fs
-    .readdirSync(`src/pages`)
-    .filter((p) => p.endsWith(".tsx"))
-    .filter((p) => !["_app.tsx", "index.tsx"].includes(p))
-    .map((p) => p.replace(".tsx", ""));
-}
-
 export async function getAllManifests(): Promise<Record<string, Manifest>> {
-  const columns = await getAllColumnComponents();
-  const manifests: Record<string, Manifest> = {};
-  for (const column of columns) {
-    const json = fs.readFileSync(`public/${column}/glide.json`, "utf8");
-    manifests[column] = JSON.parse(json);
-  }
+  const manifests: Record<string, Manifest> = JSON.parse(
+    fs.readFileSync(`public/all.json`, "utf8")
+  );
   return manifests;
 }
 
@@ -27,7 +16,7 @@ interface Props {
   manifests: Record<string, Manifest>;
 }
 
-export const getStaticProps: GetStaticProps<Props> = async (context) => {
+export const getStaticProps: GetStaticProps<Props> = async context => {
   const manifests = await getAllManifests();
   return {
     props: {
@@ -46,7 +35,7 @@ const Index = ({ manifests }: Props) => {
       <div className="h-16 bg-[#12CCE5] shadow hidden">Header</div>
       <div className="flex flex-grow w-full">
         <div className="border-r w-72 dark:bg-gray-900 dark:border-transparent">
-          {columns.map((column) => {
+          {columns.map(column => {
             const manifest = manifests[column];
             return (
               <div
@@ -69,7 +58,10 @@ const Index = ({ manifests }: Props) => {
           })}
         </div>
         <div className="flex-grow bg-gray-100 dark:bg-black">
-          <iframe className="w-full h-full" src={`/${selectedColumn}`}></iframe>
+          <iframe
+            className="w-full h-full"
+            src={`/${selectedColumn}/preview`}
+          ></iframe>
         </div>
       </div>
     </div>
