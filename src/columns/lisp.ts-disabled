@@ -1,3 +1,5 @@
+// Awaiting merge of https://github.com/jcubic/lips/pull/183
+
 import * as glide from "../glide";
 import { exec, env } from "@jcubic/lips";
 
