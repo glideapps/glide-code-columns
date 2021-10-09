@@ -5,19 +5,12 @@ import { GetStaticProps } from "next";
 import { useState } from "react";
 import { Manifest } from "../glide";
 
-export async function getAllManifests(): Promise<Record<string, Manifest>> {
-  const manifests: Record<string, Manifest> = JSON.parse(
-    fs.readFileSync(`public/all.json`, "utf8")
-  );
-  return manifests;
-}
-
 interface Props {
   manifests: Record<string, Manifest>;
 }
 
-export const getStaticProps: GetStaticProps<Props> = async context => {
-  const manifests = await getAllManifests();
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const manifests = JSON.parse(fs.readFileSync(`public/all.json`, "utf8"));
   return {
     props: {
       manifests,
