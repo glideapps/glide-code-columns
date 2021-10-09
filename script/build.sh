@@ -12,5 +12,5 @@ do
     rm public/$SLUG/manifest.js
 
     esbuild $COLUMN --bundle --outfile=public/$SLUG/index.js
-    cp script/index.html public/$SLUG
+    echo "<script src='/$SLUG/index.js'></script>" > public/$SLUG/index.html
 done
