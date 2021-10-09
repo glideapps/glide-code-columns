@@ -1,7 +1,7 @@
-import { Column, ColumnComponent } from "../components/REPL";
 import { Cache } from "../cache";
 
 import * as cheerio from "cheerio";
+import * as glide from "../glide";
 
 const cache = new Cache<string | undefined>({ timeoutSeconds: 5 * 60 });
 
@@ -30,32 +30,28 @@ export async function fetchAppIcon(
   ]);
 }
 
-const run: Column = async url => {
+const run: glide.Column = async url => {
   if (url.value === undefined) return undefined;
   return await cache.getWith(url.value, fetchAppIcon);
 };
 
-const AppIconColumn = () => (
-  <ColumnComponent
-    name="Glide App Icon"
-    description="Gets a Glide app's icon"
-    author="David Siegel <david@glideapps.com>"
-    params={{
-      url: {
-        displayName: "Glide URL",
-        type: "uri",
-      },
-    }}
-    result={{ type: "image-uri" }}
-    example={{
-      url: "https://employees.glideapp.io",
-    }}
-    run={run}
-    about={`
+export default glide.column({
+  name: "Glide App Icon",
+  description: "Gets a Glide app's icon",
+  author: "David Siegel <david@glideapps.com>",
+  params: {
+    url: {
+      displayName: "Glide URL",
+      type: "uri",
+    },
+  },
+  result: { type: "image-uri" },
+  example: {
+    url: "https://employees.glideapp.io",
+  },
+  run,
+  about: `
       Given a URL to a Glide app or page, this column produces a link to the icon for that app or page.
-    `}
-    icon="glide"
-  />
-);
-
-export default AppIconColumn;
+    `,
+  icon: "glide",
+});

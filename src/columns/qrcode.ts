@@ -1,9 +1,9 @@
-import { Column, ColumnComponent } from "../components/REPL";
+import * as glide from "../glide";
 import { url } from "../urls";
 
 // TODO support more from https://api.qrserver.com/v1/create-qr-code/
 
-const run: Column = async (dataValue, sizeValue) => {
+const run: glide.Column = async (dataValue, sizeValue) => {
   const { value: data } = dataValue;
   const { value: size = 500 } = sizeValue;
 
@@ -18,29 +18,28 @@ const run: Column = async (dataValue, sizeValue) => {
   });
 };
 
-const QRCodeColumn = () => (
-  <ColumnComponent
-    name="QR Code"
-    description="Generate QR codes"
-    about={`
+export default glide.column({
+  name: "QR Code",
+  description: "Generate QR codes",
+  about: `
       Uses [goQR.me](https://goqr.me/api/)'s QR code generation API.
-    `}
-    video="https://www.youtube.com/watch?v=142TGhaTMtI"
-    author="David Siegel <david@glideapps.com>"
-    params={{
-      content: {
-        displayName: "Content",
-        type: "primitive",
-      },
-      size: {
-        displayName: "Size",
-        type: "number",
-      },
-    }}
-    example={{ content: "https://glideapps.com", size: 250 }}
-    result={{ type: "image-uri" }}
-    run={run}
-    icon={`<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    `,
+  video: "https://www.youtube.com/watch?v=142TGhaTMtI",
+  author: "David Siegel <david@glideapps.com>",
+  params: {
+    content: {
+      displayName: "Content",
+      type: "primitive",
+    },
+    size: {
+      displayName: "Size",
+      type: "number",
+    },
+  },
+  example: { content: "https://glideapps.com", size: 250 },
+  result: { type: "image-uri" },
+  run,
+  icon: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M16 2H2V16H16V2ZM14 14H4V4H14V14Z" fill="currentColor"/>
       <path d="M31 42H29V46H46V44H31V42Z" fill="currentColor"/>
       <path d="M12 6H6V12H12V6Z" fill="currentColor"/>
@@ -57,8 +56,5 @@ const QRCodeColumn = () => (
       <path d="M32 40H35V42H39V40V38V35H35V38H32V35H30V38H28V30H26V28H24V22H17V26H19V24H22V28V32H26V38V40H28H30H32Z" fill="currentColor"/>
       <path d="M44 27H41H39H34V31H32V27H30V33H36V29H39V32H41V29H44V35H41V41H46V39H43V37H46V29V27V24H44V27Z" fill="currentColor"/>
       </svg>
-      `}
-  />
-);
-
-export default QRCodeColumn;
+      `,
+});
