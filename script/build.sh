@@ -8,13 +8,13 @@ do
     mkdir -p public/$SLUG
 
     # First build is to extract metadata and build manifest
-    esbuild $COLUMN --bundle --outfile=public/$SLUG/index.js --format=cjs --log-level=silent
+    esbuild $COLUMN --bundle --outfile=public/$SLUG/index.js --format=cjs --log-level=silent --platform=node
     cp script/manifest.js public/$SLUG
     node public/$SLUG/manifest.js
     rm public/$SLUG/manifest.js
 
     # Now we build the actual column
-    esbuild $COLUMN --bundle --outfile=public/$SLUG/index.js
+    esbuild $COLUMN --bundle --outfile=public/$SLUG/index.js --minify --sourcemap --platform=node # node could be wrong
     echo "<script src='/$SLUG/index.js'></script>" > public/$SLUG/index.html
 done
 
