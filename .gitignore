@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
-public/**.{js,html}
+public/**/index.js
+public/**/index.html
 public/**/glide.json
 .env
 .next
