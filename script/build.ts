@@ -1,6 +1,5 @@
 import * as fs from "fs";
-
-import { Manifest } from "./glide";
+import type { Manifest } from "../src/glide";
 
 function writeGlideBrandImages() {
   const listImages = (c: string) =>

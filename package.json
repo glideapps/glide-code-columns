@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "manifest": "script/build.sh",
-    "build": "npm run manifest && next build",
-    "dev": "npm run manifest && next dev",
+    "build": "script/build.sh && next build",
+    "dev": "script/build.sh && next dev",
     "start": "npm run dev",
     "deploy": "vercel deploy",
     "test": "jest"
