@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import * as glide from "./glide";
-import { ColumnDefinition } from "./glide";
+import * as glide from "../glide";
+import { ColumnDefinition } from "../glide";
 
 import "iframe-resizer";
 
-export * from "./glide";
+export * from "../glide";
 
 const REPL: React.VFC<ColumnDefinition<any>> = props => {
   const {
@@ -79,9 +79,4 @@ const REPL: React.VFC<ColumnDefinition<any>> = props => {
   );
 };
 
-// Loads the expected manifest to display and wire the column
-export function ColumnComponent<TColumnParams>(
-  props: ColumnDefinition<TColumnParams>
-) {
-  return <REPL {...props} />;
-}
+export default REPL;

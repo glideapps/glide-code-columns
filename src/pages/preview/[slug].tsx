@@ -1,6 +1,9 @@
-import { GetStaticPaths, GetStaticProps } from "next";
-import { Manifest } from "../../glide";
 import * as fs from "fs";
+
+import { GetStaticPaths, GetStaticProps } from "next";
+import React from "react";
+import REPL from "../../components/REPL";
+import { ColumnDefinition, Manifest } from "../../glide";
 
 interface Props {
   slug: string;
@@ -28,7 +31,10 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
 
 const PreviewPage = (props: Props) => {
   const { slug } = props;
-  return <div>{slug}</div>;
+  const { default: manifest } = require(`../../columns/${slug}`) as {
+    default: ColumnDefinition<any>;
+  };
+  return <REPL {...manifest} />;
 };
 
 export default PreviewPage;
