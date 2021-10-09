@@ -87,8 +87,12 @@ const REPL: React.VFC<Props<any>> = props => {
   );
 };
 
-const listenAsEarlyAsPossible = `
-  console.log("before interactive");
+const listenEarly = `
+  window.queuedGlideMessages = window.queuedGlideMessages || [];
+  window.addEventListener("message", function (e) {
+    var ms = window.queuedGlideMessages;
+    if (ms !== undefined) ms.push(e);
+  });
 `;
 
 // Loads the expected manifest to display and wire the column
@@ -97,9 +101,13 @@ export function ColumnComponent<TColumnParams>(props: Props<TColumnParams>) {
   useEffect(() => glide.column(run));
   return (
     <>
-      <Script id="queue-glide-messages" strategy="beforeInteractive">
-        {listenAsEarlyAsPossible}
-      </Script>
+      <Script
+        id="listen-early"
+        // strategy="beforeInteractive" // this does not work
+        dangerouslySetInnerHTML={{
+          __html: listenEarly,
+        }}
+      />
       <REPL {...props} />
     </>
   );
