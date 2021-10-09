@@ -1,5 +1,5 @@
 import { Cache } from "../cache";
-import { Column, ColumnComponent } from "../glide.next";
+import * as glide from "../glide";
 
 function hashCode(x: any): number {
   const s = `${x}`;
@@ -23,7 +23,7 @@ const cache = new Cache<Record<ImageCategory, string[]>>({
   timeoutSeconds: Number.MAX_SAFE_INTEGER,
 });
 
-const run: Column = async (categoryValue, randomSeed) => {
+const run: glide.Column = async (categoryValue, randomSeed) => {
   const { value: category = defaultCategory } = categoryValue;
   const { value: seed } = randomSeed;
   if (seed === undefined) return undefined;
@@ -37,26 +37,22 @@ const run: Column = async (categoryValue, randomSeed) => {
   return `https://column.sh${image}`;
 };
 
-const GlideBrandImage = () => (
-  <ColumnComponent
-    name="Glide Brand Image"
-    description="Glide 3D Data Shapes"
-    author="David Siegel <david@glideapps.com>"
-    params={{
-      category: {
-        displayName: "Category (3d, avatar, or gradient)",
-        type: "string",
-      },
-      random: {
-        displayName: "Seed Value",
-        type: "string",
-      },
-    }}
-    example={{ category: "3d", random: "glideapps.com" }}
-    result={{ type: "image-uri" }}
-    run={run}
-    icon="glide"
-  />
-);
-
-export default GlideBrandImage;
+export default glide.column({
+  name: "Glide Brand Image",
+  description: "Glide 3D Data Shapes",
+  author: "David Siegel <david@glideapps.com>",
+  params: {
+    category: {
+      displayName: "Category (3d, avatar, or gradient)",
+      type: "string",
+    },
+    random: {
+      displayName: "Seed Value",
+      type: "string",
+    },
+  },
+  example: { category: "3d", random: "glideapps.com" },
+  result: { type: "image-uri" },
+  run,
+  icon: "glide",
+});

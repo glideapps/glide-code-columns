@@ -1,18 +1,12 @@
-import { useEffect, useState } from "react";
-import * as glide from "./glide";
-import { Column } from "./glide";
+import React, { useEffect, useState } from "react";
+import * as glide from "../glide";
+import { ColumnDefinition } from "../glide";
 
 import "iframe-resizer";
 
-export * from "./glide";
-import type { ManifestConvenient } from "./manifest";
+export * from "../glide";
 
-type Props<TColumnParams> = ManifestConvenient<TColumnParams> & {
-  run: Column;
-  example?: Partial<TColumnParams>;
-};
-
-const REPL: React.VFC<Props<any>> = props => {
+const REPL: React.VFC<ColumnDefinition<any>> = props => {
   const {
     params,
     result: { type: resultType },
@@ -85,11 +79,4 @@ const REPL: React.VFC<Props<any>> = props => {
   );
 };
 
-// Loads the expected manifest to display and wire the column
-export function ColumnComponent<TColumnParams>(props: Props<TColumnParams>) {
-  const { run } = props;
-  useEffect(() => {
-    glide.column(run);
-  }, []);
-  return <REPL {...props} />;
-}
+export default REPL;

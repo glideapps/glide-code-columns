@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "manifest": "rm -rf build && tsc --project tsconfig.manifest.json && node build/manifest.js",
+    "manifest": "script/build.sh",
     "build": "npm run manifest && next build",
     "dev": "npm run manifest && next dev",
     "start": "npm run dev",
@@ -26,6 +26,7 @@
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
     "autoprefixer": "^10.3.4",
+    "esbuild": "^0.13.4",
     "jest": "^27.1.0",
     "postcss": "^8.3.6",
     "tailwindcss": "^2.2.15",
