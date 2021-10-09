@@ -1,20 +1,12 @@
 import React, { useEffect, useState } from "react";
 import * as glide from "./glide";
-import { Column } from "./glide";
+import { ColumnDefinition } from "./glide";
 
 import "iframe-resizer";
 
 export * from "./glide";
-import type { ManifestConvenient } from "./manifest";
 
-import Script from "next/script";
-
-type Props<TColumnParams> = ManifestConvenient<TColumnParams> & {
-  run: Column;
-  example?: Partial<TColumnParams>;
-};
-
-const REPL: React.VFC<Props<any>> = props => {
+const REPL: React.VFC<ColumnDefinition<any>> = props => {
   const {
     params,
     result: { type: resultType },
@@ -87,28 +79,9 @@ const REPL: React.VFC<Props<any>> = props => {
   );
 };
 
-const listenEarly = `
-  window.queuedGlideMessages = window.queuedGlideMessages || [];
-  window.addEventListener("message", function (e) {
-    var ms = window.queuedGlideMessages;
-    if (ms !== undefined) ms.push(e);
-  });
-`;
-
 // Loads the expected manifest to display and wire the column
-export function ColumnComponent<TColumnParams>(props: Props<TColumnParams>) {
-  const { run } = props;
-  useEffect(() => glide.column(run));
-  return (
-    <>
-      <Script
-        id="listen-early"
-        // strategy="beforeInteractive" // this does not work
-        dangerouslySetInnerHTML={{
-          __html: listenEarly,
-        }}
-      />
-      <REPL {...props} />
-    </>
-  );
+export function ColumnComponent<TColumnParams>(
+  props: ColumnDefinition<TColumnParams>
+) {
+  return <REPL {...props} />;
 }
