@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as glide from "./glide";
 import { Column } from "./glide";
 
@@ -6,6 +6,8 @@ import "iframe-resizer";
 
 export * from "./glide";
 import type { ManifestConvenient } from "./manifest";
+
+import Script from "next/script";
 
 type Props<TColumnParams> = ManifestConvenient<TColumnParams> & {
   run: Column;
@@ -85,11 +87,20 @@ const REPL: React.VFC<Props<any>> = props => {
   );
 };
 
+const listenAsEarlyAsPossible = `
+  console.log("before interactive");
+`;
+
 // Loads the expected manifest to display and wire the column
 export function ColumnComponent<TColumnParams>(props: Props<TColumnParams>) {
   const { run } = props;
-  useEffect(() => {
-    glide.column(run);
-  }, []);
-  return <REPL {...props} />;
+  useEffect(() => glide.column(run));
+  return (
+    <>
+      <Script id="queue-glide-messages" strategy="beforeInteractive">
+        {listenAsEarlyAsPossible}
+      </Script>
+      <REPL {...props} />
+    </>
+  );
 }
