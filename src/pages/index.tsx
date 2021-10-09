@@ -1,19 +1,20 @@
 import classNames from "classnames";
-import * as fs from "fs";
 
 import { GetStaticProps } from "next";
 import { useState } from "react";
+import { getColumnManifests } from "../columns";
 import { Manifest } from "../glide";
+import { removeUndefineds } from "../util";
 
 interface Props {
   manifests: Record<string, Manifest>;
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const manifests = JSON.parse(fs.readFileSync(`public/all.json`, "utf8"));
+  const manifests = getColumnManifests();
   return {
     props: {
-      manifests,
+      manifests: removeUndefineds(manifests),
     },
   };
 };

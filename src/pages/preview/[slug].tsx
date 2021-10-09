@@ -1,22 +1,14 @@
-import * as fs from "fs";
-
 import { GetStaticPaths, GetStaticProps } from "next";
-import React from "react";
+import { getColumnDefinition } from "../../columns";
 import REPL from "../../components/REPL";
-import { ColumnDefinition, Manifest } from "../../glide";
 
 interface Props {
   slug: string;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const manifests: Record<string, Manifest> = JSON.parse(
-    fs.readFileSync(`public/all.json`, "utf8")
-  );
   return {
-    paths: Object.keys(manifests).map(slug => ({
-      params: { slug },
-    })),
+    paths: [],
     fallback: "blocking",
   };
 };
@@ -31,9 +23,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
 
 const PreviewPage = (props: Props) => {
   const { slug } = props;
-  const { default: manifest } = require(`../../columns/${slug}`) as {
-    default: ColumnDefinition<any>;
-  };
+  const manifest = getColumnDefinition(slug);
   return <REPL {...manifest} />;
 };
 
