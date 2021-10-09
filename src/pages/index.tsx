@@ -1,10 +1,11 @@
 import classNames from "classnames";
 
 import { GetStaticProps } from "next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getColumnManifests } from "../columns";
 import { Manifest } from "../glide";
 import { removeUndefineds } from "../util";
+import PreviewPage from "./preview/[slug]";
 
 interface Props {
   manifests: Record<string, Manifest>;
@@ -23,7 +24,16 @@ const Index = ({ manifests }: Props) => {
   const columns = Object.keys(manifests).sort((a, b) =>
     manifests[a].name.localeCompare(manifests[b].name)
   );
-  const [selectedColumn, setSelectedColumn] = useState(columns[0]);
+  const [selectedColumn, setSelectedColumn] = useState<string>();
+
+  useEffect(() => {
+    let { column } = localStorage;
+    if (manifests[column] === undefined) {
+      column = columns[0];
+    }
+    setSelectedColumn(column);
+  });
+
   return (
     <div className="flex flex-col h-screen text-gray-700 dark:text-gray-50">
       <div className="h-16 bg-[#12CCE5] shadow hidden">Header</div>
@@ -42,7 +52,10 @@ const Index = ({ manifests }: Props) => {
                   }
                 )}
                 key={column}
-                onClick={() => setSelectedColumn(column)}
+                onClick={() => {
+                  localStorage.column = column;
+                  setSelectedColumn(column);
+                }}
               >
                 <div className="flex-grow">
                   <div className="text-base">{manifest.name}</div>
@@ -52,10 +65,7 @@ const Index = ({ manifests }: Props) => {
           })}
         </div>
         <div className="flex-grow bg-gray-100 dark:bg-black">
-          <iframe
-            className="w-full h-full"
-            src={`/preview/${selectedColumn}`}
-          ></iframe>
+          {selectedColumn && <PreviewPage slug={selectedColumn} />}
         </div>
       </div>
     </div>

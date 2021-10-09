@@ -24,7 +24,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
 const PreviewPage = (props: Props) => {
   const { slug } = props;
   const manifest = getColumnDefinition(slug);
-  return <REPL {...manifest} />;
+  return <REPL key={slug} {...manifest} />;
 };
 
 export default PreviewPage;
