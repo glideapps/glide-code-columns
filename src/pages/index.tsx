@@ -53,7 +53,7 @@ const Index = ({ manifests }: Props) => {
         <div className="flex-grow bg-gray-100 dark:bg-black">
           <iframe
             className="w-full h-full"
-            src={`/${selectedColumn}/preview`}
+            src={`/preview/${selectedColumn}`}
           ></iframe>
         </div>
       </div>
