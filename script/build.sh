@@ -13,9 +13,11 @@ do
     node public/$SLUG/manifest.js
     rm public/$SLUG/manifest.js
 
-    # Now we build the actual column
-    esbuild $COLUMN --bundle --minify --sourcemap --outdir=public/$SLUG --external:fs --external:path --splitting --format=esm
-    echo "<script type='module'>import './$SLUG/$SLUG.js';</script>" > public/$SLUG/index.html
+
+    echo "<script type='module'>import './$SLUG.js';</script>" > public/$SLUG/index.html
 done
+
+# Now we build the actual column
+esbuild src/columns/*.ts --bundle --minify --sourcemap --outdir=public/ --external:fs --external:path --splitting --format=esm
 
 ts-node script/build.ts
