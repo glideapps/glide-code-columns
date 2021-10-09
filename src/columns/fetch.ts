@@ -1,5 +1,4 @@
 import * as glide from "../glide";
-import jq from "jq-web";
 
 import { Cache } from "../cache";
 
@@ -13,6 +12,7 @@ const run: glide.Column = async (url, query) => {
   }
   let json = await cache.fetch(url.value);
   if (query.value !== undefined) {
+    const jq = await import("jq-web");
     json = jq.json(json, query.value);
   }
 
