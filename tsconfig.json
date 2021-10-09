@@ -21,6 +21,11 @@
     "noEmit": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "src/**/*.ts", "src/**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "script/manifest.ts"
+  ],
   "exclude": ["node_modules"]
 }
