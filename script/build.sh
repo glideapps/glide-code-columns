@@ -17,3 +17,5 @@ do
     esbuild $COLUMN --bundle --outfile=public/$SLUG/index.js
     echo "<script src='/$SLUG/index.js'></script>" > public/$SLUG/index.html
 done
+
+ts-node src/manifest.ts
