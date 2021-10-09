@@ -1,4 +1,4 @@
-import { Column, ColumnComponent } from "../glide.next";
+import { Column, ColumnComponent } from "../components/REPL";
 import { exec, env } from "@jcubic/lips";
 
 const run: Column = async (code, ...params) => {

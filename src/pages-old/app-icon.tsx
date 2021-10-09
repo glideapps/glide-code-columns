@@ -1,4 +1,4 @@
-import { Column, ColumnComponent } from "../glide.next";
+import { Column, ColumnComponent } from "../components/REPL";
 import { Cache } from "../cache";
 
 import * as cheerio from "cheerio";

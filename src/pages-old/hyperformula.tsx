@@ -1,4 +1,4 @@
-import { Column, ColumnComponent } from "../glide.next";
+import { Column, ColumnComponent } from "../components/REPL";
 import { HyperFormula } from "hyperformula";
 
 const options = {

@@ -1,4 +1,4 @@
-import { Column, ColumnComponent } from "../glide.next";
+import { Column, ColumnComponent } from "../components/REPL";
 import { url } from "../urls";
 
 // TODO support more from https://www.ruggedtabletpc.com/barcode-generator

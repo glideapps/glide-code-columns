@@ -1,6 +1,6 @@
 import jq from "jq-web";
 import React from "react";
-import { Column, ColumnComponent } from "../glide.next";
+import { Column, ColumnComponent } from "../components/REPL";
 
 const run: Column = async (json, query) => {
   if (json.value === undefined) {
