@@ -7,5 +7,7 @@ public/**/glide.json
 .next
 .vercel
 build
-public/all.json
+public/**/*.json
+public/**/*.js*
 public/glide-brand-image/images.json
+out

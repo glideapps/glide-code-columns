@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from "next";
-import { getColumnDefinition } from "../../columns";
+import { getColumnSlugs, getColumnDefinition } from "../../columns";
 import REPL from "../../components/REPL";
 
 interface Props {
@@ -7,9 +7,10 @@ interface Props {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const slugs = getColumnSlugs();
   return {
-    paths: [],
-    fallback: "blocking",
+    paths: slugs.map(slug => ({ params: { slug } })),
+    fallback: false,
   };
 };
 
