@@ -5,7 +5,7 @@ interface Props {
 }
 
 const defaultProps: Props = {
-  timeoutSeconds: 5,
+  timeoutSeconds: 5 * 60,
 };
 
 function elapsedSeconds(date: Date): number {
