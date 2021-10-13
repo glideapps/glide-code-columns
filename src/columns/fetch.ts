@@ -11,12 +11,18 @@ const run: glide.Column = async (url, query) => {
   if (url.value === undefined) {
     return undefined;
   }
-  let json = await cache.fetch(url.value);
+  let data = await cache.fetch(url.value);
   if (query.value !== undefined) {
-    json = jq.json(json, query.value);
+    data = jq.json(data, query.value);
   }
 
-  return typeof json === "object" ? JSON.stringify(json) : json;
+  if (data === null) {
+    return undefined;
+  }
+  if (typeof data === "object" || Array.isArray(data)) {
+    return JSON.stringify(data);
+  }
+  return data;
 };
 
 export default glide.column({

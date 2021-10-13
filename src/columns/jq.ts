@@ -9,10 +9,16 @@ const run: glide.Column = async (json, query) => {
   if (query.value === undefined) {
     return json.value;
   }
+
   const val = jq.json(JSON.parse(json.value), query.value);
-  return typeof val === "object" || Array.isArray(val)
-    ? JSON.stringify(val)
-    : val;
+
+  if (val === null) {
+    return undefined;
+  }
+  if (typeof val === "object" || Array.isArray(val)) {
+    return JSON.stringify(val);
+  }
+  return val;
 };
 
 export default glide.column({
