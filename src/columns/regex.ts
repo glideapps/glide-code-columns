@@ -7,4 +7,9 @@ export default glide
   .withStringParam("text")
   .withStringParam("regex", "Regular Expression")
   .withExample({ text: `Hello, world.`, regex: "Hello, (.+)." })
-  .run(({ text, regex }) => text?.match(regex)?.[1]);
+  .run(({ text, regex }) => {
+    if (regex === undefined) {
+      return undefined;
+    }
+    text?.match(regex)?.[1];
+  });
