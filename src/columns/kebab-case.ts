@@ -1,6 +1,6 @@
 import * as glide from "../glide";
 
-import kebabCase = require("lodash/kebabCase");
+import kebabCase from "lodash/kebabCase";
 
 export default glide
   .columnNamed("Kebab Case")

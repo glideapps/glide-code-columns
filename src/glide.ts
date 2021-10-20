@@ -1,4 +1,4 @@
-import startCase = require("lodash/startCase");
+import startCase from "lodash/startCase";
 
 export type ColumnType =
   | "string"
@@ -203,6 +203,10 @@ export class Col<TParams = {}, TResult = string> {
     return this.withResult<string>("string");
   }
 
+  public withNumberResult() {
+    return this.withResult<number>("number");
+  }
+
   public withParam<TParam, TName extends string>(
     type: ColumnType,
     name: TName,
@@ -218,6 +222,10 @@ export class Col<TParams = {}, TResult = string> {
 
   public withStringParam<T extends string>(name: T, displayName?: string) {
     return this.withParam<string, T>("string", name, displayName);
+  }
+
+  public withNumberParam<T extends string>(name: T, displayName?: string) {
+    return this.withParam<number, T>("number", name, displayName);
   }
 
   public withExample(example: TParams) {

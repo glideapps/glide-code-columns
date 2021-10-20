@@ -1,6 +1,6 @@
 import * as glide from "../glide";
 
-import startCase = require("lodash/startCase");
+import startCase from "lodash/startCase";
 
 export default glide
   .columnNamed("Start Case")
