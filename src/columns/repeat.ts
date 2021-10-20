@@ -9,5 +9,5 @@ export default glide
   .withStringResult()
   .withStringParam("text")
   .withNumberParam("n", "Repetitions")
-  .withExample({ text: `*`, length: 8 })
+  .withExample({ text: `*`, n: 8 })
   .run(({ text, n }) => (text === undefined ? undefined : repeat(text, n)));
