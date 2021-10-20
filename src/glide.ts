@@ -153,7 +153,7 @@ export function toStrictManifest(
   };
 }
 
-const defaultManifest: ColumnDefinition = {
+const defaultDefinition: ColumnDefinition = {
   name: "Glide Column",
   description: "No Description",
   author: "Glide <hello@glideapps.com>",
@@ -172,7 +172,7 @@ export class Col<TParams = {}, TResult = string> {
 
   constructor(m: Partial<ColumnDefinition<TParams>> = {}) {
     this.definition = {
-      ...(defaultManifest as ColumnDefinition<TParams>),
+      ...(defaultDefinition as ColumnDefinition<TParams>),
       ...m,
     };
   }
