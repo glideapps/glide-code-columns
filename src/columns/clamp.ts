@@ -2,7 +2,7 @@ import * as glide from "../glide";
 
 export default glide
   .columnNamed("Clamp")
-  .withDescription(`"hello world" → "Hello World"`)
+  .withDescription(`Clamps a number within inclusive lower and upper bounds.`)
   .withNumberResult()
   .withNumberParam("number")
   .withNumberParam("lower", "Lower Bound")
