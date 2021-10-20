@@ -244,15 +244,10 @@ export class Col<TParams = {}, TResult = string> {
     name: TName,
     displayName?: string
   ) {
-    if (displayName === undefined) {
-      displayName = startCase(name);
-    }
-    return this.with(
-      {
-        params: { ...this.definition.params, [name]: { type, displayName } },
-      },
-      [name]
-    ) as Col<TParams & { readonly [K in TName]: TParam }, TResult>;
+    return this.withParam(type, name, displayName) as Col<
+      TParams & { readonly [K in TName]: TParam },
+      TResult
+    >;
   }
 
   public withStringParam<T extends string>(name: T, displayName?: string) {
