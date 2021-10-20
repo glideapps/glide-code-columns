@@ -19,6 +19,7 @@ const run: glide.Column = async (code, ...params) => {
 
 export default glide.column({
   name: "Hell Yes-Code",
+  category: "Code",
   description: "Runs JavaScript",
   about: `Inludes [lodash](https://lodash.com/docs).`,
   author: "Mark Probst <mark@glideapps.com>",

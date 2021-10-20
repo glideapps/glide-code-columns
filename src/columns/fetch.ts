@@ -27,6 +27,7 @@ const run: glide.Column = async (url, query) => {
 
 export default glide.column({
   name: "Fetch JSON",
+  category: "Code",
   description: "Fetch and optionally transform JSON",
   about: `
       Given a URL, this column fetches JSON data at that URL. An optional [jq query](https://stedolan.github.io/jq/manual/#Basicfilters) transforms the JSON.

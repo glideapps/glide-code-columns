@@ -3,7 +3,7 @@ import * as glide from "../glide";
 import Humanize from "humanize-plus";
 
 export default glide
-  .columnNamed("Pluralize Text")
+  .columnNamed("Pluralize Text", "Text")
   .withDescription(
     `Returns the plural version of a given word if the value is not 1. The default suffix is 's'.`
   )

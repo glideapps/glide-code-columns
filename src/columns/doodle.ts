@@ -17,6 +17,7 @@ const run: glide.Column = async (sizeValue, categoryValue, randomSeed) => {
 
 export default glide.column({
   name: "Doodle Ipsum",
+  category: "Image",
   description: "Generate random illustrations from data",
   video: "https://www.youtube.com/watch?v=kvUU1N-B_Ok",
   about: `

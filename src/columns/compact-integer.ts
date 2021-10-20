@@ -3,7 +3,7 @@ import * as glide from "../glide";
 import Humanize from "humanize-plus";
 
 export default glide
-  .columnNamed("Compact Integer")
+  .columnNamed("Compact Integer", "Number")
   .withDescription(`Converts an integer into its most compact representation.`)
   .withAuthor("HubSpot", "https://github.com/HubSpot/humanize")
   .withStringResult()

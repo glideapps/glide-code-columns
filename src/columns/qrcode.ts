@@ -20,6 +20,7 @@ const run: glide.Column = async (dataValue, sizeValue) => {
 
 export default glide.column({
   name: "QR Code",
+  category: "Image",
   description: "Generate QR codes",
   about: `
       Uses [goQR.me](https://goqr.me/api/)'s QR code generation API.
