@@ -287,7 +287,7 @@ export class Col<TParams = {}, TResult = string> {
     const requiredParamNames = this.requiredParams;
     const staticParamNames = Object.keys(staticParams);
 
-    async function run(...dynamicParams) {
+    function run(...dynamicParams) {
       const params = {} as TParams;
 
       dynamicParams.forEach(({ value }, i) => {
@@ -298,8 +298,7 @@ export class Col<TParams = {}, TResult = string> {
         return undefined;
       }
 
-      const result = columnFunction(params);
-      return Promise.resolve(result);
+      return columnFunction(params);
     }
 
     return column({
