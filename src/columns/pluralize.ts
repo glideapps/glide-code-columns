@@ -9,9 +9,9 @@ export default glide
   )
   .withAuthor("HubSpot", "https://github.com/HubSpot/humanize")
   .withStringResult()
-  .withRequiredStringParam("number")
-  .withNumberParam("singular")
-  .withNumberParam("plural")
+  .withRequiredNumberParam("number")
+  .withStringParam("singular")
+  .withStringParam("plural")
   .withExample({ number: 3, singular: "duck", plural: "duckies" })
   .run(({ number, singular, plural }) =>
     Humanize.pluralize(number, singular, plural)
