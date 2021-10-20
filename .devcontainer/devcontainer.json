@@ -8,6 +8,9 @@
       "VARIANT": "14"
     }
   },
-  "extensions": ["ethansk.restore-terminals"],
+  "extensions": [
+	"ethansk.restore-terminals",
+	"esbenp.prettier-vscode"
+],
   "remoteUser": "node"
 }

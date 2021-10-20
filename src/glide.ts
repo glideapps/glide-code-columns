@@ -21,7 +21,7 @@ export type ColumnValue =
   | { type: "number"; value?: number }
   | StringColumnValue;
 
-export type Column = (...values: ColumnValue[]) => Promise<any | undefined>;
+export type Column = (...values: ColumnValue[]) => any | Promise<any>;
 
 function convert(x: any) {
   if (x instanceof Date) {
@@ -93,7 +93,7 @@ export function column<TColumnParams>(
   json: string;
 } {
   // We run this code in node to output manifests, so check for window.
-  if (typeof window !== "undefined") {
+  if (!process.env.DIRECT && typeof window !== "undefined") {
     window.addEventListener("message", e => listen(e, manifest.run));
   }
 
