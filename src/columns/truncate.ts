@@ -13,6 +13,6 @@ export default glide
   .withNumberParam("length")
   .withStringParam("ending")
   .withExample({ string: "long text is good for you", length: 19 })
-  .run(({ string, length, ending = "…" }) =>
+  .run(({ string, length, ending }) =>
     Humanize.truncate(string, length, ending)
   );
