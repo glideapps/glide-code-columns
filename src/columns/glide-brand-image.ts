@@ -28,7 +28,7 @@ const run: glide.Column = async (categoryValue, randomSeed) => {
   const { value: seed } = randomSeed;
   if (seed === undefined) return undefined;
 
-  const images = await cache.fetch(`/glide-brand-image/images.json`);
+  const images = await cache.fetch(`https://column.sh/glide-brand-image/images.json`);
   const is = images[category] ?? images[defaultCategory];
   const hash = Math.abs(hashCode(seed));
   const image = is[hash % is.length];
