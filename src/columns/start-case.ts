@@ -5,6 +5,7 @@ import startCase from "lodash/startCase";
 export default glide
   .columnNamed("Start Case")
   .withDescription(`"hello world" → "Hello World"`)
+  .withAuthor("lodash Project", "lodash.com")
   .withStringResult()
   .withStringParam("text")
   .withExample({ text: `helloWorld` })

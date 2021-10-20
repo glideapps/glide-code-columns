@@ -5,6 +5,7 @@ import kebabCase from "lodash/kebabCase";
 export default glide
   .columnNamed("Kebab Case")
   .withDescription(`"hello world" → "hello-world"`)
+  .withAuthor("lodash Project", "lodash.com")
   .withStringResult()
   .withStringParam("text")
   .withExample({ text: `helloWorld` })
