@@ -1,3 +1,5 @@
+import { startCase } from "lodash";
+
 export type ColumnType =
   | "string"
   | "primitive"
@@ -204,14 +206,17 @@ export class Col<TParams = {}, TResult = string> {
   public withParam<TParam, TName extends string>(
     type: ColumnType,
     name: TName,
-    displayName = name
+    displayName?: string
   ) {
+    if (displayName === undefined) {
+      displayName = startCase(name);
+    }
     return this.with({
       params: { ...this.definition.params, [name]: { type, displayName } },
     }) as Col<TParams & { readonly [K in TName]?: TParam }, TResult>;
   }
 
-  public withStringParam<T extends string>(name: T, displayName = name) {
+  public withStringParam<T extends string>(name: T, displayName?: string) {
     return this.withParam<string, T>("string", name, displayName);
   }
 

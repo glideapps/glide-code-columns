@@ -24,6 +24,7 @@
   "homepage": "https://github.com/dvdsgl/glide-computed-column#readme",
   "devDependencies": {
     "@types/jest": "^27.0.1",
+    "@types/lodash": "^4.14.175",
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
     "autoprefixer": "^10.3.4",
