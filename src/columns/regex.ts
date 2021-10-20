@@ -11,5 +11,5 @@ export default glide
     if (regex === undefined) {
       return undefined;
     }
-    text?.match(regex)?.[1];
+    return text?.match(regex)?.[1];
   });
