@@ -1,4 +1,4 @@
-import { startCase } from "lodash";
+import startCase = require("lodash/startCase");
 
 export type ColumnType =
   | "string"
