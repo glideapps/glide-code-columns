@@ -4,6 +4,6 @@ export default glide
   .columnNamed("Base64 Encode")
   .withDescription("A common binary encoding for text.")
   .withStringResult()
-  .withStringParam("text")
+  .withRequiredStringParam("text")
   .withExample({ text: `Hello, world!` })
-  .runRequired(({ text }) => btoa(text));
+  .run(({ text }) => btoa(text));

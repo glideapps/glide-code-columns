@@ -172,16 +172,27 @@ const defaultDefinition: ColumnDefinition = {
 
 export class Col<TParams = {}, TResult = string> {
   readonly definition: ColumnDefinition<TParams>;
+  readonly requiredParams: string[];
 
-  constructor(m: Partial<ColumnDefinition<TParams>> = {}) {
+  constructor(
+    m: Partial<ColumnDefinition<TParams>> = {},
+    requiredParams: string[] = []
+  ) {
     this.definition = {
       ...(defaultDefinition as ColumnDefinition<TParams>),
       ...m,
     };
+    this.requiredParams = [...requiredParams];
   }
 
-  public with(m: Partial<ColumnDefinition<TParams>>): Col<TParams, TResult> {
-    return new Col({ ...this.definition, ...m });
+  public with(
+    m: Partial<ColumnDefinition<TParams>>,
+    requiredParams: string[] = []
+  ): Col<TParams, TResult> {
+    return new Col({ ...this.definition, ...m }, [
+      ...this.requiredParams,
+      ...requiredParams,
+    ]);
   }
 
   public withName(name: string) {
@@ -215,22 +226,40 @@ export class Col<TParams = {}, TResult = string> {
   public withParam<TParam, TName extends string>(
     type: ColumnType,
     name: TName,
-    displayName?: string
+    displayName?: string,
+    required?: "required"
   ) {
     if (displayName === undefined) {
       displayName = startCase(name);
     }
-    return this.with({
-      params: { ...this.definition.params, [name]: { type, displayName } },
-    }) as Col<TParams & { readonly [K in TName]?: TParam }, TResult>;
+    return this.with(
+      {
+        params: { ...this.definition.params, [name]: { type, displayName } },
+      },
+      required === "required" ? [name] : []
+    ) as Col<TParams & { readonly [K in TName]: TParam }, TResult>;
   }
 
   public withStringParam<T extends string>(name: T, displayName?: string) {
-    return this.withParam<string, T>("string", name, displayName);
+    return this.withParam<string | undefined, T>("string", name, displayName);
+  }
+
+  public withRequiredStringParam<T extends string>(
+    name: T,
+    displayName?: string
+  ) {
+    return this.withParam<string, T>("string", name, displayName, "required");
+  }
+
+  public withRequiredNumberParam<T extends string>(
+    name: T,
+    displayName?: string
+  ) {
+    return this.withParam<number, T>("number", name, displayName, "required");
   }
 
   public withNumberParam<T extends string>(name: T, displayName?: string) {
-    return this.withParam<number, T>("number", name, displayName);
+    return this.withParam<number | undefined, T>("number", name, displayName);
   }
 
   public withExample(example: TParams) {
@@ -243,6 +272,7 @@ export class Col<TParams = {}, TResult = string> {
     ) => Promise<TResult | undefined> | TResult | undefined
   ) {
     const { params: staticParams } = this.definition;
+    const requiredParamNames = this.requiredParams;
     const staticParamNames = Object.keys(staticParams);
 
     async function run(...dynamicParams) {
@@ -252,6 +282,10 @@ export class Col<TParams = {}, TResult = string> {
         params[staticParamNames[i]] = value;
       });
 
+      if (requiredParamNames.some(name => params[name] === undefined)) {
+        return undefined;
+      }
+
       const result = columnFunction(params);
       return Promise.resolve(result);
     }
@@ -259,22 +293,6 @@ export class Col<TParams = {}, TResult = string> {
     return column({
       ...this.definition,
       run,
-    });
-  }
-
-  public runRequired(
-    columnFunction: (
-      params: Required<TParams>
-    ) => Promise<TResult | undefined> | TResult | undefined
-  ) {
-    const { params: staticParams } = this.definition;
-    const staticParamNames = Object.keys(staticParams);
-
-    return this.run(dynamicParams => {
-      if (staticParamNames.some(name => dynamicParams[name] === undefined)) {
-        return undefined;
-      }
-      return columnFunction(dynamicParams as Required<TParams>);
     });
   }
 }
