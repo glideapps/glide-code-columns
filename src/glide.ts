@@ -1,4 +1,12 @@
-type ColumnType = "string" | "primitive" | "number" | "image-uri" | "uri";
+import startCase from "lodash/startCase";
+
+export type ColumnType =
+  | "string"
+  | "primitive"
+  | "number"
+  | "boolean"
+  | "image-uri"
+  | "uri";
 
 export type StringColumnValue = { type: "string"; value?: string };
 
@@ -73,7 +81,7 @@ export type ManifestConvenient<T> = Omit<Manifest, "params" | "icon"> & {
   icon?: "glide" | string;
 };
 
-export type ColumnDefinition<TColumnParams> =
+export type ColumnDefinition<TColumnParams = {}> =
   ManifestConvenient<TColumnParams> & {
     run: Column;
     example?: Partial<TColumnParams>;
@@ -81,7 +89,9 @@ export type ColumnDefinition<TColumnParams> =
 
 export function column<TColumnParams>(
   manifest: ColumnDefinition<TColumnParams>
-): ColumnDefinition<TColumnParams> & { json: string } {
+): ColumnDefinition<TColumnParams> & {
+  json: string;
+} {
   // We run this code in node to output manifests, so check for window.
   if (typeof window !== "undefined") {
     window.addEventListener("message", e => listen(e, manifest.run));
@@ -144,4 +154,115 @@ export function toStrictManifest(
       ...param,
     })),
   };
+}
+
+const defaultDefinition: ColumnDefinition = {
+  name: "Glide Column",
+  description: "No Description",
+  author: "Glide <hello@glideapps.com>",
+  params: {},
+  result: { type: "string" },
+  icon: defaultIcon,
+  about: undefined,
+  video: undefined,
+  async run() {
+    return undefined;
+  },
+};
+
+export class Col<TParams = {}, TResult = string> {
+  readonly definition: ColumnDefinition<TParams>;
+
+  constructor(m: Partial<ColumnDefinition<TParams>> = {}) {
+    this.definition = {
+      ...(defaultDefinition as ColumnDefinition<TParams>),
+      ...m,
+    };
+  }
+
+  public with(m: Partial<ColumnDefinition<TParams>>): Col<TParams, TResult> {
+    return new Col({ ...this.definition, ...m });
+  }
+
+  public withName(name: string) {
+    return this.with({ name });
+  }
+
+  public withDescription(description: string) {
+    return this.with({ description });
+  }
+
+  public withAuthor(name: string, email: string) {
+    return this.with({ author: `${name} <${email}>` });
+  }
+
+  public withResult<T>(type: ColumnType) {
+    return this.with({ result: { type } }) as Col<TParams, T>;
+  }
+
+  public withStringResult() {
+    return this.withResult<string>("string");
+  }
+
+  public withNumberResult() {
+    return this.withResult<number>("number");
+  }
+
+  public withBooleanResult() {
+    return this.withResult<boolean>("boolean");
+  }
+
+  public withParam<TParam, TName extends string>(
+    type: ColumnType,
+    name: TName,
+    displayName?: string
+  ) {
+    if (displayName === undefined) {
+      displayName = startCase(name);
+    }
+    return this.with({
+      params: { ...this.definition.params, [name]: { type, displayName } },
+    }) as Col<TParams & { readonly [K in TName]?: TParam }, TResult>;
+  }
+
+  public withStringParam<T extends string>(name: T, displayName?: string) {
+    return this.withParam<string, T>("string", name, displayName);
+  }
+
+  public withNumberParam<T extends string>(name: T, displayName?: string) {
+    return this.withParam<number, T>("number", name, displayName);
+  }
+
+  public withExample(example: TParams) {
+    return this.with({ example });
+  }
+
+  public run(
+    columnFunction: (
+      params: TParams
+    ) => Promise<TResult | undefined> | TResult | undefined
+  ) {
+    const { params: staticParams } = this.definition;
+    const staticParamNames = Object.keys(staticParams);
+
+    async function run(...dynamicParams) {
+      const params = {} as TParams;
+
+      dynamicParams.forEach(({ value }, i) => {
+        params[staticParamNames[i]] = value;
+      });
+
+      const result = columnFunction(params);
+      return Promise.resolve(result);
+    }
+
+    return column({
+      ...this.definition,
+      run,
+    });
+  }
+}
+
+export function columnNamed(name: string) {
+  return new Col({ name });
 }
