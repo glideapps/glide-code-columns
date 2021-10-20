@@ -226,8 +226,20 @@ export class Col<TParams = {}, TResult = string> {
   public withParam<TParam, TName extends string>(
     type: ColumnType,
     name: TName,
-    displayName?: string,
-    required?: "required"
+    displayName?: string
+  ) {
+    if (displayName === undefined) {
+      displayName = startCase(name);
+    }
+    return this.with({
+      params: { ...this.definition.params, [name]: { type, displayName } },
+    }) as Col<TParams & { readonly [K in TName]?: TParam }, TResult>;
+  }
+
+  public withRequiredParam<TParam, TName extends string>(
+    type: ColumnType,
+    name: TName,
+    displayName?: string
   ) {
     if (displayName === undefined) {
       displayName = startCase(name);
@@ -236,30 +248,30 @@ export class Col<TParams = {}, TResult = string> {
       {
         params: { ...this.definition.params, [name]: { type, displayName } },
       },
-      required === "required" ? [name] : []
+      [name]
     ) as Col<TParams & { readonly [K in TName]: TParam }, TResult>;
   }
 
   public withStringParam<T extends string>(name: T, displayName?: string) {
-    return this.withParam<string | undefined, T>("string", name, displayName);
+    return this.withParam<string, T>("string", name, displayName);
+  }
+
+  public withNumberParam<T extends string>(name: T, displayName?: string) {
+    return this.withParam<number, T>("number", name, displayName);
   }
 
   public withRequiredStringParam<T extends string>(
     name: T,
     displayName?: string
   ) {
-    return this.withParam<string, T>("string", name, displayName, "required");
+    return this.withRequiredParam<string, T>("string", name, displayName);
   }
 
   public withRequiredNumberParam<T extends string>(
     name: T,
     displayName?: string
   ) {
-    return this.withParam<number, T>("number", name, displayName, "required");
-  }
-
-  public withNumberParam<T extends string>(name: T, displayName?: string) {
-    return this.withParam<number | undefined, T>("number", name, displayName);
+    return this.withRequiredParam<number, T>("number", name, displayName);
   }
 
   public withExample(example: TParams) {
