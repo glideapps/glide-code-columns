@@ -19,14 +19,18 @@ const REPL: React.VFC<ColumnDefinition<any>> = props => {
   );
 
   useEffect(() => {
-    const args = values.map(
-      (value, i) =>
-        ({
-          ...params[i],
-          value,
-        } as glide.ColumnValue)
-    );
-    run(...args).then(setResult);
+    async function f() {
+      const args = values.map(
+        (value, i) =>
+          ({
+            ...params[i],
+            value,
+          } as glide.ColumnValue)
+      );
+      const result = await run(...args);
+      setResult(result);
+    }
+    void f();
   }, [values.join("")]);
 
   const inputClassName =
