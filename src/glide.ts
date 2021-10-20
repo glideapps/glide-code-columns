@@ -244,7 +244,7 @@ export class Col<TParams = {}, TResult = string> {
     name: TName,
     displayName?: string
   ) {
-    return this.withParam(type, name, displayName) as Col<
+    return this.withParam(type, name, displayName).with({}, [name]) as Col<
       TParams & { readonly [K in TName]: TParam },
       TResult
     >;
