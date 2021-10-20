@@ -43,6 +43,7 @@
     "cheerio": "^1.0.0-rc.10",
     "classnames": "^2.3.1",
     "dotenv": "^10.0.0",
+    "email-validator": "^2.0.4",
     "hyperformula": "^1.2.0",
     "iframe-resizer": "^4.3.2",
     "jq-web": "^0.5.1",

@@ -4,6 +4,7 @@ export type ColumnType =
   | "string"
   | "primitive"
   | "number"
+  | "boolean"
   | "image-uri"
   | "uri";
 
@@ -205,6 +206,10 @@ export class Col<TParams = {}, TResult = string> {
 
   public withNumberResult() {
     return this.withResult<number>("number");
+  }
+
+  public withBooleanResult() {
+    return this.withResult<boolean>("boolean");
   }
 
   public withParam<TParam, TName extends string>(
