@@ -1,5 +1,4 @@
 import * as glide from "../glide";
-import { map } from "../util";
 
 export default glide
   .columnNamed("Base64 Decode")
@@ -7,4 +6,4 @@ export default glide
   .withStringResult()
   .withStringParam("text")
   .withExample({ text: `SGVsbG8sIHdvcmxkIQ==` })
-  .run(({ text }) => map(atob, text));
+  .runRequired(({ text }) => atob(text));

@@ -261,6 +261,22 @@ export class Col<TParams = {}, TResult = string> {
       run,
     });
   }
+
+  public runRequired(
+    columnFunction: (
+      params: Required<TParams>
+    ) => Promise<TResult | undefined> | TResult | undefined
+  ) {
+    const { params: staticParams } = this.definition;
+    const staticParamNames = Object.keys(staticParams);
+
+    return this.run(dynamicParams => {
+      if (staticParamNames.some(name => dynamicParams[name] === undefined)) {
+        return undefined;
+      }
+      return columnFunction(dynamicParams as Required<TParams>);
+    });
+  }
 }
 
 export function columnNamed(name: string) {

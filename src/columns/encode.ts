@@ -6,4 +6,4 @@ export default glide
   .withStringResult()
   .withStringParam("text")
   .withExample({ text: `Hello, world!` })
-  .run(({ text }) => (text === undefined ? undefined : btoa(text)));
+  .runRequired(({ text }) => btoa(text));
