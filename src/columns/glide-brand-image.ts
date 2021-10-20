@@ -39,6 +39,7 @@ const run: glide.Column = async (categoryValue, randomSeed) => {
 
 export default glide.column({
   name: "Glide Brand Image",
+  category: "Glide",
   description: "Glide 3D Data Shapes",
   author: "David Siegel <david@glideapps.com>",
   params: {

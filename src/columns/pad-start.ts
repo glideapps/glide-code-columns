@@ -3,7 +3,7 @@ import * as glide from "../glide";
 import padStart from "lodash/padStart";
 
 export default glide
-  .columnNamed("Pad Text at Start")
+  .columnNamed("Pad Text at Start", "Text")
   .withDescription(
     `Pads string on the left side if it's shorter than length. Padding characters are truncated if they exceed length.`
   )

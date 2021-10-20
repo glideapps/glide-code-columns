@@ -3,7 +3,7 @@ import * as glide from "../glide";
 import Humanize from "humanize-plus";
 
 export default glide
-  .columnNamed("Ordinal")
+  .columnNamed("Ordinal", "Number")
   .withDescription(`Converts an integer to its ordinal as a string.`)
   .withAuthor("HubSpot", "https://github.com/HubSpot/humanize")
   .withStringResult()

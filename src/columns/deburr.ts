@@ -3,7 +3,7 @@ import * as glide from "../glide";
 import deburr from "lodash/deburr";
 
 export default glide
-  .columnNamed("Deburr Text")
+  .columnNamed("Deburr Text", "Text")
   .withDescription(
     `Deburrs string by converting Latin-1 Supplement and Latin Extended-A letters to basic Latin letters and removing combining diacritical marks.`
   )

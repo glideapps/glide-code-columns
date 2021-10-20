@@ -3,7 +3,7 @@ import * as glide from "../glide";
 import repeat from "lodash/repeat";
 
 export default glide
-  .columnNamed("Repeat Text")
+  .columnNamed("Repeat Text", "Text")
   .withDescription(`Repeats the given string n times.`)
   .withAuthor("lodash Project", "lodash.com")
   .withStringResult()

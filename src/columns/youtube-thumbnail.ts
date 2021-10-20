@@ -23,6 +23,7 @@ const run: glide.Column = async link => {
 
 export default glide.column({
   name: "YouTube Thumbnail",
+  category: "Image",
   description: "Display video thumbnail images",
   author: "David Siegel <david@glideapps.com>",
   params: {

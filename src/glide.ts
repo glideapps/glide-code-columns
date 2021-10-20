@@ -67,6 +67,7 @@ export async function listen(event: MessageEvent<any>, main: Column) {
 
 export type Manifest = {
   name: string;
+  category: string;
   description: string;
   author: string;
   params: ColumnParam[];
@@ -133,7 +134,7 @@ export function toStrictManifest(
 ): Manifest {
   // We carefully pick out just the props in manifest, because more
   // could come in from the component.
-  const { name, description, author, result, params, about, video } =
+  const { name, category, description, author, result, params, about, video } =
     convenient;
 
   let { icon = defaultIcon } = convenient;
@@ -143,6 +144,7 @@ export function toStrictManifest(
 
   return {
     name,
+    category,
     description,
     author,
     result,
@@ -158,7 +160,8 @@ export function toStrictManifest(
 
 const defaultDefinition: ColumnDefinition = {
   name: "Glide Column",
-  description: "No Description",
+  category: "No category",
+  description: "No description",
   author: "Glide <hello@glideapps.com>",
   params: {},
   result: { type: "string" },
@@ -308,6 +311,6 @@ export class Col<TParams = {}, TResult = string> {
   }
 }
 
-export function columnNamed(name: string) {
-  return new Col({ name });
+export function columnNamed(name: string, category: string) {
+  return new Col({ name, category });
 }

@@ -1,7 +1,7 @@
 import * as glide from "../glide";
 
 export default glide
-  .columnNamed("Clamp")
+  .columnNamed("Clamp", "Number")
   .withDescription(`Clamps a number within inclusive lower and upper bounds.`)
   .withNumberResult()
   .withRequiredNumberParam("number")

@@ -26,6 +26,7 @@ const run: glide.Column = async (dataValue, sizeValue) => {
 
 export default glide.column({
   name: "Barcode",
+  category: "Image",
   description: "Generates barcode images",
   about: `
       Uses [ruggedtabletpc.com](https://ruggedtabletpc.com) to generate images of barcodes.

@@ -1,7 +1,7 @@
 import * as glide from "../glide";
 
 export default glide
-  .columnNamed("Trim Whitespace")
+  .columnNamed("Trim Whitespace", "Text")
   .withDescription("Remove whitespace around text.")
   .withStringResult()
   .withStringParam("text")

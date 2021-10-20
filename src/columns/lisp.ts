@@ -18,6 +18,7 @@ const run: glide.Column = async (code, ...params) => {
 
 export default glide.column({
   name: "LISP",
+  category: "Code",
   run,
   description: "Runs LISP code",
   about: `

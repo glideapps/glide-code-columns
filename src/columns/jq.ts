@@ -23,6 +23,7 @@ const run: glide.Column = async (json, query) => {
 
 export default glide.column({
   name: "Transform JSON",
+  category: "Code",
   description: "Transform JSON with JQ",
   author: "David Siegel <david@glideapps.com>",
   video: "https://www.youtube.com/watch?v=EvpwhGeiH0U",

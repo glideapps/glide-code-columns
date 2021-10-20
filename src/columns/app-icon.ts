@@ -37,6 +37,7 @@ const run: glide.Column = async url => {
 
 export default glide.column({
   name: "Glide App Icon",
+  category: "Glide",
   description: "Gets a Glide app's icon",
   author: "David Siegel <david@glideapps.com>",
   params: {
