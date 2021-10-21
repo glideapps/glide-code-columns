@@ -65,9 +65,11 @@ export async function listen(event: MessageEvent<any>, main: Column) {
   (event.source?.postMessage as any)(response, "*");
 }
 
+type Category = "General" | "Number" | "Encoding" | "Text";
+
 export type Manifest = {
   name: string;
-  category: string;
+  category: Category;
   description: string;
   author: string;
   params: ColumnParam[];
@@ -160,7 +162,7 @@ export function toStrictManifest(
 
 const defaultDefinition: ColumnDefinition = {
   name: "Glide Column",
-  category: "No category",
+  category: "General",
   description: "No description",
   author: "Glide <hello@glideapps.com>",
   params: {},
@@ -200,6 +202,10 @@ export class Col<TParams = {}, TResult = string> {
 
   public withName(name: string) {
     return this.with({ name });
+  }
+
+  public withCategory(category: Manifest["category"]) {
+    return this.with({ category });
   }
 
   public withDescription(description: string) {
@@ -311,6 +317,6 @@ export class Col<TParams = {}, TResult = string> {
   }
 }
 
-export function columnNamed(name: string, category: string) {
-  return new Col({ name, category });
+export function columnNamed(name: string) {
+  return new Col({ name });
 }
