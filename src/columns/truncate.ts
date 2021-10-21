@@ -3,7 +3,8 @@ import * as glide from "../glide";
 import Humanize from "humanize-plus";
 
 export default glide
-  .columnNamed("Truncate Text", "Text")
+  .columnNamed("Truncate Text")
+  .withCategory("Text")
   .withDescription(
     `Truncates a string if it is longer than the specified number of characters. Truncated strings will end with a translatable ellipsis sequence ("…").`
   )
