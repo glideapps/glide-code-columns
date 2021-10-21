@@ -6,6 +6,7 @@ export type ColumnType =
   | "number"
   | "boolean"
   | "image-uri"
+  | "date-time"
   | "uri";
 
 export type StringColumnValue = { type: "string"; value?: string };
@@ -72,6 +73,7 @@ export type Category =
   | "Encoding"
   | "Text"
   | "Image"
+  | "Date & Time"
   | "Code";
 
 export type Manifest = {
@@ -221,6 +223,10 @@ export class Col<TParams = {}, TResult = string> {
     return this.with({ description });
   }
 
+  public withAbout(about: string) {
+    return this.with({ about });
+  }
+
   public withAuthor(name: string, email: string) {
     return this.with({ author: `${name} <${email}>` });
   }
@@ -229,8 +235,15 @@ export class Col<TParams = {}, TResult = string> {
     params: Partial<TParams>,
     expectedResult: TResult | undefined
   ) {
+    const {
+      tests = [],
+      // Use this test as an example if we don't have one.
+      example = params,
+    } = this.definition;
+
     return this.with({
-      tests: [...(this.definition.tests ?? []), { params, expectedResult }],
+      example,
+      tests: [...tests, { params, expectedResult }],
     });
   }
 
@@ -278,6 +291,10 @@ export class Col<TParams = {}, TResult = string> {
     return this.withParam<string, T>("string", name, displayName);
   }
 
+  public withDateParam<T extends string>(name: T, displayName?: string) {
+    return this.withParam<string, T>("date-time", name, displayName);
+  }
+
   public withNumberParam<T extends string>(name: T, displayName?: string) {
     return this.withParam<number, T>("number", name, displayName);
   }
@@ -287,6 +304,13 @@ export class Col<TParams = {}, TResult = string> {
     displayName?: string
   ) {
     return this.withRequiredParam<string, T>("string", name, displayName);
+  }
+
+  public withRequiredDateParam<T extends string>(
+    name: T,
+    displayName?: string
+  ) {
+    return this.withRequiredParam<string, T>("date-time", name, displayName);
   }
 
   public withRequiredNumberParam<T extends string>(
