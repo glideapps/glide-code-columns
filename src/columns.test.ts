@@ -8,8 +8,14 @@ Object.values(definitions).forEach(definition => {
 
   if (tests.length === 0) return;
 
-  test(name, async () => {
-    for (const { params: testParams, expectedResult } of tests) {
+  for (const { params: testParams, expectedResult } of tests) {
+    const paramsDescription = Object.entries(testParams)
+      .map(([k, v]) => `${k}: ${JSON.stringify(v)}`)
+      .join(", ");
+    const description = `${name} { ${paramsDescription} } = ${JSON.stringify(
+      expectedResult
+    )}`;
+    test(description, async () => {
       const params = Object.entries(staticParams).map(
         ([name, columnParam]) =>
           ({
@@ -19,6 +25,6 @@ Object.values(definitions).forEach(definition => {
       );
       const result = await definition.run(...params);
       expect(result).toBe(expectedResult);
-    }
-  });
+    });
+  }
 });
