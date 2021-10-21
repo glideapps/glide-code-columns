@@ -22,15 +22,8 @@ export default glide
 
   .run(({ date, format }) => {
     const millis = Date.parse(date);
-
-    // For some reason, this does not catch all malformed dates,
-    // so we check again at end.
-    if (millis === NaN) return undefined;
+    if (isNaN(millis)) return undefined;
 
     const dateTime = DateTime.fromMillis(millis);
-
-    const formatted = dateTime.toFormat(format);
-    if (formatted === "Invalid DateTime") return undefined;
-
-    return formatted;
+    return dateTime.toFormat(format);
   });
