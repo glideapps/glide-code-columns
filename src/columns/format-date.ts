@@ -20,4 +20,7 @@ export default glide
 
   .withTest({ date: testDate, format: "cccc" }, "Thursday")
 
-  .run(({ date, format }) => DateTime.fromISO(date).toFormat(format));
+  .run(({ date, format }) => {
+    console.log({ date, type: typeof date });
+    return DateTime.fromISO(date).toFormat(format);
+  });
