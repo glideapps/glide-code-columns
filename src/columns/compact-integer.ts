@@ -11,4 +11,8 @@ export default glide
   .withRequiredNumberParam("number")
   .withNumberParam("decimals", "Decimal Places")
   .withExample({ number: 123456789 })
+
+  .withTest({ number: 123456789 }, "123M")
+  .withTest({ number: 123456789, decimals: 2 }, "123.46M")
+
   .run(({ number, decimals }) => Humanize.compactInteger(number, decimals));

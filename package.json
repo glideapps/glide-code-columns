@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "manifest": "script/build.sh",
-    "build": "npm run manifest && next build",
+    "build": "npm test && npm run manifest && next build",
     "export": "npm run manifest",
     "dev": "next dev",
     "start": "npm run dev",

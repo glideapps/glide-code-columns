@@ -95,6 +95,7 @@ export type ColumnDefinition<TColumnParams = {}> =
   ManifestConvenient<TColumnParams> & {
     run: Column;
     example?: Partial<TColumnParams>;
+    tests?: Array<{ params: Partial<TColumnParams>; expectedResult: any }>;
   };
 
 export function column<TColumnParams>(
@@ -177,6 +178,7 @@ const defaultDefinition: ColumnDefinition = {
   icon: defaultIcon,
   about: undefined,
   video: undefined,
+  tests: [],
   async run() {
     return undefined;
   },
@@ -221,6 +223,15 @@ export class Col<TParams = {}, TResult = string> {
 
   public withAuthor(name: string, email: string) {
     return this.with({ author: `${name} <${email}>` });
+  }
+
+  public withTest(
+    params: Partial<TParams>,
+    expectedResult: TResult | undefined
+  ) {
+    return this.with({
+      tests: [...(this.definition.tests ?? []), { params, expectedResult }],
+    });
   }
 
   public withResult<T>(type: ColumnType) {

@@ -10,6 +10,9 @@ export default glide
   )
   .withAuthor("lodash Project", "lodash.com")
   .withStringResult()
-  .withStringParam("text")
+  .withRequiredStringParam("text")
   .withExample({ text: `HELLO` })
-  .run(({ text }) => (text === undefined ? undefined : capitalize(text)));
+
+  .withTest({ text: `HELLO` }, "Hello")
+
+  .run(({ text }) => capitalize(text));
