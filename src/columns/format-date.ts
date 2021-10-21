@@ -4,6 +4,7 @@ import { DateTime } from "luxon";
 
 export default glide
   .columnNamed("Format Date")
+  .withDescription(`Powerful date & time formatting with luxon.`)
   .withCategory("Date & Time")
   .withAuthor("luxon", "https://moment.github.io/luxon")
   .withAbout(
@@ -11,7 +12,6 @@ export default glide
     Learn about date formatting in [luxon's documentation](https://moment.github.io/luxon/#/formatting?id=table-of-tokens).
   `
   )
-  .withDescription(`Format a date`)
   .withStringResult()
   .withRequiredDateParam("date")
   .withRequiredStringParam("format")
