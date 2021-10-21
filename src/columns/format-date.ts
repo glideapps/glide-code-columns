@@ -18,9 +18,19 @@ export default glide
 
   .withTest({ date: "2021-10-21T14:35:46.216Z", format: "cccc" }, "Thursday")
   .withTest({ date: "10/21/2021", format: "cccc" }, "Thursday")
+  .withTest({ date: "Invalid date!", format: "cccc" }, undefined)
 
   .run(({ date, format }) => {
-    const jsDate = new Date(date);
-    const dateTime = DateTime.fromJSDate(jsDate);
-    return dateTime.toFormat(format);
+    const millis = Date.parse(date);
+
+    // For some reason, this does not catch all malformed dates,
+    // so we check again at end.
+    if (millis === NaN) return undefined;
+
+    const dateTime = DateTime.fromMillis(millis);
+
+    const formatted = dateTime.toFormat(format);
+    if (formatted === "Invalid DateTime") return undefined;
+
+    return formatted;
   });
