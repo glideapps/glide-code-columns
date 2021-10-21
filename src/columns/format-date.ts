@@ -2,8 +2,6 @@ import * as glide from "../glide";
 
 import { DateTime } from "luxon";
 
-const testDate = "2021-10-21T14:35:46.216Z";
-
 export default glide
   .columnNamed("Format Date")
   .withCategory("Date & Time")
@@ -18,9 +16,11 @@ export default glide
   .withRequiredDateParam("date")
   .withRequiredStringParam("format")
 
-  .withTest({ date: testDate, format: "cccc" }, "Thursday")
+  .withTest({ date: "2021-10-21T14:35:46.216Z", format: "cccc" }, "Thursday")
+  .withTest({ date: "10/21/2021", format: "cccc" }, "Thursday")
 
   .run(({ date, format }) => {
-    console.log({ date, type: typeof date });
-    return DateTime.fromISO(date).toFormat(format);
+    const jsDate = new Date(date);
+    const dateTime = DateTime.fromJSDate(jsDate);
+    return dateTime.toFormat(format);
   });
