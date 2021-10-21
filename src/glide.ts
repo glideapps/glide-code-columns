@@ -65,7 +65,14 @@ export async function listen(event: MessageEvent<any>, main: Column) {
   (event.source?.postMessage as any)(response, "*");
 }
 
-type Category = "General" | "Number" | "Encoding" | "Text";
+export type Category =
+  | "Glide"
+  | "General"
+  | "Number"
+  | "Encoding"
+  | "Text"
+  | "Image"
+  | "Code";
 
 export type Manifest = {
   name: string;
