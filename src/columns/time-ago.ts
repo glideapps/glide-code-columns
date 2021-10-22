@@ -57,5 +57,7 @@ export default glide
     const nowMillis = now === undefined ? Date.now() : Date.parse(now);
     if (isNaN(nowMillis)) return undefined;
 
-    return timeAgo.format(dateMillis, style, { now: nowMillis }) as string;
+    return timeAgo.format(dateMillis, style as FormatStyleName | undefined, {
+      now: nowMillis,
+    }) as string;
   });
