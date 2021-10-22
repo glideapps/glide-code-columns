@@ -49,5 +49,5 @@ export default glide
     const nowMillis = now === undefined ? Date.now() : Date.parse(now);
     if (isNaN(nowMillis)) return undefined;
 
-    return timeAgo.format(dateMillis, "round", { now: nowMillis });
+    return timeAgo.format(dateMillis, "round", { now: nowMillis }) as string;
   });
