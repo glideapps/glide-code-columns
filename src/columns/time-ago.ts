@@ -8,7 +8,9 @@ const timeAgo = new TimeAgo("en-US");
 
 export default glide
   .columnNamed("Relative Time")
-  .withDescription(`International relative time formatting.`)
+  .withDescription(
+    `Given a date, returns a string with the relative time (e.g. '1 day ago').`
+  )
   .withCategory("Date & Time")
   .withAuthor("Nikolay Kuchumov", "gitlab.com/catamphetamine")
   .withAbout(
