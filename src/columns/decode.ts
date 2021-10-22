@@ -17,9 +17,4 @@ export default glide
   )
   .withTest({ text: "Hello%2C%20world!", encoding: "url" }, `Hello, world!`)
 
-  .run(({ text, encoding = "base64" }) => {
-    if (!encodingTypes.includes(encoding)) return undefined;
-
-    const { decode } = encodings[encoding];
-    return decode?.(text);
-  });
+  .run(({ text, encoding = "base64" }) => encodings[encoding]?.decode?.(text));
