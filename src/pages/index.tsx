@@ -38,7 +38,7 @@ const Index = ({ manifests }: Props) => {
     <div className="flex flex-col h-screen text-gray-700 dark:text-gray-50">
       <div className="h-16 bg-[#12CCE5] shadow hidden">Header</div>
       <div className="flex flex-grow w-full">
-        <div className="border-r w-72 dark:bg-gray-900 dark:border-transparent">
+        <div className="h-screen overflow-scroll border-r w-72 dark:bg-gray-900 dark:border-transparent">
           {columns.map(column => {
             const manifest = manifests[column];
             return (
