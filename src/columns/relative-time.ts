@@ -17,37 +17,37 @@ export default glide
   `
   )
   .withStringResult()
-  .withRequiredDateParam("relativeTo", "Relative To")
   .withRequiredDateParam("date")
+  .withDateParam("now")
 
   .withTest(
     {
-      relativeTo: "2021-10-21T14:35:46.216Z",
+      now: "2021-10-21T14:35:46.216Z",
       date: "2020-10-21T14:35:46.216Z",
     },
     "1 year ago"
   )
   .withTest(
     {
-      relativeTo: "2021-10-21T14:35:46.216Z",
+      now: "2021-10-21T14:35:46.216Z",
       date: "2021-10-21T14:35:46.216Z",
     },
     "just now"
   )
   .withTest(
     {
-      relativeTo: "2021-10-21T14:35:46.216Z",
+      now: "2021-10-21T14:35:46.216Z",
       date: "2021-10-21T14:40:46.216Z",
     },
     "in 5 minutes"
   )
 
-  .run(({ relativeTo, date }) => {
-    const relativeToMillis = Date.parse(relativeTo);
-    if (isNaN(relativeToMillis)) return undefined;
-
+  .run(({ date, now }) => {
     const dateMillis = Date.parse(date);
     if (isNaN(dateMillis)) return undefined;
 
-    return timeAgo.format(dateMillis, "round", { now: relativeToMillis });
+    const nowMillis = now === undefined ? Date.now() : Date.parse(now);
+    if (isNaN(nowMillis)) return undefined;
+
+    return timeAgo.format(dateMillis, "round", { now: nowMillis });
   });
