@@ -13,7 +13,7 @@ export default glide
   .withStringParam("text")
   .withNumberParam("length")
   .withStringParam("chars", "Padding")
-  .withExample({ text: `abc`, length: 8 })
+  .withTest({ text: `abc`, length: 8 }, "abc     ")
   .run(({ text, length, chars }) =>
     text === undefined ? undefined : padEnd(text, length, chars)
   );

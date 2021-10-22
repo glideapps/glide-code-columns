@@ -8,5 +8,5 @@ export default glide
   .withDescription(`Indicates whether text is an email.`)
   .withBooleanResult()
   .withStringParam("email")
-  .withExample({ email: `hello@world.co` })
+  .withTest({ email: `hello@world.co` }, true)
   .run(({ email }) => email !== undefined && validator.validate(email));

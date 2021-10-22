@@ -7,8 +7,11 @@ export default glide
   .withCategory("Text")
   .withDescription(`Repeats the given string n times.`)
   .withAuthor("lodash Project", "lodash.com")
+
+  .withRequiredStringParam("text")
+  .withRequiredNumberParam("n", "Repetitions")
   .withStringResult()
-  .withStringParam("text")
-  .withNumberParam("n", "Repetitions")
-  .withExample({ text: `*`, n: 8 })
-  .run(({ text, n }) => (text === undefined ? undefined : repeat(text, n)));
+
+  .withTest({ text: `*`, n: 8 }, "********")
+
+  .run(({ text, n }) => repeat(text, n));

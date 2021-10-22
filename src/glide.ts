@@ -236,14 +236,9 @@ export class Col<TParams = {}, TResult = string> {
     params: Partial<TParams>,
     expectedResult: TResult | undefined
   ) {
-    const {
-      tests = [],
-      // Use this test as an example if we don't have one.
-      example = params,
-    } = this.definition;
+    const { tests = [] } = this.definition;
 
     return this.with({
-      example,
       tests: [...tests, { params, expectedResult }],
     });
   }
@@ -319,10 +314,6 @@ export class Col<TParams = {}, TResult = string> {
     displayName?: string
   ) {
     return this.withRequiredParam<number, T>("number", name, displayName);
-  }
-
-  public withExample(example: TParams) {
-    return this.with({ example });
   }
 
   public run(

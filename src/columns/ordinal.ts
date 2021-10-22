@@ -9,5 +9,5 @@ export default glide
   .withAuthor("HubSpot", "https://github.com/HubSpot/humanize")
   .withStringResult()
   .withRequiredNumberParam("number")
-  .withExample({ number: 22 })
+  .withTest({ number: 22 }, "22nd")
   .run(({ number }) => Humanize.ordinal(number));

@@ -9,11 +9,14 @@ export default glide
     `Truncates a string if it is longer than the specified number of characters. Truncated strings will end with a translatable ellipsis sequence ("…").`
   )
   .withAuthor("HubSpot", "https://github.com/HubSpot/humanize")
-  .withStringResult()
+
   .withRequiredStringParam("string")
   .withNumberParam("length")
   .withStringParam("ending")
-  .withExample({ string: "long text is good for you", length: 19 })
+  .withStringResult()
+
+  .withTest({ string: "long text is good for you", length: 12 }, "long text...")
+
   .run(({ string, length, ending }) =>
     Humanize.truncate(string, length, ending)
   );

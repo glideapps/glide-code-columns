@@ -11,5 +11,5 @@ export default glide
   .withAuthor("lodash Project", "lodash.com")
   .withStringResult()
   .withStringParam("text")
-  .withExample({ text: `déjà vu` })
+  .withTest({ text: `déjà vu` }, "deja vu")
   .run(({ text }) => (text === undefined ? undefined : deburr(text)));

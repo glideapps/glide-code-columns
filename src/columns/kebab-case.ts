@@ -9,5 +9,5 @@ export default glide
   .withAuthor("lodash Project", "lodash.com")
   .withStringResult()
   .withStringParam("text")
-  .withExample({ text: `helloWorld` })
+  .withTest({ text: `helloWorld` }, "hello-world")
   .run(({ text }) => (text === undefined ? undefined : kebabCase(text)));

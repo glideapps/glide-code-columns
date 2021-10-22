@@ -4,10 +4,13 @@ export default glide
   .columnNamed("Extract Matching Text")
   .withCategory("Text")
   .withDescription("Extract text matching a regular expression.")
-  .withStringResult()
+
   .withStringParam("text")
   .withStringParam("regex", "Regular Expression")
-  .withExample({ text: `Hello, world.`, regex: "Hello, (.+)." })
+  .withStringResult()
+
+  .withTest({ text: `Hello, world.`, regex: "Hello, (.+)." }, "world")
+
   .run(({ text, regex }) => {
     if (regex === undefined) {
       return undefined;

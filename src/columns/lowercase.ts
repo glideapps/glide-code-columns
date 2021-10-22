@@ -9,5 +9,5 @@ export default glide
   .withAuthor("lodash Project", "lodash.com")
   .withStringResult()
   .withStringParam("text")
-  .withExample({ text: `--Foo-Bar--` })
+  .withTest({ text: `--Foo-Bar--` }, "foo bar")
   .run(({ text }) => (text === undefined ? undefined : lowerCase(text)));
