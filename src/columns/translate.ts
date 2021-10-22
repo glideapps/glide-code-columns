@@ -35,7 +35,7 @@ const run: glide.Column = async (textColumn, langColumn, keyColumn) => {
 
 export default glide.column({
   name: "Google Translate",
-  category: "Text",
+  category: "Data & APIs",
   description: "Translate from one language to another",
   author: "David Siegel <david@glideapps.com>",
   video: "https://www.youtube.com/watch?v=A3knNbGfXh4",

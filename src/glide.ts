@@ -72,6 +72,7 @@ export type Category =
   | "Number"
   | "Encoding"
   | "Text"
+  | "Data & APIs"
   | "Image"
   | "Date & Time"
   | "Code";
