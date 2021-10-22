@@ -49,6 +49,7 @@
     "humanize-plus": "^1.8.2",
     "hyperformula": "^1.2.0",
     "iframe-resizer": "^4.3.2",
+    "javascript-time-ago": "^2.3.9",
     "jq-web": "^0.5.1",
     "lodash": "^4.17.21",
     "luxon": "^2.0.2",
