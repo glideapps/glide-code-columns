@@ -11,7 +11,6 @@ export default glide
   .withAuthor("lodash Project", "lodash.com")
   .withStringResult()
   .withRequiredStringParam("text")
-  .withExample({ text: `HELLO` })
 
   .withTest({ text: `HELLO` }, "Hello")
 

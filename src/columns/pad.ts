@@ -9,11 +9,12 @@ export default glide
     `Pads string on the left and right sides if it's shorter than length. Padding characters are truncated if they can't be evenly divided by length.`
   )
   .withAuthor("lodash Project", "lodash.com")
-  .withStringResult()
-  .withStringParam("text")
+
+  .withRequiredStringParam("text")
   .withNumberParam("length")
   .withStringParam("chars", "Padding")
-  .withExample({ text: `abc`, length: 8 })
-  .run(({ text, length, chars }) =>
-    text === undefined ? undefined : pad(text, length, chars)
-  );
+  .withStringResult()
+
+  .withTest({ text: `abc`, length: 8 }, "  abc   ")
+
+  .run(({ text, length, chars }) => pad(text, length, chars));

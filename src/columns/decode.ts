@@ -6,5 +6,5 @@ export default glide
   .withDescription("A common binary encoding for text.")
   .withStringResult()
   .withRequiredStringParam("text")
-  .withExample({ text: `SGVsbG8sIHdvcmxkIQ==` })
+  .withTest({ text: `SGVsbG8sIHdvcmxkIQ==` }, "Hello, world!")
   .run(({ text }) => atob(text));

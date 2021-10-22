@@ -7,7 +7,10 @@ export default glide
   .withCategory("Text")
   .withDescription(`"hello world" → "Hello World"`)
   .withAuthor("lodash Project", "lodash.com")
+
+  .withRequiredStringParam("text")
   .withStringResult()
-  .withStringParam("text")
-  .withExample({ text: `helloWorld` })
-  .run(({ text }) => (text === undefined ? undefined : startCase(text)));
+
+  .withTest({ text: `helloWorld` }, "Hello World")
+
+  .run(({ text }) => startCase(text));

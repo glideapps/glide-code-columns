@@ -11,8 +11,10 @@ const REPL: React.VFC<ColumnDefinition<any>> = props => {
     params,
     result: { type: resultType },
     run,
-    example = {},
+    tests = [],
+    example = tests.length > 0 ? tests[0].params : {},
   } = props;
+
   const [result, setResult] = useState<any>();
   const [values, setValues] = useState<any[]>(
     Object.keys(params).map(name => example[name])

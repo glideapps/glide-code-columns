@@ -4,7 +4,10 @@ export default glide
   .columnNamed("Trim Whitespace")
   .withCategory("Text")
   .withDescription("Remove whitespace around text.")
+
+  .withRequiredStringParam("text")
   .withStringResult()
-  .withStringParam("text")
-  .withExample({ text: ` hello ` })
-  .run(({ text }) => text?.trim());
+
+  .withTest({ text: ` hello ` }, "hello")
+
+  .run(({ text }) => text.trim());
