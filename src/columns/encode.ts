@@ -24,7 +24,7 @@ export const encodingTypes = Object.keys(encodings);
 export default glide
   .columnNamed("Encode Text")
   .withCategory("Encoding")
-  .withDescription("A common binary encoding for text.")
+  .withDescription("Encode text in a variety of formats.")
 
   .withRequiredStringParam("text")
   .withStringParam("encoding", `Encoding (${encodingTypes.join(", ")})`)
