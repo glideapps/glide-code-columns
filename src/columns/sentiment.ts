@@ -5,6 +5,14 @@ import axios from "axios";
 
 const cache = new Cache({ timeoutSeconds: 5 * 60 });
 
+const interpretations = {
+  sentiment: x => x.type,
+  score: x => x.score,
+  full: JSON.stringify,
+};
+
+const defaultInterpretation: keyof typeof interpretations = "sentiment";
+
 export default glide
   .columnNamed("Text Sentiment")
   .withAuthor("twinword inc.", "help@twinword.com")
@@ -18,9 +26,16 @@ export default glide
 
   .withRequiredStringParam("text")
   .withRequiredStringParam("apiKey", `API Key`)
-  .withStringResult()
+  .withStringParam(
+    "interpretation",
+    `Result (${Object.keys(interpretations).join(", ")})`
+  )
+  .withPrimitiveResult()
 
-  .run(async ({ text, apiKey }) => {
+  .run(async ({ text, apiKey, interpretation = defaultInterpretation }) => {
+    const interpret =
+      interpretations[interpretation] ?? interpretations[defaultInterpretation];
+
     async function getSentiment() {
       try {
         const response = await axios.get(
@@ -33,10 +48,12 @@ export default glide
             },
           }
         );
-        return JSON.stringify(response.data);
+        return response.data;
       } catch {
         return undefined;
       }
     }
-    return await cache.getWith(text, getSentiment);
+
+    const data = await cache.getWith(text, getSentiment);
+    return interpret(data);
   });

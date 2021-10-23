@@ -251,6 +251,10 @@ export class Col<TParams = {}, TResult = string> {
     return this.withResult<string>("string");
   }
 
+  public withPrimitiveResult() {
+    return this.withResult<string>("primitive");
+  }
+
   public withNumberResult() {
     return this.withResult<number>("number");
   }
