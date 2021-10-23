@@ -4,7 +4,7 @@ import axios from "axios";
 export default glide
   .columnNamed("Text Sentiment")
   .withAuthor("twinword inc.", "help@twinword.com")
-  .withCategory("Text")
+  .withCategory("Data & APIs")
   .withDescription("Is this comment positive or negative? Find out the tone.")
   .withAbout(
     `
