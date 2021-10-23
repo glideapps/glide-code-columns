@@ -1,5 +1,5 @@
 import * as glide from "../glide";
-import { encodings, encodingTypes } from "./encode";
+import { decode, EncodingType, encodingTypes } from "./encode";
 
 export default glide
   .columnNamed("Decode Text")
@@ -17,4 +17,6 @@ export default glide
   )
   .withTest({ text: "Hello%2C%20world!", encoding: "url" }, `Hello, world!`)
 
-  .run(({ text, encoding = "base64" }) => encodings[encoding]?.decode?.(text));
+  .run(({ text, encoding = "base64" }) =>
+    decode(text, encoding as EncodingType)
+  );

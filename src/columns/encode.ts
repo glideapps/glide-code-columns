@@ -1,25 +1,38 @@
 import * as glide from "../glide";
-import { withWindow } from "../util";
 
 type Encoder = (x: string) => string;
+
+export const encodingTypes = ["base64", "url"] as const;
+
+export type EncodingType = typeof encodingTypes[number];
 
 type Encoding = {
   encode: Encoder | undefined;
   decode: Encoder | undefined;
 };
 
-export const encodings: Record<string, Encoding> = {
-  base64: {
-    encode: withWindow(w => w.btoa),
-    decode: withWindow(w => w.atob),
-  },
-  url: {
-    encode: encodeURIComponent,
-    decode: decodeURIComponent,
-  },
-};
+function getEncoding(type: EncodingType): Encoding {
+  switch (type) {
+    case "base64":
+      return {
+        encode: btoa.bind(window),
+        decode: atob.bind(window),
+      };
+    case "url":
+      return {
+        encode: encodeURIComponent,
+        decode: decodeURIComponent,
+      };
+  }
+}
 
-export const encodingTypes = Object.keys(encodings);
+export function encode(s: string, t: EncodingType): string | undefined {
+  return getEncoding(t)?.encode?.(s);
+}
+
+export function decode(s: string, t: EncodingType): string | undefined {
+  return getEncoding(t)?.decode?.(s);
+}
 
 export default glide
   .columnNamed("Encode Text")
@@ -37,4 +50,6 @@ export default glide
   )
   .withTest({ text: `Hello, world!`, encoding: "url" }, "Hello%2C%20world!")
 
-  .run(({ text, encoding = "base64" }) => encodings[encoding]?.encode?.(text));
+  .run(({ text, encoding = "base64" }) =>
+    encode(text, encoding as EncodingType)
+  );
