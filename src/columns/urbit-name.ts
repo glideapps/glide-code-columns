@@ -559,6 +559,7 @@ export default glide
   `
   )
   .withAuthor("urbit Project", "urbit.org")
+  .withVideo("https://www.youtube.com/watch?v=M04AKTCDavc")
 
   .withRequiredPrimitiveParam("value")
   .withStringParam("kind", `Kind (${Object.keys(namers).join(", ")})`)

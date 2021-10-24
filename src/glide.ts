@@ -229,6 +229,10 @@ export class Col<TParams = {}, TResult = string> {
     return this.with({ about });
   }
 
+  public withVideo(video: Manifest["video"]) {
+    return this.with({ video });
+  }
+
   public withAuthor(name: string, email: string) {
     return this.with({ author: `${name} <${email}>` });
   }
