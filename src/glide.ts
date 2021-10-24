@@ -288,6 +288,10 @@ export class Col<TParams = {}, TResult = string> {
     >;
   }
 
+  public withPrimitiveParam<T extends string>(name: T, displayName?: string) {
+    return this.withParam<any, T>("primitive", name, displayName);
+  }
+
   public withStringParam<T extends string>(name: T, displayName?: string) {
     return this.withParam<string, T>("string", name, displayName);
   }
