@@ -74,6 +74,7 @@ export type Category =
   | "Text"
   | "Data & APIs"
   | "Image"
+  | "Fun"
   | "Date & Time"
   | "Code";
 
@@ -297,6 +298,13 @@ export class Col<TParams = {}, TResult = string> {
 
   public withNumberParam<T extends string>(name: T, displayName?: string) {
     return this.withParam<number, T>("number", name, displayName);
+  }
+
+  public withRequiredPrimitiveParam<T extends string>(
+    name: T,
+    displayName?: string
+  ) {
+    return this.withRequiredParam<any, T>("primitive", name, displayName);
   }
 
   public withRequiredStringParam<T extends string>(

@@ -1,19 +1,6 @@
 import { Cache } from "../cache";
 import * as glide from "../glide";
-
-function hashCode(x: any): number {
-  const s = `${x}`;
-  let hash = 0;
-  if (s.length === 0) {
-    return hash;
-  }
-  for (let i = 0; i < s.length; i++) {
-    const char = s.charCodeAt(i);
-    hash = (hash << 5) - hash + char;
-    hash = hash & hash; // Convert to 32bit integer
-  }
-  return hash;
-}
+import { hashCode } from "../util";
 
 const defaultCategory: ImageCategory = "3d";
 
@@ -28,7 +15,9 @@ const run: glide.Column = async (categoryValue, randomSeed) => {
   const { value: seed } = randomSeed;
   if (seed === undefined) return undefined;
 
-  const images = await cache.fetch(`https://column.sh/glide-brand-image/images.json`);
+  const images = await cache.fetch(
+    `https://column.sh/glide-brand-image/images.json`
+  );
   const is = images[category] ?? images[defaultCategory];
   const hash = Math.abs(hashCode(seed));
   const image = is[hash % is.length];
