@@ -547,7 +547,7 @@ export default glide
   .columnNamed("Urbit Name")
   .withCategory("Fun")
   .withDescription(
-    `Converts the first character of string to upper case and the remaining to lower case.`
+    `Galaxy, star, and planet names in the Urbit computational universe.`
   )
   .withAbout(
     `
