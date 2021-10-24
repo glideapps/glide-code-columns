@@ -42,7 +42,7 @@ const REPL: React.VFC<ColumnDefinition<any>> = props => {
     <div className="p-5">
       <div className="space-y-6">
         {Object.values(params).map((p, i) => (
-          <div>
+          <div key={i}>
             <div className="mb-1 text-sm font-semibold opacity-70">
               {p.displayName}
             </div>
@@ -54,7 +54,7 @@ const REPL: React.VFC<ColumnDefinition<any>> = props => {
                 // We need to coerce the value depending on the parameter type.
                 let value: any = e.target.value;
                 if (p.type === "number" || p.type === "primitive") {
-                  if (NaN !== Number(value)) {
+                  if (!isNaN(Number(value))) {
                     value = Number(value);
                   }
                 }
