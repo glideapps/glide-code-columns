@@ -233,6 +233,10 @@ export class Col<TParams = {}, TResult = string> {
     return this.with({ video });
   }
 
+  public withIcon(icon: Manifest["icon"]) {
+    return this.with({ icon });
+  }
+
   public withAuthor(name: string, email: string) {
     return this.with({ author: `${name} <${email}>` });
   }
