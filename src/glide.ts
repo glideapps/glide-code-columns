@@ -67,6 +67,7 @@ export async function listen(event: MessageEvent<any>, main: Column) {
 }
 
 export type Category =
+  | "Machine Learning"
   | "Glide"
   | "General"
   | "Number"

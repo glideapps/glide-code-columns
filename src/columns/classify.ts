@@ -11,11 +11,14 @@ const bayes = require("bayes") as {
   fromJson(json: string): Classifier;
 };
 
-const classifer = bayes();
+const classifiers: Record<string, Classifier> = {};
+function getClassifier(id: string): Classifier {
+  return (classifiers[id] ??= bayes());
+}
 
 export default glide
-  .columnNamed("Classify")
-  .withCategory("Text")
+  .columnNamed("Classify Text")
+  .withCategory("Machine Learning")
   .withDescription(
     `Returns the plural version of a given word if the value is not 1. The default suffix is 's'.`
   )
@@ -26,7 +29,9 @@ export default glide
   .withStringParam("category", "Category for Training")
   .withStringResult()
 
-  .run(({ phrase, category }) => {
+  .run(({ id, phrase, category }) => {
+    const classifer = getClassifier(id);
+
     if (category !== undefined) {
       classifer.learn(phrase, category);
       return category;
