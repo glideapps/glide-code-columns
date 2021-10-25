@@ -23,6 +23,12 @@ export default glide
   .withCategory("Machine Learning")
   .withDescription(`Categorize text based on examples.`)
   .withAuthor("ttezel", "https://github.com/ttezel/bayes")
+  .withAbout(
+    `
+      The Classify Text column takes training data in the form of text values, and known categories for those text values. When it sees new text values without categories provided, it tries to infer the category based on the examples it's seen.
+
+      **This is just a proof of concept. Because Glide does not guarantee that all columns are evaluated (it only evaluates columns required to show the current screen), this will usually not produce good results.**`
+  )
 
   .withRequiredStringParam("phrase")
   .withStringParam("category", "Training Data")
