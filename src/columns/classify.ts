@@ -29,6 +29,7 @@ export default glide
 
       **This is just a proof of concept. Because Glide does not guarantee that all columns are evaluated (it only evaluates columns required to show the current screen), this will usually not produce good results.**`
   )
+  .withVideo("https://www.youtube.com/watch?v=Qu9MM8YAAM0")
 
   .withRequiredStringParam("phrase")
   .withStringParam("category", "Training Data")
