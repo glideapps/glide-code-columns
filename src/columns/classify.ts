@@ -11,6 +11,8 @@ const bayes = require("bayes") as {
   fromJson(json: string): Classifier;
 };
 
+const defaultClassifier = "";
+
 const classifiers: Record<string, Classifier> = {};
 function getClassifier(id: string): Classifier {
   return (classifiers[id] ??= bayes());
@@ -22,12 +24,12 @@ export default glide
   .withDescription(`Categorize text based on examples.`)
   .withAuthor("ttezel", "https://github.com/ttezel/bayes")
 
-  .withRequiredStringParam("id", "Classifier ID")
   .withRequiredStringParam("phrase")
   .withStringParam("example", "Training Data")
+  .withStringParam("id", "Classifier ID")
   .withStringResult()
 
-  .run(({ id, phrase, category }) => {
+  .run(({ id = defaultClassifier, phrase, category }) => {
     const classifer = getClassifier(id);
 
     if (category !== undefined) {
