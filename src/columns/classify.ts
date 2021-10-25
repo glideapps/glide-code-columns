@@ -25,7 +25,7 @@ export default glide
   .withAuthor("ttezel", "https://github.com/ttezel/bayes")
 
   .withRequiredStringParam("phrase")
-  .withStringParam("example", "Training Data")
+  .withStringParam("category", "Training Data")
   .withStringParam("id", "Classifier ID")
   .withStringResult()
 
