@@ -19,14 +19,12 @@ function getClassifier(id: string): Classifier {
 export default glide
   .columnNamed("Classify Text")
   .withCategory("Machine Learning")
-  .withDescription(
-    `Returns the plural version of a given word if the value is not 1. The default suffix is 's'.`
-  )
-  .withAuthor("HubSpot", "https://github.com/HubSpot/humanize")
+  .withDescription(`Categorize text based on examples.`)
+  .withAuthor("ttezel", "https://github.com/ttezel/bayes")
 
   .withRequiredStringParam("id", "Classifier ID")
   .withRequiredStringParam("phrase")
-  .withStringParam("category", "Category for Training")
+  .withStringParam("example", "Training Data")
   .withStringResult()
 
   .run(({ id, phrase, category }) => {
