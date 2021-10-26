@@ -16,21 +16,19 @@ Object.values(definitions).forEach(definition => {
             allowFailure === true ? " FAILURE EXPECTED" : ""
         }`;
         test(description, async () => {
-            const params = Object.entries(staticParams).map(
-                ([name, columnParam]) =>
-                    ({
-                        type: columnParam.type,
-                        value: testParams[name],
-                    } as ColumnValue)
-            );
-
-            const result = await definition.run(...params);
-
             try {
+                const params = Object.entries(staticParams).map(
+                    ([name, columnParam]) =>
+                        ({
+                            type: columnParam.type,
+                            value: testParams[name],
+                        } as ColumnValue)
+                );
+
+                const result = await definition.run(...params);
                 expect(result).toStrictEqual(expectedResult);
             } catch (error) {
-                if (allowFailure === true) {
-                } else {
+                if (allowFailure !== true) {
                     throw error;
                 }
             }
