@@ -9,6 +9,7 @@ export default glide
   .withAbout(
     "You can use any valid [CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color)."
   )
+  .withReleased("direct")
 
   .withRequiredStringParam("color", "Color")
   .withNumberParam("size", "Image size (in pixels)")
