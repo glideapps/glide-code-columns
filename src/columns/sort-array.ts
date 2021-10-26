@@ -2,7 +2,7 @@ import * as glide from "../glide";
 
 export default glide
     .columnNamed("Sort array")
-    .withCategory("Code")
+    .withCategory("Array")
     .withReleased("direct")
     .withDescription(`Sort the items in an array`)
     .withStringArrayResult()
