@@ -1,7 +1,6 @@
 import * as glide from "../glide";
 
 import { LoremIpsum } from "lorem-ipsum";
-import seedrandom from "seedrandom";
 
 export default glide
     .columnNamed("Lorem Ipsum")
@@ -9,18 +8,15 @@ export default glide
     .withDescription(`Produces a 'lorem ipsum' style string`)
     .withAuthor("davidbau", "github.com/davidbau/seedrandom")
     .withAuthor("knicklabs", "github.com/knicklabs/lorem-ipsum.js")
+    .withRequiredNumberParam("numberOfSentances", "Number of Sentences")
     .withStringResult()
-    .withRequiredNumberParam("numberOfWordsPerSentence", "Number of words per sentence")
-    .withRequiredNumberParam("numberOfSentences", "Number of sentences")
-    .withTest({ numberOfWordsPerSentence: 2, numberOfSentences: 3 }, "Aliqua duis. Incididunt culpa. Commodo enim.")
-    .run(({ numberOfWordsPerSentence, numberOfSentences }) => {
+    .run(({ numberOfSentances }) => {
         const lorem = new LoremIpsum({
             wordsPerSentence: {
-                min: numberOfWordsPerSentence,
-                max: numberOfWordsPerSentence,
+                min: 2,
+                max: 10,
             },
-            random: seedrandom("Glide")
         });
-        const text = lorem.generateSentences(numberOfSentences);
+        const text = lorem.generateSentences(numberOfSentances);
         return text;
     });
