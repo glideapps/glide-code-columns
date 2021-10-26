@@ -19,8 +19,8 @@ export default glide
   .withNumberParam("sides", "Sides (default is 6)")
   .withNumberResult()
 
-  .withTest({ seed: 6 }, 1)
-  .withTest({ seed: 6, sides: 6 }, 1)
-  .withTest({ seed: 6, sides: 0 }, undefined)
+  .withTest({ seed: "I'm feeling lucky!" }, 1)
+  .withTest({ seed: "I'm feeling lucky!", sides: 6 }, 1)
+  .withTest({ seed: "I'm feeling lucky!", sides: 0 }, undefined)
 
   .run(({ seed, sides = 6 }) => roll(seed, sides));
