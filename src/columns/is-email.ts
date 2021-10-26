@@ -5,6 +5,7 @@ import validator from "email-validator";
 export default glide
     .columnNamed("Email Validator")
     .withCategory("Text")
+    .withReleased("direct")
     .withDescription(`Indicates whether text is an email.`)
     .withBooleanResult()
     .withStringParam("email")

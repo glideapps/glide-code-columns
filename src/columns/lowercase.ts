@@ -2,6 +2,8 @@ import * as glide from "../glide";
 
 import lowerCase from "lodash/lowerCase";
 
+// FIXME: Option for opinionated vs simple.
+
 export default glide
     .columnNamed("Lowercase Text")
     .withCategory("Text")

@@ -7,7 +7,7 @@ export default glide
 
     .withStringParam("text")
     .withStringParam("regex", "Regular Expression")
-    .withStringResult()
+    .withBooleanResult()
 
     .withTest({ text: `Hello, world.`, regex: "Hello, (.+)." }, true)
     .withTest({ text: `Goodnight, moon.`, regex: "Hello, (.+)." }, false)

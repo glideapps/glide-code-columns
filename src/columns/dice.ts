@@ -15,6 +15,7 @@ function roll(seed: any, sides: number): number | undefined {
 export default glide
     .columnNamed("Roll Dice")
     .withCategory("Number")
+    .withReleased("direct")
     .withDescription(`Roll dice of various sizes.`)
 
     .withRequiredPrimitiveParam("seed", "Roll Seed")

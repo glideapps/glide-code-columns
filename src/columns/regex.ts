@@ -3,6 +3,7 @@ import * as glide from "../glide";
 export default glide
     .columnNamed("Extract Matching Text")
     .withCategory("Text")
+    .withReleased("direct")
     .withDescription("Extract text matching a regular expression.")
 
     .withStringParam("text")

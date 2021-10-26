@@ -4,6 +4,7 @@ import { decode, EncodingType, encodingTypes } from "./encode";
 export default glide
     .columnNamed("Decode Text")
     .withCategory("Encoding")
+    .withReleased("direct")
     .withDescription("Decode text in a variety of formats.")
 
     .withRequiredStringParam("text")

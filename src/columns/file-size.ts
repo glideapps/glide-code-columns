@@ -5,6 +5,7 @@ import Humanize from "humanize-plus";
 export default glide
     .columnNamed("File Size")
     .withCategory("Number")
+    .withReleased("direct")
     .withDescription(`Formats the value like a 'human-readable' file size (i.e. '13 KB', '4.1 MB', '102 bytes', etc).`)
     .withAuthor("HubSpot", "https://github.com/HubSpot/humanize")
 
