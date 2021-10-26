@@ -4,10 +4,10 @@ import seedrandom from "seedrandom";
 
 function roll(seed: any, sides: number): number | undefined {
   if (sides === 0) return undefined;
+  if (sides < 0) return roll(seed, -sides);
 
-  const sign = sides > 0 ? 1 : -1;
   const random = seedrandom(seed)();
-  return sign * (Math.floor(Math.abs(sides * random)) + 1);
+  return Math.floor(sides * random) + 1;
 }
 
 export default glide
