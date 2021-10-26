@@ -19,6 +19,7 @@ const run: glide.Column = async (formula, ...params) => {
 export default glide.column({
   name: "Hyperformula",
   category: "Code",
+  released: "sandboxed",
   description: "Run Excel formulas",
   about: `
       Uses [handsontable.github.io/hyperformula](https://handsontable.github.io/hyperformula) to evaluate

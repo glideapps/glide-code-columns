@@ -5,6 +5,7 @@ export default glide
   .withDescription(
       "Reverses the order of items in an array"
   )
+  .withReleased("direct")
   .withPrimitiveArrayResult()
   .withPrimitiveArrayParam("array")
   .run(({ array }) => {

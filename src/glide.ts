@@ -84,9 +84,12 @@ export type Category =
   | "Date & Time"
   | "Code";
 
+type Released = "direct" | "sandboxed";
+
 export type Manifest = {
   name: string;
   category: Category;
+  released?: Released;
   description: string;
   author: string;
   params: ColumnParam[];
@@ -227,6 +230,10 @@ export class Col<TParams = {}, TResult = string> {
     return this.with({ category });
   }
 
+  public withReleased(released: "direct" | "sandboxed") {
+    return this.with({ released })
+  }
+
   public withDescription(description: string) {
     return this.with({ description });
   }
@@ -357,7 +364,7 @@ export class Col<TParams = {}, TResult = string> {
   ) {
     return this.withRequiredParam<number, T>("number", name, displayName);
   }
-  
+
   public withStringArrayParam<T extends string>(name: T, displayName?: string) {
     return this.withParam<string[], T>({ kind: "array", items: "string"}, name, displayName);
   }
