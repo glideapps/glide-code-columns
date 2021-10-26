@@ -9,7 +9,9 @@ export type PrimitiveColumnType =
   | "date-time"
   | "uri";
 
-export type ColumnType = PrimitiveColumnType | { kind: "array", items: PrimitiveColumnType };
+export type ColumnType =
+  | PrimitiveColumnType
+  | { kind: "array"; items: PrimitiveColumnType };
 
 export type StringColumnValue = { type: "string"; value?: string };
 
@@ -157,8 +159,17 @@ export function toStrictManifest(
 ): Manifest {
   // We carefully pick out just the props in manifest, because more
   // could come in from the component.
-  const { name, category, released, description, author, result, params, about, video } =
-    convenient;
+  const {
+    name,
+    category,
+    released,
+    description,
+    author,
+    result,
+    params,
+    about,
+    video,
+  } = convenient;
 
   let { icon = defaultIcon } = convenient;
   if (icon === "glide") {
@@ -233,7 +244,7 @@ export class Col<TParams = {}, TResult = string> {
   }
 
   public withReleased(released: "direct" | "sandboxed") {
-    return this.with({ released })
+    return this.with({ released });
   }
 
   public withDescription(description: string) {
@@ -288,15 +299,18 @@ export class Col<TParams = {}, TResult = string> {
   }
 
   public withStringArrayResult() {
-    return this.withResult<string[]>({ kind: "array", items: "string"});
+    return this.withResult<string[]>({ kind: "array", items: "string" });
   }
 
   public withNumberArrayResult() {
-    return this.withResult<number[]>({ kind: "array", items: "number"});
+    return this.withResult<number[]>({ kind: "array", items: "number" });
   }
 
   public withPrimitiveArrayResult() {
-    return this.withResult<PrimitiveValue[]>({ kind: "array", items: "primitive"});
+    return this.withResult<PrimitiveValue[]>({
+      kind: "array",
+      items: "primitive",
+    });
   }
 
   public withParam<TParam, TName extends string>(
@@ -368,15 +382,41 @@ export class Col<TParams = {}, TResult = string> {
   }
 
   public withStringArrayParam<T extends string>(name: T, displayName?: string) {
-    return this.withParam<string[], T>({ kind: "array", items: "string"}, name, displayName);
+    return this.withParam<string[], T>(
+      { kind: "array", items: "string" },
+      name,
+      displayName
+    );
+  }
+
+  public withRequiredStringArrayParam<T extends string>(
+    name: T,
+    displayName?: string
+  ) {
+    return this.withRequiredParam<string[], T>(
+      { kind: "array", items: "string" },
+      name,
+      displayName
+    );
   }
 
   public withNumberArrayParam<T extends string>(name: T, displayName?: string) {
-    return this.withParam<number[], T>({ kind: "array", items: "number"}, name, displayName);
+    return this.withParam<number[], T>(
+      { kind: "array", items: "number" },
+      name,
+      displayName
+    );
   }
 
-  public withPrimitiveArrayParam<T extends string>(name: T, displayName?: string) {
-    return this.withParam<PrimitiveValue[], T>({ kind: "array", items: "primitive"}, name, displayName);
+  public withPrimitiveArrayParam<T extends string>(
+    name: T,
+    displayName?: string
+  ) {
+    return this.withParam<PrimitiveValue[], T>(
+      { kind: "array", items: "primitive" },
+      name,
+      displayName
+    );
   }
 
   public withExample(example: TParams) {
