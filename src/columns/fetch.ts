@@ -11,7 +11,7 @@ const run: glide.Column = async (url, query) => {
   if (url.value === undefined) {
     return undefined;
   }
-  let data = await cache.fetch(url.value);
+  let data = await cache.fetch(url.value.toString());
   if (query.value !== undefined) {
     data = jq.json(data, query.value);
   }

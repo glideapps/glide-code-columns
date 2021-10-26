@@ -5,6 +5,7 @@ import capitalize from "lodash/capitalize";
 export default glide
   .columnNamed("Capitalize Text")
   .withCategory("Text")
+  .withReleased("direct")
   .withDescription(
     `Converts the first character of string to upper case and the remaining to lower case.`
   )
