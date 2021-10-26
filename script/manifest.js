@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 const {
-  default: { json },
+    default: { json },
 } = require("./index");
 
 fs.writeFileSync(`${__dirname}/glide.json`, json);
