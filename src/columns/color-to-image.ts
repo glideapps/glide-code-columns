@@ -6,7 +6,7 @@ import svgToMiniDataURI from "mini-svg-data-uri";
 function getSvgForColor(color: string) {
     return svgToMiniDataURI(`
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200" xml:space="preserve" height="200px" width="200px">
-      <rect width="200" height="200" style="fill:${encodeURIComponent(color)};" />
+      <rect width="200" height="200" style="fill:${color};" />
     </svg>`);
 }
 
