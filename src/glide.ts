@@ -68,6 +68,7 @@ export type Category =
   | "Machine Learning"
   | "Glide"
   | "General"
+  | "Array"
   | "Number"
   | "Encoding"
   | "Text"
