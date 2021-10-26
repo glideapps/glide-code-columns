@@ -77,7 +77,8 @@ export type Category =
   | "Image"
   | "Fun"
   | "Date & Time"
-  | "Code";
+  | "Code"
+  | "Cryptography";
 
 export type Manifest = {
   name: string;
