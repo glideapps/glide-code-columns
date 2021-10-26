@@ -1,64 +1,73 @@
 {
-  "name": "glide-computed-column",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "manifest": "script/build.sh",
-    "build": "npm test && npm run manifest && next build",
-    "export": "npm run manifest",
-    "dev": "jest --watchAll & next dev",
-    "start": "npm run dev",
-    "deploy": "vercel deploy",
-    "test": "jest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dvdsgl/glide-computed-column.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/dvdsgl/glide-computed-column/issues"
-  },
-  "homepage": "https://github.com/dvdsgl/glide-computed-column#readme",
-  "devDependencies": {
-    "@types/humanize-plus": "^1.8.0",
-    "@types/jest": "^27.0.1",
-    "@types/lodash": "^4.14.175",
-    "@types/luxon": "^2.0.5",
-    "@types/react": "^17.0.20",
-    "@types/react-dom": "^17.0.9",
-    "@types/seedrandom": "^3.0.1",
-    "autoprefixer": "^10.3.4",
-    "esbuild": "^0.13.4",
-    "jest": "^27.1.0",
-    "postcss": "^8.3.6",
-    "tailwindcss": "^2.2.15",
-    "ts-jest": "^27.0.5",
-    "ts-node": "^10.2.1",
-    "typescript": "^4.4.2",
-    "vercel": "^23.1.2"
-  },
-  "dependencies": {
-    "@heroicons/react": "^1.0.4",
-    "@jcubic/lips": "^1.0.0-beta.14",
-    "axios": "^0.23.0",
-    "bayes": "^1.0.0",
-    "cheerio": "^1.0.0-rc.10",
-    "classnames": "^2.3.1",
-    "dotenv": "^10.0.0",
-    "email-validator": "^2.0.4",
-    "humanize-plus": "^1.8.2",
-    "hyperformula": "^1.2.0",
-    "iframe-resizer": "^4.3.2",
-    "javascript-time-ago": "^2.3.9",
-    "jq-web": "^0.5.1",
-    "lodash": "^4.17.21",
-    "luxon": "^2.0.2",
-    "next": "^11.1.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "seedrandom": "^3.0.5"
-  }
+    "name": "glide-computed-column",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "manifest": "script/build.sh",
+        "build": "npm test && npm run manifest && next build",
+        "export": "npm run manifest",
+        "dev": "jest --watchAll & next dev",
+        "start": "npm run dev",
+        "deploy": "vercel deploy",
+        "test": "jest",
+        "prepare": "husky install .config/husky",
+        "prettify": "prettier --write \"./**/*.{ts,tsx,js,jsx,css,scss,json}\""
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "pretty-quick --staged"
+        }
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dvdsgl/glide-computed-column.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/dvdsgl/glide-computed-column/issues"
+    },
+    "homepage": "https://github.com/dvdsgl/glide-computed-column#readme",
+    "devDependencies": {
+        "@types/humanize-plus": "^1.8.0",
+        "@types/jest": "^27.0.1",
+        "@types/lodash": "^4.14.175",
+        "@types/luxon": "^2.0.5",
+        "@types/react": "^17.0.20",
+        "@types/react-dom": "^17.0.9",
+        "@types/seedrandom": "^3.0.1",
+        "autoprefixer": "^10.3.4",
+        "esbuild": "^0.13.4",
+        "husky": "^7.0.4",
+        "jest": "^27.1.0",
+        "postcss": "^8.3.6",
+        "tailwindcss": "^2.2.15",
+        "ts-jest": "^27.0.5",
+        "ts-node": "^10.2.1",
+        "typescript": "^4.4.2",
+        "prettier": "^2.4.1",
+        "vercel": "^23.1.2"
+    },
+    "dependencies": {
+        "@heroicons/react": "^1.0.4",
+        "@jcubic/lips": "^1.0.0-beta.14",
+        "axios": "^0.23.0",
+        "bayes": "^1.0.0",
+        "cheerio": "^1.0.0-rc.10",
+        "classnames": "^2.3.1",
+        "dotenv": "^10.0.0",
+        "email-validator": "^2.0.4",
+        "humanize-plus": "^1.8.2",
+        "hyperformula": "^1.2.0",
+        "iframe-resizer": "^4.3.2",
+        "javascript-time-ago": "^2.3.9",
+        "jq-web": "^0.5.1",
+        "lodash": "^4.17.21",
+        "luxon": "^2.0.2",
+        "next": "^11.1.2",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "seedrandom": "^3.0.5"
+    }
 }
