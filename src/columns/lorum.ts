@@ -2,7 +2,7 @@ import * as glide from "../glide";
 import { LoremIpsum } from "lorem-ipsum";
 
 export default glide
-  .columnNamed("Lorum Ipsum")
+  .columnNamed("Lorum")
   .withCategory("Text")
   .withDescription(`Produces and 'lorum ipsum' style string`)
   .withStringResult()
