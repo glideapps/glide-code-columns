@@ -8,15 +8,15 @@ export default glide
     .withDescription(`Produces a 'lorem ipsum' style string`)
     .withAuthor("davidbau", "github.com/davidbau/seedrandom")
     .withAuthor("knicklabs", "github.com/knicklabs/lorem-ipsum.js")
-    .withRequiredNumberParam("numberOfSentances", "Number of Sentences")
+    .withRequiredNumberParam("numberOfSentences", "Number of Sentences")
     .withStringResult()
-    .run(({ numberOfSentances }) => {
+    .run(({ numberOfSentences }) => {
         const lorem = new LoremIpsum({
             wordsPerSentence: {
                 min: 2,
                 max: 10,
             },
         });
-        const text = lorem.generateSentences(numberOfSentances);
+        const text = lorem.generateSentences(numberOfSentences);
         return text;
     });
