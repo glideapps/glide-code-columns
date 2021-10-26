@@ -3,45 +3,43 @@ import * as glide from "../glide";
 // TODO support more of https://doodleipsum.com/ API
 
 const run: glide.Column = async (sizeValue, categoryValue, randomSeed) => {
-  const { value: size = 600 } = sizeValue;
-  const { value: seed = "1" } = randomSeed;
-  let { value: category = "" } = categoryValue;
-  if (category === "random") {
-    category = "";
-  }
+    const { value: size = 600 } = sizeValue;
+    const { value: seed = "1" } = randomSeed;
+    let { value: category = "" } = categoryValue;
+    if (category === "random") {
+        category = "";
+    }
 
-  return `https://doodleipsum.com/${size}/${category}?n=${encodeURIComponent(
-    seed
-  )}`;
+    return `https://doodleipsum.com/${size}/${category}?n=${encodeURIComponent(seed)}`;
 };
 
 export default glide.column({
-  name: "Doodle Ipsum",
-  category: "Image",
-  description: "Generate random illustrations from data",
-  video: "https://www.youtube.com/watch?v=kvUU1N-B_Ok",
-  about: `
+    name: "Doodle Ipsum",
+    category: "Image",
+    description: "Generate random illustrations from data",
+    video: "https://www.youtube.com/watch?v=kvUU1N-B_Ok",
+    about: `
       [Doodle Ipsum](https://doodleipsum.com) is the *lorem ipsum* of illustrations. Learn more at [doodleipsum.com](https://doodleipsum.com).
     `,
-  author: "David Siegel <david@glideapps.com>",
-  params: {
-    size: {
-      displayName: "Size",
-      type: "number",
+    author: "David Siegel <david@glideapps.com>",
+    params: {
+        size: {
+            displayName: "Size",
+            type: "number",
+        },
+        category: {
+            displayName: "Category (random|flat|hand-drawn|outline|abstract|avatar)",
+            type: "string",
+        },
+        random: {
+            displayName: "Random Seed",
+            type: "primitive",
+        },
     },
-    category: {
-      displayName: "Category (random|flat|hand-drawn|outline|abstract|avatar)",
-      type: "string",
-    },
-    random: {
-      displayName: "Random Seed",
-      type: "primitive",
-    },
-  },
-  example: { size: 200, category: "avatar", random: 42 },
-  result: { type: "image-uri" },
-  run,
-  icon: `
+    example: { size: 200, category: "avatar", random: 42 },
+    result: { type: "image-uri" },
+    run,
+    icon: `
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M37 26C42.5228 26 47 21.5228 47 16C47 10.4772 42.5228 6 37 6C31.4772 6 27 10.4772 27 16C27 21.5228 31.4772 26 37 26Z" fill="currentColor"/>
         <path d="M27 27H11C10.4477 27 10 27.4477 10 28V44C10 44.5523 10.4477 45 11 45H27C27.5523 45 28 44.5523 28 44V28C28 27.4477 27.5523 27 27 27Z" fill="currentColor"/>
