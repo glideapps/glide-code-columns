@@ -3,9 +3,9 @@ import * as glide from "../glide";
 import seedrandom from "seedrandom";
 
 export default glide
-  .columnNamed("Random Value")
+  .columnNamed("Random Number")
   .withCategory("Number")
-  .withDescription(`Seeded random number generator.`)
+  .withDescription(`Turn any value into a stable random number.`)
   .withAuthor("davidbau", "github.com/davidbau/seedrandom")
   .withVideo("https://www.youtube.com/watch?v=GtOt7EBNEwQ")
 
