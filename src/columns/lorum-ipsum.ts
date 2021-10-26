@@ -6,9 +6,18 @@ export default glide
   .withCategory("Text")
   .withDescription(`Produces and 'lorum ipsum' style string`)
   .withStringResult()
-  .withRequiredNumberParam("number", "Number of words")
-  .run(({ number }) => {
-    const lorum = new LoremIpsum();
-    const text = lorum.generateWords(number);
+  .withRequiredNumberParam(
+    "numberOfWordsPerSentence",
+    "Number of words per sentence"
+  )
+  .withRequiredNumberParam("numberOfSentences", "Number of sentences")
+  .run(({ numberOfWordsPerSentence, numberOfSentences }) => {
+    const lorum = new LoremIpsum({
+      wordsPerSentence: {
+        min: numberOfWordsPerSentence,
+        max: numberOfWordsPerSentence,
+      },
+    });
+    const text = lorum.generateSentences(numberOfSentences);
     return text;
   });
