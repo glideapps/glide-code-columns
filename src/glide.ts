@@ -157,7 +157,7 @@ export function toStrictManifest(
 ): Manifest {
   // We carefully pick out just the props in manifest, because more
   // could come in from the component.
-  const { name, category, description, author, result, params, about, video } =
+  const { name, category, released, description, author, result, params, about, video } =
     convenient;
 
   let { icon = defaultIcon } = convenient;
@@ -168,6 +168,7 @@ export function toStrictManifest(
   return {
     name,
     category,
+    released,
     description,
     author,
     result,
@@ -184,6 +185,7 @@ export function toStrictManifest(
 const defaultDefinition: ColumnDefinition = {
   name: "Glide Column",
   category: "General",
+  released: undefined,
   description: "No description",
   author: "Glide <hello@glideapps.com>",
   params: {},
