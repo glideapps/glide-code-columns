@@ -65,17 +65,18 @@ export async function listen(event: MessageEvent<any>, main: Column) {
 }
 
 export type Category =
-    | "Machine Learning"
-    | "Glide"
-    | "General"
-    | "Number"
-    | "Encoding"
-    | "Text"
-    | "Data & APIs"
-    | "Image"
-    | "Fun"
-    | "Date & Time"
-    | "Code";
+  | "Machine Learning"
+  | "Glide"
+  | "General"
+  | "Number"
+  | "Encoding"
+  | "Text"
+  | "Data & APIs"
+  | "Image"
+  | "Fun"
+  | "Date & Time"
+  | "Code"
+  | "Cryptography";
 
 type Released = "direct" | "sandboxed";
 
