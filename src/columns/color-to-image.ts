@@ -5,7 +5,10 @@ import * as chroma from "chroma-js";
 export default glide
   .columnNamed("Image from color")
   .withCategory("Image")
-  .withDescription(`Get an image based on a color.`)
+  .withDescription("Get an image based on a CSS color.")
+  .withAbout(
+    "You can use any valid [CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color)."
+  )
 
   .withRequiredStringParam("color", "Color")
   .withNumberParam("size", "Image size (in pixels)")
