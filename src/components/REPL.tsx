@@ -48,14 +48,15 @@ const REPL: React.VFC<ColumnDefinition<any>> = props => {
                                 // TODO make this better
                                 // We need to coerce the value depending on the parameter type.
                                 let value: any = e.target.value;
-                                if (p.type === "number" || p.type === "primitive") {
+                                if (value === "") {
+                                    value = undefined;
+                                } else if (p.type === "number" || p.type === "primitive") {
                                     if (!isNaN(Number(value))) {
                                         value = Number(value);
                                     }
                                 }
                                 setValues([...values.slice(0, i), value, ...values.slice(i + 1, values.length - i)]);
-                            }}
-                        ></input>
+                            }}></input>
                     </div>
                 ))}
             </div>
