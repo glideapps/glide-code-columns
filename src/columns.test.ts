@@ -22,7 +22,11 @@ Object.values(definitions).forEach(definition => {
                     } as ColumnValue)
             );
             const result = await definition.run(...params);
-            expect(result).toBe(expectedResult);
+            if (Array.isArray(result)) {
+                expect(result).toEqual(expectedResult);
+            } else {
+                expect(result).toBe(expectedResult);
+            }
         });
     }
 });
