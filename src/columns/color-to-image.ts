@@ -1,6 +1,15 @@
 import * as glide from "../glide";
 
-import * as chroma from "chroma-js";
+import chroma from "chroma-js";
+
+function getSvgForColor(color: string) {
+  return `data:image/svg+xml;utf8,
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200" xml:space="preserve" height="200px" width="200px">
+      <rect width="200" height="200" style="fill:${encodeURIComponent(
+        color
+      )};" />
+    </svg>`;
+}
 
 export default glide
   .columnNamed("Image from color")
@@ -12,26 +21,18 @@ export default glide
   .withReleased("direct")
 
   .withRequiredStringParam("color", "Color")
-  .withNumberParam("size", "Image size (in pixels)")
   .withResult("image-uri")
 
-  .withTest(
-    { color: "hotpink", size: 500 },
-    `https://www.colorbook.io/imagecreator.php?hex=ff69b4&width=500&height=500`
-  )
-  .withTest(
-    { color: "#fafafa" },
-    `https://www.colorbook.io/imagecreator.php?hex=fafafa&width=400&height=400`
-  )
+  // This test is stupid, but it sets an example
+  .withTest({ color: "hotpink" }, getSvgForColor("#ff69b4"))
   .withTest({ color: "This-is-not-a-color!" }, undefined)
 
-  .run(({ color, size }) => {
+  .run(({ color }) => {
     try {
-      const chromaColor = chroma.default(color);
-      const hexColor = chromaColor.hex("auto").slice(1);
-      const clampedSize = Math.max(0, Math.min(2000, size ?? 400));
+      const chromaColor = chroma(color);
+      const hexColor = chromaColor.hex("auto");
 
-      return `https://www.colorbook.io/imagecreator.php?hex=${hexColor}&width=${clampedSize}&height=${clampedSize}`;
+      return getSvgForColor(hexColor);
     } catch {
       return undefined;
     }
