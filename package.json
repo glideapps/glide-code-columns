@@ -68,6 +68,8 @@
         "next": "^11.1.2",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
-        "seedrandom": "^3.0.5"
+        "seedrandom": "^3.0.5",
+        "wink-eng-lite-web-model": "^1.2.2",
+        "wink-nlp": "^1.8.1"
     }
 }
