@@ -18,8 +18,8 @@ const run: glide.Column = async (categoryValue, randomSeed) => {
   const images = await cache.fetch(
     `https://column.sh/glide-brand-image/images.json`
   );
-  const is = images[category] ?? images[defaultCategory];
-  const random = seedrandom(seed)();
+  const is = images[category.toString()] ?? images[defaultCategory];
+  const random = seedrandom(seed.toString())();
   const image = is[Math.floor(random * is.length)];
 
   // TODO move these images to CDN, not Vercel

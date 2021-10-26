@@ -32,7 +32,7 @@ export async function fetchAppIcon(
 
 const run: glide.Column = async url => {
   if (url.value === undefined) return undefined;
-  return await cache.getWith(url.value, fetchAppIcon);
+  return await cache.getWith(url.value.toString(), fetchAppIcon);
 };
 
 export default glide.column({
