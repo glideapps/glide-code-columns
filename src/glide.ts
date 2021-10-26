@@ -68,6 +68,7 @@ export type Category =
     | "Machine Learning"
     | "Glide"
     | "General"
+    | "Array"
     | "Number"
     | "Encoding"
     | "Text"
@@ -326,12 +327,20 @@ export class Col<TParams = {}, TResult = string> {
         return this.withParam<string[], T>({ kind: "array", items: "string" }, name, displayName);
     }
 
+    public withRequiredStringArrayParam<T extends string>(name: T, displayName?: string) {
+        return this.withRequiredParam<string[], T>({ kind: "array", items: "string" }, name, displayName);
+    }
+
     public withNumberArrayParam<T extends string>(name: T, displayName?: string) {
         return this.withParam<number[], T>({ kind: "array", items: "number" }, name, displayName);
     }
 
     public withPrimitiveArrayParam<T extends string>(name: T, displayName?: string) {
         return this.withParam<PrimitiveValue[], T>({ kind: "array", items: "primitive" }, name, displayName);
+    }
+
+    public withRequiredPrimitiveArrayParam<T extends string>(name: T, displayName?: string) {
+        return this.withRequiredParam<PrimitiveValue[], T>({ kind: "array", items: "primitive" }, name, displayName);
     }
 
     public withExample(example: TParams) {
