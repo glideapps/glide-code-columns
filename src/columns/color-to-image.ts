@@ -1,12 +1,13 @@
 import * as glide from "../glide";
 
 import chroma from "chroma-js";
+import svgToMiniDataURI from "mini-svg-data-uri";
 
 function getSvgForColor(color: string) {
-    return `data:image/svg+xml;utf8,
+    return svgToMiniDataURI(`
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200" xml:space="preserve" height="200px" width="200px">
       <rect width="200" height="200" style="fill:${encodeURIComponent(color)};" />
-    </svg>`;
+    </svg>`);
 }
 
 export default glide
@@ -18,7 +19,7 @@ export default glide
     .withReleased("direct")
 
     .withRequiredStringParam("color", "Color")
-    .withResult("image-uri")
+    .withImageResult()
 
     // This test is stupid, but it sets an example
     .withTest({ color: "hotpink" }, getSvgForColor("#ff69b4"))
