@@ -1,46 +1,9 @@
 import * as glide from "../glide";
-import { url } from "../urls";
 
-// TODO support more from https://api.qrserver.com/v1/create-qr-code/
+import QRCode from "qrcode-svg";
+import svgToMiniDataURI from "mini-svg-data-uri";
 
-const run: glide.Column = async (dataValue, sizeValue) => {
-    const { value: data } = dataValue;
-    const { value: size = 500 } = sizeValue;
-
-    if (data === undefined) {
-        return undefined;
-    }
-
-    return url(`https://api.qrserver.com/v1/create-qr-code/`, {
-        data,
-        size: `${size}x${size}`,
-        margin: 0,
-    });
-};
-
-export default glide.column({
-    name: "QR Code",
-    category: "Image",
-    description: "Generate QR codes",
-    about: `
-      Uses [goQR.me](https://goqr.me/api/)'s QR code generation API.
-    `,
-    video: "https://www.youtube.com/watch?v=142TGhaTMtI",
-    author: "David Siegel <david@glideapps.com>",
-    params: {
-        content: {
-            displayName: "Content",
-            type: "primitive",
-        },
-        size: {
-            displayName: "Size",
-            type: "number",
-        },
-    },
-    example: { content: "https://glideapps.com", size: 250 },
-    result: { type: "image-uri" },
-    run,
-    icon: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+const icon = `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M16 2H2V16H16V2ZM14 14H4V4H14V14Z" fill="currentColor"/>
       <path d="M31 42H29V46H46V44H31V42Z" fill="currentColor"/>
       <path d="M12 6H6V12H12V6Z" fill="currentColor"/>
@@ -57,5 +20,34 @@ export default glide.column({
       <path d="M32 40H35V42H39V40V38V35H35V38H32V35H30V38H28V30H26V28H24V22H17V26H19V24H22V28V32H26V38V40H28H30H32Z" fill="currentColor"/>
       <path d="M44 27H41H39H34V31H32V27H30V33H36V29H39V32H41V29H44V35H41V41H46V39H43V37H46V29V27V24H44V27Z" fill="currentColor"/>
       </svg>
-      `,
-});
+      `;
+
+export default glide
+    .columnNamed("QR Code")
+    .withCategory("Image")
+    .withDescription("Generate QR codes from any value.")
+    .withAuthor("David Siegel", "")
+    .withIcon(icon)
+    .withVideo("https://www.youtube.com/watch?v=142TGhaTMtI")
+    .withReleased("direct")
+
+    .withRequiredPrimitiveParam("content")
+    .withNumberParam("size")
+    .withImageResult()
+
+    .run(({ content, size = 250 }) => {
+        const svg = new QRCode({
+            content,
+            width: size,
+            height: size,
+            join: true,
+
+            // TODO support these parameters
+            // padding: 4,
+            // color: "#000000",
+            // background: "#ffffff",
+            // ecl: "M",
+        }).svg();
+
+        return svgToMiniDataURI(svg);
+    });
