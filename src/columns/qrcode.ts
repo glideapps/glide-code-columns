@@ -4,43 +4,43 @@ import { url } from "../urls";
 // TODO support more from https://api.qrserver.com/v1/create-qr-code/
 
 const run: glide.Column = async (dataValue, sizeValue) => {
-  const { value: data } = dataValue;
-  const { value: size = 500 } = sizeValue;
+    const { value: data } = dataValue;
+    const { value: size = 500 } = sizeValue;
 
-  if (data === undefined) {
-    return undefined;
-  }
+    if (data === undefined) {
+        return undefined;
+    }
 
-  return url(`https://api.qrserver.com/v1/create-qr-code/`, {
-    data,
-    size: `${size}x${size}`,
-    margin: 0,
-  });
+    return url(`https://api.qrserver.com/v1/create-qr-code/`, {
+        data,
+        size: `${size}x${size}`,
+        margin: 0,
+    });
 };
 
 export default glide.column({
-  name: "QR Code",
-  category: "Image",
-  description: "Generate QR codes",
-  about: `
+    name: "QR Code",
+    category: "Image",
+    description: "Generate QR codes",
+    about: `
       Uses [goQR.me](https://goqr.me/api/)'s QR code generation API.
     `,
-  video: "https://www.youtube.com/watch?v=142TGhaTMtI",
-  author: "David Siegel <david@glideapps.com>",
-  params: {
-    content: {
-      displayName: "Content",
-      type: "primitive",
+    video: "https://www.youtube.com/watch?v=142TGhaTMtI",
+    author: "David Siegel <david@glideapps.com>",
+    params: {
+        content: {
+            displayName: "Content",
+            type: "primitive",
+        },
+        size: {
+            displayName: "Size",
+            type: "number",
+        },
     },
-    size: {
-      displayName: "Size",
-      type: "number",
-    },
-  },
-  example: { content: "https://glideapps.com", size: 250 },
-  result: { type: "image-uri" },
-  run,
-  icon: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    example: { content: "https://glideapps.com", size: 250 },
+    result: { type: "image-uri" },
+    run,
+    icon: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M16 2H2V16H16V2ZM14 14H4V4H14V14Z" fill="currentColor"/>
       <path d="M31 42H29V46H46V44H31V42Z" fill="currentColor"/>
       <path d="M12 6H6V12H12V6Z" fill="currentColor"/>
