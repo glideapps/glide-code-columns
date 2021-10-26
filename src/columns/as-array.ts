@@ -8,8 +8,8 @@ export default glide
     .withPrimitiveArrayResult()
     .withRequiredPrimitiveParam("value")
 
-    .withTest({ values: "a" }, ["a"])
-    .withTest({ values: 3 }, [3])
+    .withTest({ value: "a" }, ["a"])
+    .withTest({ value: 3 }, [3])
 
     .run(({ value }) => {
         return [value];
