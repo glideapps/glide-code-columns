@@ -21,6 +21,7 @@ function getClassifier(id: string): Classifier {
 export default glide
     .columnNamed("Classify Text")
     .withCategory("Machine Learning")
+    .withReleased("direct")
     .withDescription(`Categorize text based on examples.`)
     .withAuthor("ttezel", "https://github.com/ttezel/bayes")
     .withAbout(

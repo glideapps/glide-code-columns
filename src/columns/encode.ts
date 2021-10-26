@@ -37,6 +37,7 @@ export function decode(s: string, t: EncodingType): string | undefined {
 export default glide
     .columnNamed("Encode Text")
     .withCategory("Encoding")
+    .withReleased("direct")
     .withDescription("Encode text in a variety of formats.")
 
     .withRequiredStringParam("text")

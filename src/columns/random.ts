@@ -5,6 +5,7 @@ import seedrandom from "seedrandom";
 export default glide
     .columnNamed("Random Number")
     .withCategory("Number")
+    .withReleased("direct")
     .withDescription(`Turn any value into a stable random number.`)
     .withAuthor("davidbau", "github.com/davidbau/seedrandom")
     .withVideo("https://www.youtube.com/watch?v=GtOt7EBNEwQ")

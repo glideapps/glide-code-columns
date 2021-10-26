@@ -1,7 +1,7 @@
 import * as glide from "../glide";
 
 export default glide
-    .columnNamed("Append array")
+    .columnNamed("Append Array")
     .withCategory("Array")
     .withReleased("direct")
     .withDescription(`Add one array to the end of another`)

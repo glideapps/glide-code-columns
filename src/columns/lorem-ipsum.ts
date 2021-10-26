@@ -5,6 +5,7 @@ import { LoremIpsum } from "lorem-ipsum";
 export default glide
     .columnNamed("Lorem Ipsum")
     .withCategory("Text")
+    .withReleased("direct")
     .withDescription(`Produces a 'lorem ipsum' style string`)
     .withAuthor("knicklabs", "github.com/knicklabs/lorem-ipsum.js")
     .withRequiredNumberParam("numberOfSentences", "Number of Sentences")

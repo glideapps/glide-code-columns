@@ -5,6 +5,7 @@ import Humanize from "humanize-plus";
 export default glide
     .columnNamed("Pluralize Text")
     .withCategory("Text")
+    .withReleased("direct")
     .withDescription(`Returns the plural version of a given word if the value is not 1. The default suffix is 's'.`)
     .withAuthor("HubSpot", "https://github.com/HubSpot/humanize")
 

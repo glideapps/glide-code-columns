@@ -6,8 +6,7 @@ export default glide
     .withDescription("Reverses the order of items in an array")
     .withReleased("direct")
     .withPrimitiveArrayResult()
-    .withPrimitiveArrayParam("array")
+    .withRequiredPrimitiveArrayParam("array")
     .run(({ array }) => {
-        if (array === undefined) return undefined;
         return [...array].reverse();
     });

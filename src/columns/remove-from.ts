@@ -1,5 +1,7 @@
 import * as glide from "../glide";
 
+// FIXME - Needs to support stringified numbers
+
 export default glide
     .columnNamed("Remove item")
     .withCategory("Array")

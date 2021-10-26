@@ -1,7 +1,7 @@
 import * as glide from "../glide";
 
 export default glide
-    .columnNamed("Create array")
+    .columnNamed("Single Element Array")
     .withCategory("Array")
     .withReleased("direct")
     .withDescription(`Convert a solitary value to an array`)
