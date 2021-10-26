@@ -10,7 +10,7 @@ const run: glide.Column = async (json, query) => {
     return json.value;
   }
 
-  const val = jq.json(JSON.parse(json.value), query.value);
+  const val = jq.json(JSON.parse(json.value.toString()), query.value);
 
   if (val === null) {
     return undefined;

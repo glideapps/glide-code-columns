@@ -1,6 +1,6 @@
 import startCase from "lodash/startCase";
 
-export type ColumnType =
+export type PrimitiveColumnType =
   | "string"
   | "primitive"
   | "number"
@@ -8,6 +8,8 @@ export type ColumnType =
   | "image-uri"
   | "date-time"
   | "uri";
+
+export type ColumnType = PrimitiveColumnType | { kind: "array", items: PrimitiveColumnType };
 
 export type StringColumnValue = { type: "string"; value?: string };
 
@@ -17,9 +19,12 @@ export type ColumnParam = {
   type: ColumnType;
 };
 
+export type PrimitiveValue = string | number | boolean;
+
 export type ColumnValue =
-  | { type: "primitive"; value?: any }
+  | { type: "primitive"; value?: PrimitiveValue }
   | { type: "number"; value?: number }
+  | { type: "boolean"; value?: boolean }
   | StringColumnValue;
 
 export type Column = (...values: ColumnValue[]) => any | Promise<any>;
@@ -79,9 +84,12 @@ export type Category =
   | "Date & Time"
   | "Code";
 
+type Released = "direct" | "sandboxed";
+
 export type Manifest = {
   name: string;
   category: Category;
+  released?: Released;
   description: string;
   author: string;
   params: ColumnParam[];
@@ -149,7 +157,7 @@ export function toStrictManifest(
 ): Manifest {
   // We carefully pick out just the props in manifest, because more
   // could come in from the component.
-  const { name, category, description, author, result, params, about, video } =
+  const { name, category, released, description, author, result, params, about, video } =
     convenient;
 
   let { icon = defaultIcon } = convenient;
@@ -160,6 +168,7 @@ export function toStrictManifest(
   return {
     name,
     category,
+    released,
     description,
     author,
     result,
@@ -176,6 +185,7 @@ export function toStrictManifest(
 const defaultDefinition: ColumnDefinition = {
   name: "Glide Column",
   category: "General",
+  released: undefined,
   description: "No description",
   author: "Glide <hello@glideapps.com>",
   params: {},
@@ -220,6 +230,10 @@ export class Col<TParams = {}, TResult = string> {
 
   public withCategory(category: Manifest["category"]) {
     return this.with({ category });
+  }
+
+  public withReleased(released: "direct" | "sandboxed") {
+    return this.with({ released })
   }
 
   public withDescription(description: string) {
@@ -271,6 +285,18 @@ export class Col<TParams = {}, TResult = string> {
 
   public withBooleanResult() {
     return this.withResult<boolean>("boolean");
+  }
+
+  public withStringArrayResult() {
+    return this.withResult<string[]>({ kind: "array", items: "string"});
+  }
+
+  public withNumberArrayResult() {
+    return this.withResult<number[]>({ kind: "array", items: "number"});
+  }
+
+  public withPrimitiveArrayResult() {
+    return this.withResult<PrimitiveValue[]>({ kind: "array", items: "primitive"});
   }
 
   public withParam<TParam, TName extends string>(
@@ -339,6 +365,22 @@ export class Col<TParams = {}, TResult = string> {
     displayName?: string
   ) {
     return this.withRequiredParam<number, T>("number", name, displayName);
+  }
+
+  public withStringArrayParam<T extends string>(name: T, displayName?: string) {
+    return this.withParam<string[], T>({ kind: "array", items: "string"}, name, displayName);
+  }
+
+  public withNumberArrayParam<T extends string>(name: T, displayName?: string) {
+    return this.withParam<number[], T>({ kind: "array", items: "number"}, name, displayName);
+  }
+
+  public withPrimitiveArrayParam<T extends string>(name: T, displayName?: string) {
+    return this.withParam<PrimitiveValue[], T>({ kind: "array", items: "primitive"}, name, displayName);
+  }
+
+  public withExample(example: TParams) {
+    return this.with({ example });
   }
 
   public run(
