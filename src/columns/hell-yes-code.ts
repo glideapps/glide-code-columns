@@ -12,7 +12,7 @@ const run: glide.Column = async (code, ...params) => {
   // TODO https://esbuild.github.io/content-types/#direct-eval
   const fn = (0, eval)(functionCode);
 
-  functions.set(code.value, fn);
+  functions.set(code.value.toString(), fn);
 
   return fn(...params.map(p => p.value));
 };
@@ -20,6 +20,7 @@ const run: glide.Column = async (code, ...params) => {
 export default glide.column({
   name: "Hell Yes-Code",
   category: "Code",
+  released: "sandboxed",
   description: "Runs JavaScript",
   about: `Inludes [lodash](https://lodash.com/docs).`,
   author: "Mark Probst <mark@glideapps.com>",

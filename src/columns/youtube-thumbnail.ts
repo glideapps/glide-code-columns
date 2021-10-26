@@ -18,7 +18,7 @@ const run: glide.Column = async link => {
   if (link.value === undefined) {
     return undefined;
   }
-  return thumbnailFromLink(link.value);
+  return thumbnailFromLink(link.value.toString());
 };
 
 export default glide.column({
