@@ -24,7 +24,7 @@ Object.values(definitions).forEach(definition => {
           } as ColumnValue)
       );
       const result = await definition.run(...params);
-      expect(result).toBe(expectedResult);
+      expect(result).toStrictEqual(expectedResult);
     });
   }
 });

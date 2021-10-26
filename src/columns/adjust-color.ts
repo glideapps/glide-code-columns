@@ -5,6 +5,7 @@ import chroma from "chroma-js";
 export default glide
   .columnNamed("Adjust Color")
   .withCategory("Image")
+  .withReleased("direct")
   .withDescription(
     `Modifies a color by brightening, darkening, saturating, and adjusting transparency.`
   )
