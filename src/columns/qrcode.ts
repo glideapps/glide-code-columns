@@ -26,7 +26,7 @@ export default glide
     .columnNamed("QR Code")
     .withCategory("Image")
     .withDescription("Generate QR codes from any value.")
-    .withAuthor("David Siegel", "")
+    .withAuthor("David Siegel", "david@glideapps.com")
     .withIcon(icon)
     .withVideo("https://www.youtube.com/watch?v=142TGhaTMtI")
     .withReleased("direct")
