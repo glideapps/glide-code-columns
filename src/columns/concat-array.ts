@@ -13,5 +13,5 @@ export default glide
     .withTest({ values: [3, 20, 100], toAppend: [20, 3] }, [3, 20, 100, 20, 3])
 
     .run(({ values, toAppend }) => {
-        return [...values, ...toAppend];
+        return [...values, ...(toAppend ?? [])];
     });

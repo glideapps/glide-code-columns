@@ -17,5 +17,5 @@ export default glide
 
     .run(({ values }) => {
         if (values.some(v => typeof v !== "number")) return values.sort();
-        return values.sort((a, b) => a - b);
+        return values.sort((a: number, b: number) => a - b);
     });
