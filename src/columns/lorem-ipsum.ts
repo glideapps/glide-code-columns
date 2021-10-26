@@ -6,7 +6,6 @@ export default glide
     .columnNamed("Lorem Ipsum")
     .withCategory("Text")
     .withDescription(`Produces a 'lorem ipsum' style string`)
-    .withAuthor("davidbau", "github.com/davidbau/seedrandom")
     .withAuthor("knicklabs", "github.com/knicklabs/lorem-ipsum.js")
     .withRequiredNumberParam("numberOfSentences", "Number of Sentences")
     .withStringResult()
