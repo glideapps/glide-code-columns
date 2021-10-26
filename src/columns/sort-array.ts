@@ -2,8 +2,6 @@ import * as glide from "../glide";
 
 import sortBy from "lodash/sortBy";
 
-// FIXME - Needs to support stringified numbers
-
 export default glide
     .columnNamed("Sort array")
     .withCategory("Array")

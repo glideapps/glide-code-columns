@@ -1,7 +1,5 @@
 import * as glide from "../glide";
 
-// FIXME - Stringified numbers and booleans
-
 export default glide
     .columnNamed("Index of")
     .withCategory("Array")
