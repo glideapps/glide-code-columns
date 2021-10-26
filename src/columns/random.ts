@@ -12,4 +12,6 @@ export default glide
   .withRequiredPrimitiveParam("seed")
   .withNumberResult()
 
+  .withTest({ seed: "Glide" }, 0.3711851882348728)
+
   .run(({ seed }) => seedrandom(seed)());
