@@ -255,6 +255,10 @@ export class Col<TParams = {}, TResult = string> {
         return this.withResult<string>("primitive");
     }
 
+    public withImageResult() {
+        return this.withResult<string>("image-uri");
+    }
+
     public withNumberResult() {
         return this.withResult<number>("number");
     }

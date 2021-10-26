@@ -35,6 +35,7 @@
         "@types/jest": "^27.0.1",
         "@types/lodash": "^4.14.175",
         "@types/luxon": "^2.0.5",
+        "@types/qrcode-svg": "^1.1.1",
         "@types/react": "^17.0.20",
         "@types/react-dom": "^17.0.9",
         "@types/seedrandom": "^3.0.1",
@@ -68,7 +69,9 @@
         "lodash": "^4.17.21",
         "lorem-ipsum": "^2.0.4",
         "luxon": "^2.0.2",
+        "mini-svg-data-uri": "^1.4.3",
         "next": "^11.1.2",
+        "qrcode-svg": "^1.1.0",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "seedrandom": "^3.0.5"
