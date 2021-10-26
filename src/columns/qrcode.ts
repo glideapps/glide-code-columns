@@ -35,6 +35,8 @@ export default glide
     .withNumberParam("size")
     .withImageResult()
 
+    .withFailingTest({ content: "https://wwww.glideapps.com" }, "way too big to put here")
+
     .run(({ content, size = 250 }) => {
         const svg = new QRCode({
             content,

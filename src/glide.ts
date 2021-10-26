@@ -98,10 +98,12 @@ export type ManifestConvenient<T> = Omit<Manifest, "params" | "icon"> & {
     icon?: "glide" | string;
 };
 
+type Test<TParams> = { params: Partial<TParams>; expectedResult: any; allowFailure?: boolean };
+
 export type ColumnDefinition<TColumnParams = {}> = ManifestConvenient<TColumnParams> & {
     run: Column;
     example?: Partial<TColumnParams>;
-    tests?: Array<{ params: Partial<TColumnParams>; expectedResult: any }>;
+    tests?: Test<TColumnParams>[];
 };
 
 export function column<TColumnParams>(manifest: ColumnDefinition<TColumnParams>): ColumnDefinition<TColumnParams> & {
@@ -240,6 +242,14 @@ export class Col<TParams = {}, TResult = string> {
 
         return this.with({
             tests: [...tests, { params, expectedResult }],
+        });
+    }
+
+    public withFailingTest(params: Partial<TParams>, expectedResult: TResult | undefined) {
+        const { tests = [] } = this.definition;
+
+        return this.with({
+            tests: [...tests, { params, expectedResult, allowFailure: true }],
         });
     }
 
