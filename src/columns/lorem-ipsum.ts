@@ -2,9 +2,9 @@ import * as glide from "../glide";
 import { LoremIpsum } from "lorem-ipsum";
 
 export default glide
-  .columnNamed("Lorum")
+  .columnNamed("Lorem Ipsum")
   .withCategory("Text")
-  .withDescription(`Produces and 'lorum ipsum' style string`)
+  .withDescription(`Produces a 'lorem ipsum' style string`)
   .withStringResult()
   .withRequiredNumberParam(
     "numberOfWordsPerSentence",
@@ -12,12 +12,12 @@ export default glide
   )
   .withRequiredNumberParam("numberOfSentences", "Number of sentences")
   .run(({ numberOfWordsPerSentence, numberOfSentences }) => {
-    const lorum = new LoremIpsum({
+    const lorem = new LoremIpsum({
       wordsPerSentence: {
         min: numberOfWordsPerSentence,
         max: numberOfWordsPerSentence,
       },
     });
-    const text = lorum.generateSentences(numberOfSentences);
+    const text = lorem.generateSentences(numberOfSentences);
     return text;
   });
