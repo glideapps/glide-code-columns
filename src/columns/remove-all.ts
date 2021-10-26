@@ -12,10 +12,9 @@ export default glide
     .withPrimitiveArrayParam("toRemove", "To remove")
 
     .withTest({ values: ["a", "b", "b", "c"], toRemove: ["b", "c"] }, ["a"])
-    .withTest({ values: [3, 20, 100], toRemove: [20, 3] }, [100])
+    .withTest({ values: [3, 20, 100], toRemove: [20, "3"] }, [100])
 
     .run(({ values, toRemove }) => {
         if (toRemove === undefined) return values;
-        const set = new Set(toRemove);
-        return values.filter(v => !set.has(v));
+        return values.filter(v => !toRemove.some(x => x == v));
     });

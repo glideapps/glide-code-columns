@@ -12,10 +12,10 @@ export default glide
     .withPrimitiveParam("toFind", "To find")
 
     .withTest({ values: ["a", "b", "b", "c"], toFind: "b" }, 1)
-    .withTest({ values: [3, 20, 100], toFind: 20 }, 1)
+    .withTest({ values: [3, 20, 100], toFind: "20" }, 1)
     .withTest({ values: [3, 20, 100], toFind: 25 }, undefined)
 
     .run(({ values, toFind }) => {
-        const result = values.indexOf(toFind);
+        const result = values.findIndex(x => x == toFind);
         return result === -1 ? undefined : result;
     });

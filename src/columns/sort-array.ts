@@ -1,5 +1,7 @@
 import * as glide from "../glide";
 
+import sortBy from "lodash/sortBy";
+
 // FIXME - Needs to support stringified numbers
 
 export default glide
@@ -15,9 +17,10 @@ export default glide
     .withTest({ values: ["c", "a", "b"] }, ["a", "b", "c"])
     .withTest({ values: ["3", "20", "100"] }, ["100", "20", "3"])
     .withTest({ values: [3, 20, 100] }, [3, 20, 100])
+    .withTest({ values: [23, 20, 100] }, [20, 23, 100])
+    .withTest({ values: [23, 20, "100"] }, [20, 23, "100"])
     .withTest({ values: undefined }, undefined)
 
     .run(({ values }) => {
-        if (values.some(v => typeof v !== "number")) return values.sort();
-        return values.sort((a: number, b: number) => a - b);
+        return sortBy(values, x => x);
     });
