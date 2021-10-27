@@ -23,10 +23,14 @@ export default glide
 
     .withStringParam("color")
     .withStringParam("backgroundColor")
+    .withNumberParam("size")
 
     .withImageResult()
 
-    .withFailingTest({ name: "beaker", style: "outline", color: "#0FD452", size: 128 }, undefined)
+    .withFailingTest(
+        { name: "beaker", style: "outline", color: "#F8F8F8", backgroundColor: "#007D8E", size: 128 },
+        undefined
+    )
 
     .run(({ name, color = "currentColor", style = "solid", backgroundColor = "transparent", size = 100 }) => {
         const properName = upperFirst(camelCase(name)) + "Icon";
