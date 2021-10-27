@@ -7,8 +7,8 @@ export function getColumnSlugs(): string[] {
     const columnsDir = path.join(process.cwd(), "src/columns");
     return fs
         .readdirSync(columnsDir)
-        .filter(p => p.match(/\.(ts|tsx)$/) !== null)
-        .map(p => p.replace(/\.(ts|tsx)$/, ""));
+        .filter(p => p.endsWith(".ts"))
+        .map(p => p.replace(".ts", ""));
 }
 
 export function getColumnDefinition(slug: string): ColumnDefinition<any> {
