@@ -9,7 +9,7 @@ import svgToMiniDataURI from "mini-svg-data-uri";
 import camelCase from "lodash/camelCase";
 import upperFirst from "lodash/upperFirst";
 
-const defaultIcon = "beaker";
+const defaultIcon = "Beaker";
 
 export default glide
     .columnNamed("Hero Icons")
@@ -18,17 +18,29 @@ export default glide
     .withDescription("Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS.")
 
     .withRequiredStringParam("name", "Name (See heroicons.com)")
-    .withStringParam("color")
     .withStringParam("style", "Style (solid, outline)")
+    .withNumberParam("size")
+
+    .withStringParam("color")
+    .withStringParam("backgroundColor")
+
     .withImageResult()
 
-    .withFailingTest({ name: "david" }, undefined)
+    .withFailingTest({ name: "beaker", style: "outline", color: "#0FD452", size: 128 }, undefined)
 
-    .run(({ name, color = "black", style = "solid" }) => {
-        const properName = upperFirst(camelCase(name));
+    .run(({ name, color = "currentColor", style = "solid", backgroundColor = "transparent", size = 100 }) => {
+        const properName = upperFirst(camelCase(name)) + "Icon";
         const collection = style === "solid" ? Solid : Outline;
-        const component = collection[properName] ?? collection[defaultIcon];
-        const icon = React.createElement(component, { color });
+        let component = collection[properName] ?? collection[defaultIcon];
+
+        if (component === undefined) return undefined;
+
+        const icon = React.createElement(component, {
+            color,
+            height: size,
+            width: size,
+            style: { backgroundColor },
+        });
         const svg = ReactDOMServer.renderToString(icon);
         return svgToMiniDataURI(svg);
     });
