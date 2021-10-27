@@ -24,7 +24,7 @@ export default glide
     .withStringParam("color")
     .withStringParam("backgroundColor")
     .withNumberParam("size")
-    .withNumberParam("radius")
+    // .withNumberParam("radius")
     .withNumberParam("padding")
 
     .withImageResult()
@@ -37,7 +37,7 @@ export default glide
             backgroundColor: "#007D8E",
             size: 200,
             padding: 40,
-            radius: 10,
+            // radius: 10,
         },
         undefined
     )
@@ -49,7 +49,7 @@ export default glide
             style = "solid",
             backgroundColor = "transparent",
             size = 128,
-            radius = 0,
+            // radius = 0,
             padding = 20,
         }) => {
             const properName = name.endsWith("Icon") ? name : upperFirst(camelCase(name)) + "Icon";
@@ -58,13 +58,16 @@ export default glide
 
             if (component === undefined) return undefined;
 
-            const f = 24 * (padding / size);
+            const inset = 24 * (padding / size);
             const icon = React.createElement(component, {
                 color,
                 height: size,
                 width: size,
-                viewBox: [-f, -f, 24 + 2 * f, 24 + 2 * f].join(","),
-                style: { backgroundColor, borderRadius: radius, overflow: "hidden" },
+                viewBox: [-inset, -inset, 24 + 2 * inset, 24 + 2 * inset].join(","),
+                style: {
+                    backgroundColor,
+                    // borderRadius: radius
+                },
             });
             const svg = ReactDOMServer.renderToString(icon);
             console.log(svg);
