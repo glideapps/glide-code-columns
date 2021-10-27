@@ -64,7 +64,7 @@ export default glide
                 height: size,
                 width: size,
                 viewBox: [-f, -f, 24 + 2 * f, 24 + 2 * f].join(","),
-                style: { backgroundColor, borderRadius: radius },
+                style: { backgroundColor, borderRadius: radius, overflow: "hidden" },
             });
             const svg = ReactDOMServer.renderToString(icon);
             console.log(svg);
