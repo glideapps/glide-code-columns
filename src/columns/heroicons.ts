@@ -55,12 +55,13 @@ export default glide
 
             if (component === undefined) return undefined;
 
-            const inset = 24 * (padding / size);
+            const baseSize = style === "solid" ? 20 : 24;
+            const inset = baseSize * (padding / size);
             const icon = React.createElement(component, {
                 color,
                 height: size,
                 width: size,
-                viewBox: [-inset, -inset, 24 + 2 * inset, 24 + 2 * inset].join(","),
+                viewBox: [-inset, -inset, baseSize + 2 * inset, baseSize + 2 * inset].join(","),
                 style: {
                     backgroundColor,
                 },
