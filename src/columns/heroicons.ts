@@ -24,27 +24,50 @@ export default glide
     .withStringParam("color")
     .withStringParam("backgroundColor")
     .withNumberParam("size")
+    .withNumberParam("radius")
+    .withNumberParam("padding")
 
     .withImageResult()
 
     .withFailingTest(
-        { name: "beaker", style: "outline", color: "#F8F8F8", backgroundColor: "#007D8E", size: 128 },
+        {
+            name: "beaker",
+            style: "outline",
+            color: "#F8F8F8",
+            backgroundColor: "#007D8E",
+            size: 200,
+            padding: 40,
+            radius: 10,
+        },
         undefined
     )
 
-    .run(({ name, color = "currentColor", style = "solid", backgroundColor = "transparent", size = 100 }) => {
-        const properName = upperFirst(camelCase(name)) + "Icon";
-        const collection = style === "solid" ? Solid : Outline;
-        let component = collection[properName] ?? collection[defaultIcon];
+    .run(
+        ({
+            name,
+            color = "currentColor",
+            style = "solid",
+            backgroundColor = "transparent",
+            size = 128,
+            radius = 0,
+            padding = 20,
+        }) => {
+            const properName = name.endsWith("Icon") ? name : upperFirst(camelCase(name)) + "Icon";
+            const collection = style === "solid" ? Solid : Outline;
+            let component = collection[properName] ?? collection[defaultIcon];
 
-        if (component === undefined) return undefined;
+            if (component === undefined) return undefined;
 
-        const icon = React.createElement(component, {
-            color,
-            height: size,
-            width: size,
-            style: { backgroundColor },
-        });
-        const svg = ReactDOMServer.renderToString(icon);
-        return svgToMiniDataURI(svg);
-    });
+            const f = 24 * (padding / size);
+            const icon = React.createElement(component, {
+                color,
+                height: size,
+                width: size,
+                viewBox: [-f, -f, 24 + 2 * f, 24 + 2 * f].join(","),
+                style: { backgroundColor, borderRadius: radius },
+            });
+            const svg = ReactDOMServer.renderToString(icon);
+            console.log(svg);
+            return svgToMiniDataURI(svg);
+        }
+    );
