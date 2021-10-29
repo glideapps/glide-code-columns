@@ -282,6 +282,10 @@ export class Col<TParams = {}, TResult = string> {
         return this.withParam<any, T>("primitive", name, displayName);
     }
 
+    public withBooleanParam<T extends string>(name: T, displayName?: string) {
+        return this.withParam<boolean, T>("boolean", name, displayName);
+    }
+
     public withStringParam<T extends string>(name: T, displayName?: string) {
         return this.withParam<string, T>("string", name, displayName);
     }
@@ -296,6 +300,10 @@ export class Col<TParams = {}, TResult = string> {
 
     public withRequiredPrimitiveParam<T extends string>(name: T, displayName?: string) {
         return this.withRequiredParam<any, T>("primitive", name, displayName);
+    }
+
+    public withRequiredBooleanParam<T extends string>(name: T, displayName?: string) {
+        return this.withRequiredParam<boolean, T>("boolean", name, displayName);
     }
 
     public withRequiredStringParam<T extends string>(name: T, displayName?: string) {
