@@ -1,5 +1,5 @@
 import startCase from "lodash/startCase";
-import { defaultIcon, getIconForManifest } from "./icons";
+import { categoryIcons, defaultIcon, getIconForManifest } from "./icons";
 
 export type PrimitiveColumnType = "string" | "primitive" | "number" | "boolean" | "image-uri" | "date-time" | "uri";
 
@@ -182,7 +182,7 @@ export class Col<TParams = {}, TResult = string> {
     }
 
     public withCategory(category: Manifest["category"]) {
-        return this.with({ category });
+        return this.with({ category, icon: this.definition.icon ?? categoryIcons[category] });
     }
 
     public withReleased(released: "direct" | "sandboxed") {
