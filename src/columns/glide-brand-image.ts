@@ -42,5 +42,4 @@ export default glide.column({
     example: { category: "3d", random: "glideapps.com" },
     result: { type: "image-uri" },
     run,
-    icon: "glide",
 });
