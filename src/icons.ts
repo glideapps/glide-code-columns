@@ -86,7 +86,7 @@ const Encoding = `
 </svg>
 `;
 
-const categoryIcons: Partial<Record<Category, string>> = {
+export const categoryIcons: Partial<Record<Category, string>> = {
     Glide,
     "Machine Learning": AI,
     General: defaultIcon,
