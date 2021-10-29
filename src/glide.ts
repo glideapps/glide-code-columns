@@ -152,7 +152,7 @@ const defaultDefinition: ColumnDefinition = {
     author: "Glide <hello@glideapps.com>",
     params: {},
     result: { type: "string" },
-    icon: defaultIcon,
+    icon: undefined,
     about: undefined,
     video: undefined,
     tests: [],
