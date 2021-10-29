@@ -13,4 +13,4 @@ export default glide
     .withTest({ value: false }, true)
     .withTest({ value: undefined }, true)
 
-    .run(({ value }) => value !== true);
+    .run(({ value }) => !Boolean(value));
