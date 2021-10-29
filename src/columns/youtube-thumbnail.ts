@@ -9,7 +9,7 @@ function videoIDFromLink(link: string): string | undefined {
 
 function thumbnailFromLink(link: string): string | undefined {
     const id = videoIDFromLink(link);
-    return id === undefined ? undefined : `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
+    return id === undefined ? undefined : `https://img.youtube.com/vi/${id}/0.jpg`;
 }
 
 const run: glide.Column = async link => {
