@@ -6,7 +6,7 @@ export default glide
     .withReleased("direct")
     .withDescription(`True becomes false. False (and blank) become true.`)
 
-    .withRequiredBooleanParam("value")
+    .withBooleanParam("value")
     .withBooleanResult()
 
     .withTest({ value: true }, false)
