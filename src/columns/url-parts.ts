@@ -6,8 +6,17 @@ const parts: Record<string, (url: URL) => string> = {
     protocol: x => x.protocol,
     search: x => x.search,
     hash: x => x.hash,
-    all: x => x.toJSON(),
+    all: getAllParts,
 };
+
+function getAllParts(url: URL): string {
+    const all = {};
+    for (const [part, get] of Object.entries(parts)) {
+        if (part === "all") continue;
+        all[part] = get(url);
+    }
+    return JSON.stringify(all);
+}
 
 export default glide
     .columnNamed("Get Part of URL")
@@ -16,7 +25,7 @@ export default glide
     .withReleased("direct")
 
     .withRequiredURIParam("uri", "URL")
-    .withStringParam("part", `Part (${Object.keys(parts).sort().join(", ")}, or search parameter name)`)
+    .withStringParam("part", `Part (${Object.keys(parts).sort().join(", ")}, or parameter name)`)
     .withStringResult()
 
     .withTest({ uri: "https://www.glideapps.com", part: "hostname" }, "www.glideapps.com")
