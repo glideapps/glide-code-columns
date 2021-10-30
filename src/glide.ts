@@ -235,7 +235,7 @@ export class Col<TParams = {}, TResult = string> {
     }
 
     public withDateResult() {
-        return this.withResult<string>("date-time");
+        return this.withResult<Date>("date-time");
     }
 
     public withPrimitiveResult() {
