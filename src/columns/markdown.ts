@@ -5,7 +5,9 @@ import marked, { parse } from "marked";
 export default glide
     .columnNamed("Markdown to HTML")
     .withCategory("Text")
-    .withReleased("direct")
+
+    // Not sure if we can run this unsandboxed
+    .withReleased("sandboxed")
 
     .withDescription(`Convert markdown to HTML.`)
 
