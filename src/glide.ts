@@ -234,6 +234,10 @@ export class Col<TParams = {}, TResult = string> {
         return this.withResult<string>("string");
     }
 
+    public withDateResult() {
+        return this.withResult<Date>("date-time");
+    }
+
     public withPrimitiveResult() {
         return this.withResult<string>("primitive");
     }
