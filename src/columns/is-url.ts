@@ -15,6 +15,8 @@ export default glide
     .withTest({ url: `https://www.google.com` }, true)
 
     .run(({ url, requireProtocol = true }) => {
+        if (url === undefined) return false;
+
         let fullUrl = url;
         if (!requireProtocol && !fullUrl?.includes(":")) {
             fullUrl = "https://" + fullUrl;
