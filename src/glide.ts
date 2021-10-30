@@ -77,6 +77,7 @@ export type Category =
     | "Image"
     | "Fun"
     | "Date & Time"
+    | "Cryptography"
     | "Code";
 
 type Released = "direct" | "sandboxed";
