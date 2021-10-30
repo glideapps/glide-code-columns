@@ -20,7 +20,7 @@ export default glide
     .withStringParam("zone", "Timezone")
     .withDateResult()
 
-    .withTest({ text: "12 August 1982", format: "d MMMM yyyy" }, new Date("1982-08-12T07:00:00.000Z"))
+    .withTest({ text: "12 August 1982", format: "d MMMM yyyy", zone: "utc" }, new Date("1982-08-12T07:00:00.000Z"))
 
     .run(({ text, format, locale, zone }) => {
         let dt: DateTime;
