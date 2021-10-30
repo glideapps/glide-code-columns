@@ -14,7 +14,7 @@ export default glide
     .withRequiredStringParam("to", "To Unit")
 
     // Fails because of floating point
-    .withFailingTest({ number: 1, from: "ft", to: "in" }, 12)
+    .withFailingTest({ number: 100, from: "feet / second", to: "miles / hour" }, 12)
 
     .run(({ number, from, to }) => {
         try {
