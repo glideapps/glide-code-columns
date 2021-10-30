@@ -1,6 +1,6 @@
 import * as glide from "../glide";
 
-import marked from "marked";
+import marked, { parse } from "marked";
 
 export default glide
     .columnNamed("Markdown to HTML")
@@ -10,7 +10,12 @@ export default glide
     .withDescription(`Convert markdown to HTML.`)
 
     .withRequiredStringParam("markdown")
+    .withBooleanParam("inline")
     .withStringResult()
 
-    .withTest({ markdown: `*Hello*` }, "<p><em>Hello</em></p>\n")
-    .run(({ markdown }) => marked(markdown));
+    .withTest({ markdown: `*Hello*`, inline: true }, "<em>Hello</em>")
+
+    .run(({ markdown, inline = false }) => {
+        const parse = inline ? marked.parseInline : marked;
+        return parse(markdown);
+    });
