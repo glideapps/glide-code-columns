@@ -13,4 +13,4 @@ export default glide
     .withTest({ words: `hello` }, 1)
     .withTest({ words: `` }, 0)
 
-    .run(({ words = "" }) => words.match(/\S+/g)?.length ?? 0);
+    .run(({ words }) => words?.match(/\S+/g)?.length ?? 0);
