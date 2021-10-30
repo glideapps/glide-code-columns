@@ -2,7 +2,7 @@ import * as glide from "../glide";
 
 export function isFalsey(x: any): boolean {
     if (typeof x === "string") {
-        return ["", "no", "false"].includes(x.toLowerCase());
+        return ["", "no", "false"].includes(x.trim().toLowerCase());
     }
     if (Array.isArray(x)) {
         return x.length === 0;
