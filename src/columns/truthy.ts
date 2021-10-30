@@ -1,6 +1,6 @@
 import * as glide from "../glide";
 
-function isFalsey(x: any): boolean {
+export function isFalsey(x: any): boolean {
     if (typeof x === "string") {
         return ["", "no", "false"].includes(x.toLowerCase());
     }
@@ -14,7 +14,7 @@ export default glide
     .columnNamed("Is Truthy")
     .withCategory("General")
     .withReleased("direct")
-    .withDescription(`True becomes false. False (and blank) become true.`)
+    .withDescription(`True if value is true or truth-like.`)
 
     .withPrimitiveParam("value")
     .withBooleanResult()
