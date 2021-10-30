@@ -9,8 +9,8 @@ export default glide
     .withCategory("Number")
 
     .withRequiredNumberParam("number")
-    .withRequiredStringParam("from", "From Unit")
-    .withRequiredStringParam("to", "To Unit")
+    .withRequiredStringParam("from", "From unit (see https://gl.ink/units)")
+    .withRequiredStringParam("to", "To unit")
     .withNumberResult()
 
     // Fails because of floating point
