@@ -1,14 +1,6 @@
 import * as glide from "../glide";
 
-export function isFalsey(x: any): boolean {
-    if (typeof x === "string") {
-        return ["", "no", "false"].includes(x.toLowerCase());
-    }
-    if (Array.isArray(x)) {
-        return x.length === 0;
-    }
-    return Boolean(x) === false;
-}
+import { isFalsey } from "./falsey";
 
 export default glide
     .columnNamed("Is Truthy")
