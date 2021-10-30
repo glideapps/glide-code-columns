@@ -31,7 +31,7 @@ export default glide
                 return extractPart(url);
             }
             if (url.searchParams.has(part)) {
-                return url.searchParams.get(part);
+                return url.searchParams.get(part) ?? undefined;
             }
             return undefined;
         } catch {
