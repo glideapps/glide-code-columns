@@ -18,6 +18,7 @@ export default glide
     .withTest({ value: "" }, false)
     .withTest({ value: [] }, false)
     .withTest({ value: 0 }, false)
+    .withTest({ value: "0" }, false)
     .withTest({ value: "false" }, false)
     .withTest({ value: "FALSE" }, false)
     .withTest({ value: "no" }, false)

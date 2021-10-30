@@ -2,6 +2,10 @@ import * as glide from "../glide";
 
 export function isFalsey(x: any): boolean {
     if (typeof x === "string") {
+        const n = parseFloat(x);
+        if (!isNaN(n)) {
+            return n === 0;
+        }
         return ["", "no", "false"].includes(x.trim().toLowerCase());
     }
     if (Array.isArray(x)) {
@@ -26,6 +30,7 @@ export default glide
     .withTest({ value: "" }, true)
     .withTest({ value: [] }, true)
     .withTest({ value: 0 }, true)
+    .withTest({ value: "0" }, true)
     .withTest({ value: "false" }, true)
     .withTest({ value: "FALSE" }, true)
     .withTest({ value: "no" }, true)
