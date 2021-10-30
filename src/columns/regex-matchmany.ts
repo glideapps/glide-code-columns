@@ -4,6 +4,8 @@ export default glide
     .columnNamed("Extract Multiple Matching Text")
     .withCategory("Text")
     .withDescription("Extract text matching a regular expression, returning an array of matches.")
+    .withReleased("direct")
+
     .withStringParam("text")
     .withStringParam("regex", "Regular Expression")
     .withStringArrayResult()

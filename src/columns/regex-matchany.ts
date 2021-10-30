@@ -4,6 +4,7 @@ export default glide
     .columnNamed("Check Text Matches")
     .withCategory("Text")
     .withDescription("Check that text matches a regular expression.")
+    .withReleased("direct")
 
     .withStringParam("text")
     .withStringParam("regex", "Regular Expression")
