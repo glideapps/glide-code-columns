@@ -14,7 +14,7 @@ export default glide
     .columnNamed("Is Falsey")
     .withCategory("General")
     .withReleased("direct")
-    .withDescription(`True if value is false or false-like.`)
+    .withDescription(`True if value is false or false-like, otherwise false.`)
 
     .withPrimitiveParam("value")
     .withBooleanResult()
