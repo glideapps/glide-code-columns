@@ -6,7 +6,7 @@ export default glide
     .columnNamed("Is Truthy")
     .withCategory("General")
     .withReleased("direct")
-    .withDescription(`True if value is true or truth-like.`)
+    .withDescription(`True if value is true or true-like.`)
 
     .withPrimitiveParam("value")
     .withBooleanResult()
