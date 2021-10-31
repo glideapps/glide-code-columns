@@ -3,6 +3,8 @@ import * as glide from "../glide";
 require("@tensorflow/tfjs");
 import * as toxicity from "@tensorflow-models/toxicity";
 
+let model: toxicity.ToxicityClassifier;
+
 export default glide
     .columnNamed("Detect Toxic Comments")
     .withCategory("Machine Learning")
@@ -19,7 +21,7 @@ export default glide
     .withTest({ text: `Have a happy day!` }, [])
 
     .run(async ({ text }) => {
-        const model = await toxicity.load(0.9, []);
+        model = model ?? (await toxicity.load(0.9, []));
         const results = await model.classify(text);
         return results.filter(r => r.results.some(rr => rr.match)).map(r => r.label);
     });
