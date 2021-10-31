@@ -5,9 +5,11 @@ import * as toxicity from "@tensorflow-models/toxicity";
 
 export default glide
     .columnNamed("Is Toxic")
-    .withCategory("Text")
+    .withCategory("Machine Learning")
     .withReleased("direct")
-    .withDescription(`Indicates whether text is a URL.`)
+    .withDescription(
+        `Detects threatening language, insults, obscenities, identity-based hate, or sexually explicit language.`
+    )
 
     .withRequiredStringParam("text")
     .withStringArrayResult()
