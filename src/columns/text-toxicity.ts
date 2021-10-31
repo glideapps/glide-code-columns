@@ -9,14 +9,13 @@ export default glide
     .withReleased("direct")
     .withDescription(`Indicates whether text is a URL.`)
 
-    .withStringParam("text")
-    .withStringResult()
+    .withRequiredStringParam("text")
+    .withStringArrayResult()
 
-    .withTest({ text: `you suck` }, "identity_attack")
+    .withTest({ text: `you suck` }, ["insult", "toxicity"])
 
     .run(async ({ text }) => {
         const model = await toxicity.load(0.9, []);
         const results = await model.classify(text);
-        console.log(results);
-        return results[0].label;
+        return results.filter(r => r.results.some(rr => rr.match)).map(r => r.label);
     });

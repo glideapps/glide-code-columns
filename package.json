@@ -58,8 +58,6 @@
         "@jcubic/lips": "^1.0.0-beta.14",
         "@tensorflow-models/toxicity": "^1.2.2",
         "@tensorflow/tfjs": "^3.11.0",
-        "@tensorflow/tfjs-converter": "^3.11.0",
-        "@tensorflow/tfjs-core": "^3.11.0",
         "axios": "^0.23.0",
         "bayes": "^1.0.0",
         "cheerio": "^1.0.0-rc.10",
