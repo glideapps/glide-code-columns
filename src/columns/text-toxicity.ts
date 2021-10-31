@@ -4,7 +4,7 @@ require("@tensorflow/tfjs");
 import * as toxicity from "@tensorflow-models/toxicity";
 
 export default glide
-    .columnNamed("Is Toxic")
+    .columnNamed("Detect Toxic Comments")
     .withCategory("Machine Learning")
     .withReleased("direct")
     .withDescription(
