@@ -14,7 +14,9 @@ export default glide
     .withRequiredStringParam("text")
     .withStringArrayResult()
 
-    .withTest({ text: `you suck` }, ["insult", "toxicity"])
+    .withTest({ text: `go fuck yourself` }, ["toxicity"])
+    .withTest({ text: `your ass is so fat` }, ["toxicity"])
+    .withTest({ text: `Have a happy day!` }, [])
 
     .run(async ({ text }) => {
         const model = await toxicity.load(0.9, []);
