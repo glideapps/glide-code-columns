@@ -155,7 +155,7 @@ const defaultDefinition: ColumnDefinition = {
     result: { type: "string" },
     icon: undefined,
     about: undefined,
-    video: undefined,
+    video: "https://www.loom.com/share/39ab84c058e14adea79ca4442f450351",
     tests: [],
     async run() {
         return undefined;
