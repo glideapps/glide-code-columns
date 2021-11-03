@@ -20,18 +20,18 @@ async function loadImage(uri) {
 
 const run: glide.Column = async imageUri => {
     // Load the model.
-    const model = await mobilenet.load({version, alpha});
+    const model = await mobilenet.load({ version, alpha });
 
     var img = await loadImage(imageUri);
 
     // Classify the image.
     const predictions = await model.classify(img);
 
-    const labels = predictions.map(p => [p.className, p.probability.toFixed(2)]);    
+    const labels = predictions.map(p => [p.className, p.probability.toFixed(2)]);
 
     labels.sort((l1, l2) => l2[1] - l1[1]);
 
-    console.log(labels)
+    console.log(labels);
 
     return labels.map(p => p.join(":"));
 };
@@ -39,8 +39,8 @@ const run: glide.Column = async imageUri => {
 export default glide
     .columnNamed("Classify Images")
     .withCategory("Machine Learning")
-    .withRequiredStringParam("text")
+    .withRequiredStringParam("uri")
     .withReleased("direct")
     .withDescription("Returns an array of most likely predictions and their confidences")
-    .withFailingTest("https://images.unsplash.com/photo-1495360010541-f48722b34f7d", "https://images.unsplash.com/photo-1495360010541-f48722b34f7d")
+    .withFailingTest({ uri: "https://images.unsplash.com/photo-1495360010541-f48722b34f7d" }, undefined)
     .run(run);
