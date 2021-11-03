@@ -1,14 +1,15 @@
 import * as glide from "../glide";
 
-import lowerCase from "lodash/lowerCase";
-
 export default glide
     .columnNamed("Lowercase Text")
     .withCategory("Text")
     .withReleased("direct")
-    .withDescription(`Converts string, as space separated words, to lower case.`)
-    .withAuthor("lodash Project", "lodash.com")
+    .withDescription(`Converts string to lower case.`)
+
+    .withRequiredStringParam("text")
     .withStringResult()
-    .withStringParam("text")
-    .withTest({ text: `--Foo-Bar--` }, "foo bar")
-    .run(({ text }) => (text === undefined ? undefined : lowerCase(text)));
+
+    .withTest({ text: `Hello, WORLD!` }, "hello, world!")
+    .withTest({ text: `--Foo-Bar--` }, "--foo-bar--")
+
+    .run(({ text }) => text.toLocaleLowerCase());
