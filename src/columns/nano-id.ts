@@ -15,8 +15,8 @@ export default glide
     )
     .withStringResult()
     .run(async ({ alphabet, num }) => {
-        if (alphabet) {
-            customAlphabet(alphabet, num);
+        if (num !== undefined && alphabet !== undefined) {                        
+            const nanoid = customAlphabet(alphabet, num);
             return await nanoid();
         } else {
             return await nanoid(num);
