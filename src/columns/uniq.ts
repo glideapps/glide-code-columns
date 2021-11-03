@@ -3,7 +3,7 @@ import * as glide from "../glide";
 import uniq from "lodash/uniq";
 
 export default glide
-    .columnNamed("Unique")
+    .columnNamed("Unique Elements")
     .withCategory("Array")
     .withReleased("direct")
     .withDescription(`Remove duplicate entries from an array`)

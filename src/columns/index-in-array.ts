@@ -1,7 +1,7 @@
 import * as glide from "../glide";
 
 export default glide
-    .columnNamed("Index of")
+    .columnNamed("Find Element Index")
     .withCategory("Array")
     .withReleased("direct")
     .withDescription(`Finds the first index of an element in an array`)

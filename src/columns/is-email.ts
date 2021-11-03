@@ -3,7 +3,7 @@ import * as glide from "../glide";
 import validator from "email-validator";
 
 export default glide
-    .columnNamed("Email Validator")
+    .columnNamed("Text is Email")
     .withCategory("Text")
     .withReleased("direct")
     .withDescription(`Indicates whether text is an email.`)

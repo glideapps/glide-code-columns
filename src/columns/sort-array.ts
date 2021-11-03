@@ -3,7 +3,7 @@ import * as glide from "../glide";
 import sortBy from "lodash/sortBy";
 
 export default glide
-    .columnNamed("Sort array")
+    .columnNamed("Sort Array")
     .withCategory("Array")
     .withReleased("direct")
     .withDescription(`Sort the items in an array`)

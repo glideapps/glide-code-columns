@@ -1,7 +1,7 @@
 import * as glide from "../glide";
 
 export default glide
-    .columnNamed("Remove item")
+    .columnNamed("Remove Element")
     .withCategory("Array")
     .withReleased("direct")
     .withDescription(`Remove all instances of an item from an array`)
