@@ -20,15 +20,18 @@ function writeGlideBrandImages() {
 function writeManifests() {
     const columns = fs.readdirSync(`src/columns`).filter(p => p.endsWith(".ts"));
 
-    let manifests: Record<string, Manifest> = {};
+    let manifests: Array<[string, Manifest]> = [];
 
     for (const src of columns) {
         const slug = src.split(".")[0];
         const manifest = require(`../public/${slug}/glide.json`);
-        manifests[slug] = manifest;
+        manifests.push([slug, manifest]);
     }
 
-    fs.writeFileSync(`public/all.json`, JSON.stringify(manifests, null, 2));
+    // Order by category then name
+    manifests.sort(([, a], [, b]) => `${a.category} ${a.name}`.localeCompare(`${b.category} ${b.name}`));
+
+    fs.writeFileSync(`public/all.json`, JSON.stringify(Object.fromEntries(manifests), null, 2));
 }
 
 writeManifests();
