@@ -8,7 +8,7 @@ export default glide
     .withNumberParam("num", "Length")
     .withStringParam("alphabet", "Custom Alphabet")
     .withAuthor("Andrey Sitnik", "https://github.com/ai/nanoid")
-    .withFailingTest({ num: 10, alphabet: "" }, "test")
+    .withFailingTest({ num: 10 }, "test")
     .withAbout(
         `
         A tiny, secure, URL-friendly, unique string ID generator for JavaScript.`
