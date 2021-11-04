@@ -4,7 +4,7 @@ export default glide
     .columnNamed("Replace All")
     .withCategory("Text")
     .withReleased("direct")
-    .withDescription(`Converts string to upper case.`)
+    .withDescription(`Replace every occurrence of some text with some other text.`)
 
     .withRequiredStringParam("text")
     .withRequiredStringParam("x", "Replace This")
