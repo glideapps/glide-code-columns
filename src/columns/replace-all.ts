@@ -12,5 +12,6 @@ export default glide
     .withStringResult()
 
     .withTest({ text: `Hello, world.`, x: "world", y: "universe" }, "Hello, universe.")
+    .withTest({ text: `Hello, world world.`, x: "world", y: "universe" }, "Hello, universe universe.")
 
     .run(({ text, x, y }) => text.replace(new RegExp(x, "g"), y));
