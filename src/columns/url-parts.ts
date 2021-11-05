@@ -2,6 +2,7 @@ import * as glide from "../glide";
 
 const parts: Record<string, (url: URL) => string> = {
     host: x => x.host,
+    pathname: x => x.pathname,
     hostname: x => x.hostname,
     protocol: x => x.protocol,
     search: x => x.search,
@@ -30,6 +31,7 @@ export default glide
 
     .withTest({ uri: "https://www.glideapps.com", part: "hostname" }, "www.glideapps.com")
     .withTest({ uri: "https://www.glideapps.com", part: "protocol" }, "https:")
+    .withTest({ uri: "https://www.glideapps.com/blog", part: "pathname" }, "/blog")
     .withTest({ uri: "https://www.glideapps.com?message=hello%20world", part: "message" }, "hello world")
 
     .run(({ uri, part = "all" }) => {
