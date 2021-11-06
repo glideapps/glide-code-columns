@@ -4,7 +4,7 @@ export default glide
     .columnNamed("Initials")
     .withCategory("Text")
     .withReleased("direct")
-    .withDescription(`Indicates whether text is an email.`)
+    .withDescription(`Get initials for text.`)
 
     .withRequiredStringParam("text")
     .withStringParam("separator")
