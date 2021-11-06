@@ -2,8 +2,6 @@ import * as glide from "../glide";
 
 const gravatar = require("gravatar.js");
 
-const defaults = ["404", "mp", "indenticon", "monsterid", "wavatar", "retro", "robohash", "blank"].sort();
-
 export default glide
     .columnNamed("Photo for Email")
     .withCategory("Image")
@@ -12,16 +10,13 @@ export default glide
 
     .withRequiredStringParam("email")
     .withNumberParam("size")
-    .withStringParam("defaultIcon", `Fallback (${defaults.join(", ")})`)
     .withImageResult()
 
     .withFailingTest({ email: `david@glideapps.com` }, "???")
 
-    .run(async ({ email, size = 200, defaultIcon = "404" }) => {
+    .run(async ({ email, size = 200 }) => {
         try {
-            const response = await gravatar.resolve(email, { defaultIcon, size });
-            console.log({ response });
-            return response;
+            return await gravatar.resolve(email, { defaultIcon: "404", size });
         } catch {
             return undefined;
         }
