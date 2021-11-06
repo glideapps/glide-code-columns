@@ -3,7 +3,7 @@ import * as glide from "../glide";
 const gravatar = require("gravatar.js");
 
 export default glide
-    .columnNamed("Photo for Email")
+    .columnNamed("Email to Photo")
     .withCategory("Image")
     .withReleased("direct")
     .withDescription(`Uses gravatar.com to find a person's photo given their email address.`)
