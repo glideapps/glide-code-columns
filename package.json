@@ -65,6 +65,7 @@
         "dotenv": "^10.0.0",
         "email-validator": "^2.0.4",
         "emoji-from-text": "^1.1.12",
+        "gravatar.js": "^2.0.0",
         "humanize-plus": "^1.8.2",
         "hyperformula": "^1.2.0",
         "iframe-resizer": "^4.3.2",
