@@ -1,6 +1,8 @@
+import { Cache } from "../cache";
 import * as glide from "../glide";
 
 const gravatar = require("gravatar.js");
+const cache = new Cache();
 
 export default glide
     .columnNamed("Email to Photo")
@@ -16,7 +18,7 @@ export default glide
 
     .run(async ({ email, size = 200 }) => {
         try {
-            return await gravatar.resolve(email, { defaultIcon: "404", size });
+            return await cache.getWith(email, () => gravatar.resolve(email, { defaultIcon: "404", size }));
         } catch {
             return undefined;
         }
