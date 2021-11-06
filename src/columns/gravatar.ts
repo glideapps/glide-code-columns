@@ -5,7 +5,7 @@ export default glide
     .columnNamed("Photo for Email")
     .withCategory("Image")
     .withReleased("direct")
-    .withDescription(`Indicates whether text is an email.`)
+    .withDescription(`Uses gravatar.com to find a person's photo given their email address.`)
 
     .withRequiredStringParam("email")
     .withNumberParam("size")
