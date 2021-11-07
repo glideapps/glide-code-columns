@@ -311,6 +311,10 @@ export class Col<TParams = {}, TResult = string> {
         return this.withRequiredParam<string, T>("uri", name, displayName);
     }
 
+    public withRequiredImageParam<T extends string>(name: T, displayName?: string) {
+        return this.withRequiredParam<string, T>("image-uri", name, displayName);
+    }
+
     public withRequiredBooleanParam<T extends string>(name: T, displayName?: string) {
         return this.withRequiredParam<boolean, T>("boolean", name, displayName);
     }
