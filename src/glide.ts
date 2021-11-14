@@ -96,7 +96,7 @@ export type Manifest = {
 };
 
 export type ManifestConvenient<T> = Omit<Manifest, "params" | "icon"> & {
-    params: { [Name in keyof T]: Omit<ColumnParam, "name"> };
+    params: Record<keyof T, Omit<ColumnParam, "name">>;
     icon?: string;
 };
 
@@ -273,12 +273,12 @@ export class Col<TParams = {}, TResult = string> {
         }
         return this.with({
             params: { ...this.definition.params, [name]: { type, displayName } },
-        }) as Col<TParams & { readonly [K in TName]?: TParam }, TResult>;
+        }) as Col<TParams & Partial<Record<TName, TParam>>, TResult>;
     }
 
     public withRequiredParam<TParam, TName extends string>(type: ColumnType, name: TName, displayName?: string) {
         return this.withParam(type, name, displayName).with({}, [name]) as Col<
-            TParams & { readonly [K in TName]: TParam },
+            TParams & Record<TName, TParam>,
             TResult
         >;
     }
