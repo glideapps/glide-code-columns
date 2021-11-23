@@ -30,7 +30,7 @@ async function fetchMetadata(url: string) {
 export default glide
     .columnNamed("URL Metadata")
     .withCategory("Data & APIs")
-    // .withReleased("direct")
+    .withReleased("direct")
     .withDescription(`Scrape metadata for a URL.`)
 
     .withRequiredURIParam("url")
