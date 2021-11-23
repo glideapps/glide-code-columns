@@ -66,6 +66,7 @@
         "email-validator": "^2.0.4",
         "emoji-from-text": "^1.1.12",
         "gravatar.js": "^2.0.0",
+        "html-metadata": "^1.7.1",
         "humanize-plus": "^1.8.2",
         "hyperformula": "^1.2.0",
         "iframe-resizer": "^4.3.2",

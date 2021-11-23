@@ -1,7 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
+import scrape from "html-metadata";
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     const url = req.query.url as string;
-    const html = await fetch(url).then(x => x.text());
-    res.status(200).send(html);
+    const meta = await scrape(url);
+    res.status(200).json(meta);
 };

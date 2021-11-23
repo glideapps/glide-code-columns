@@ -1,32 +1,7 @@
 import { Cache } from "../cache";
 import * as glide from "../glide";
 
-import * as cheerio from "cheerio";
-
 const cache = new Cache();
-
-const defaultPart = "all";
-
-const parts = {
-    [defaultPart]: JSON.stringify,
-    title: x => x.title,
-    description: x => x.description,
-    image: x => x.image,
-};
-
-async function fetchMetadata(url: string) {
-    const route = `/api/fetch?url=${encodeURIComponent(url)}`;
-    const html = await cache.getWith(url, () => fetch(route).then(x => x.text()));
-    const $ = cheerio.load(html);
-
-    const title = $("title").text();
-    const description = $(`meta[property="og:description"]`).attr("content");
-    const image = $(`meta[property="og:image"]`).attr("content");
-    const type = $(`meta[property="og:type"]`).attr("content");
-
-    const result = { title, description, image, type };
-    return result;
-}
 
 export default glide
     .columnNamed("URL Metadata")
@@ -35,17 +10,15 @@ export default glide
     .withDescription(`Scrape metadata for a URL.`)
 
     .withRequiredURIParam("url")
-    .withStringParam("part", `Parts (${Object.keys(parts).join(", ")})`)
 
     .withStringResult()
 
     .withFailingTest({ url: `https://www.glideapps.com` }, "???")
 
-    .run(async ({ url, part = defaultPart }) => {
+    .run(async ({ url }) => {
         try {
-            const toPart = parts[part];
-            if (toPart === undefined) return undefined;
-            return toPart(await fetchMetadata(url));
+            const meta = await cache.fetch(`/api/fetch-metadata?url=${encodeURIComponent(url)}`);
+            return JSON.stringify(meta);
         } catch {
             return undefined;
         }
