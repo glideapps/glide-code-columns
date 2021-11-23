@@ -15,7 +15,8 @@ const parts = {
 };
 
 async function fetchMetadata(url: string) {
-    const html = await cache.getWith(url, () => fetch(url).then(x => x.text()));
+    const route = `/api/fetch?url=${encodeURIComponent(url)}`;
+    const html = await cache.getWith(url, () => fetch(route).then(x => x.text()));
     const $ = cheerio.load(html);
 
     const title = $("title").text();
@@ -30,7 +31,7 @@ async function fetchMetadata(url: string) {
 export default glide
     .columnNamed("URL Metadata")
     .withCategory("Data & APIs")
-    .withReleased("direct")
+    .withReleased("sandboxed")
     .withDescription(`Scrape metadata for a URL.`)
 
     .withRequiredURIParam("url")
