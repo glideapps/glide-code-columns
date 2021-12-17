@@ -1,4 +1,5 @@
 import startCase from "lodash/startCase";
+import { getIconForManifest } from "./icons";
 
 export type PrimitiveColumnType = "string" | "primitive" | "number" | "boolean" | "image-uri" | "date-time" | "uri";
 
@@ -68,6 +69,7 @@ export type Category =
     | "Machine Learning"
     | "Glide"
     | "General"
+    | "Array"
     | "Number"
     | "Encoding"
     | "Text"
@@ -75,6 +77,7 @@ export type Category =
     | "Image"
     | "Fun"
     | "Date & Time"
+    | "Cryptography"
     | "Code";
 
 type Released = "direct" | "sandboxed";
@@ -93,14 +96,16 @@ export type Manifest = {
 };
 
 export type ManifestConvenient<T> = Omit<Manifest, "params" | "icon"> & {
-    params: { [Name in keyof T]: Omit<ColumnParam, "name"> };
-    icon?: "glide" | string;
+    params: Record<keyof T, Omit<ColumnParam, "name">>;
+    icon?: string;
 };
+
+type Test<TParams> = { params: Partial<TParams>; expectedResult: any; allowFailure?: boolean };
 
 export type ColumnDefinition<TColumnParams = {}> = ManifestConvenient<TColumnParams> & {
     run: Column;
     example?: Partial<TColumnParams>;
-    tests?: Array<{ params: Partial<TColumnParams>; expectedResult: any }>;
+    tests?: Test<TColumnParams>[];
 };
 
 export function column<TColumnParams>(manifest: ColumnDefinition<TColumnParams>): ColumnDefinition<TColumnParams> & {
@@ -117,40 +122,11 @@ export function column<TColumnParams>(manifest: ColumnDefinition<TColumnParams>)
     };
 }
 
-const glideIcon = `
-        <svg
-          width="48"
-          height="48"
-          viewBox="0 0 26 27"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M0 14.85L14.3 0V7.29C14.3 11.4653 11.0406 14.85 7.02 14.85H0Z"
-            fill="currentColor"
-          />
-          <path
-            d="M11.7 19.71C11.7 15.5347 14.9594 12.15 18.98 12.15H26L11.7 27V19.71Z"
-            fill="currentColor"
-          />
-        </svg>
-    `;
-
-const defaultIcon = `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M12.0002 34.828L2.58624 25.414C1.80524 24.633 1.80524 23.367 2.58624 22.586L12.0002 13.172L14.8292 16L6.82924 24L14.8292 32L12.0002 34.828Z" fill="currentColor"/>
-<path d="M36.0004 34.828L33.1714 32L41.1714 24L33.1714 16L36.0004 13.172L45.4144 22.586C46.1954 23.367 46.1954 24.633 45.4144 25.414L36.0004 34.828Z" fill="currentColor"/>
-<path d="M26.5485 5.57617L17.5723 41.4553L21.4527 42.4261L30.4289 6.54697L26.5485 5.57617Z" fill="currentColor"/>
-</svg>`;
-
 export function toStrictManifest(convenient: ManifestConvenient<any>): Manifest {
     // We carefully pick out just the props in manifest, because more
     // could come in from the component.
     const { name, category, released, description, author, result, params, about, video } = convenient;
-
-    let { icon = defaultIcon } = convenient;
-    if (icon === "glide") {
-        icon = glideIcon;
-    }
+    const icon = getIconForManifest(convenient);
 
     return {
         name,
@@ -177,9 +153,9 @@ const defaultDefinition: ColumnDefinition = {
     author: "Glide <hello@glideapps.com>",
     params: {},
     result: { type: "string" },
-    icon: defaultIcon,
+    icon: undefined,
     about: undefined,
-    video: undefined,
+    video: "https://www.loom.com/share/39ab84c058e14adea79ca4442f450351",
     tests: [],
     async run() {
         return undefined;
@@ -207,7 +183,8 @@ export class Col<TParams = {}, TResult = string> {
     }
 
     public withCategory(category: Manifest["category"]) {
-        return this.with({ category });
+        const { icon } = this.definition;
+        return this.with({ category, icon: getIconForManifest({ icon, category }) });
     }
 
     public withReleased(released: "direct" | "sandboxed") {
@@ -242,6 +219,14 @@ export class Col<TParams = {}, TResult = string> {
         });
     }
 
+    public withFailingTest(params: Partial<TParams>, expectedResult: TResult | undefined) {
+        const { tests = [] } = this.definition;
+
+        return this.with({
+            tests: [...tests, { params, expectedResult, allowFailure: true }],
+        });
+    }
+
     public withResult<T>(type: ColumnType) {
         return this.with({ result: { type } }) as Col<TParams, T>;
     }
@@ -250,8 +235,16 @@ export class Col<TParams = {}, TResult = string> {
         return this.withResult<string>("string");
     }
 
+    public withDateResult() {
+        return this.withResult<Date>("date-time");
+    }
+
     public withPrimitiveResult() {
         return this.withResult<string>("primitive");
+    }
+
+    public withImageResult() {
+        return this.withResult<string>("image-uri");
     }
 
     public withNumberResult() {
@@ -280,18 +273,22 @@ export class Col<TParams = {}, TResult = string> {
         }
         return this.with({
             params: { ...this.definition.params, [name]: { type, displayName } },
-        }) as Col<TParams & { readonly [K in TName]?: TParam }, TResult>;
+        }) as Col<TParams & Partial<Record<TName, TParam>>, TResult>;
     }
 
     public withRequiredParam<TParam, TName extends string>(type: ColumnType, name: TName, displayName?: string) {
         return this.withParam(type, name, displayName).with({}, [name]) as Col<
-            TParams & { readonly [K in TName]: TParam },
+            TParams & Record<TName, TParam>,
             TResult
         >;
     }
 
     public withPrimitiveParam<T extends string>(name: T, displayName?: string) {
         return this.withParam<any, T>("primitive", name, displayName);
+    }
+
+    public withBooleanParam<T extends string>(name: T, displayName?: string) {
+        return this.withParam<boolean, T>("boolean", name, displayName);
     }
 
     public withStringParam<T extends string>(name: T, displayName?: string) {
@@ -310,6 +307,14 @@ export class Col<TParams = {}, TResult = string> {
         return this.withRequiredParam<any, T>("primitive", name, displayName);
     }
 
+    public withRequiredURIParam<T extends string>(name: T, displayName?: string) {
+        return this.withRequiredParam<string, T>("uri", name, displayName);
+    }
+
+    public withRequiredBooleanParam<T extends string>(name: T, displayName?: string) {
+        return this.withRequiredParam<boolean, T>("boolean", name, displayName);
+    }
+
     public withRequiredStringParam<T extends string>(name: T, displayName?: string) {
         return this.withRequiredParam<string, T>("string", name, displayName);
     }
@@ -326,12 +331,20 @@ export class Col<TParams = {}, TResult = string> {
         return this.withParam<string[], T>({ kind: "array", items: "string" }, name, displayName);
     }
 
+    public withRequiredStringArrayParam<T extends string>(name: T, displayName?: string) {
+        return this.withRequiredParam<string[], T>({ kind: "array", items: "string" }, name, displayName);
+    }
+
     public withNumberArrayParam<T extends string>(name: T, displayName?: string) {
         return this.withParam<number[], T>({ kind: "array", items: "number" }, name, displayName);
     }
 
     public withPrimitiveArrayParam<T extends string>(name: T, displayName?: string) {
         return this.withParam<PrimitiveValue[], T>({ kind: "array", items: "primitive" }, name, displayName);
+    }
+
+    public withRequiredPrimitiveArrayParam<T extends string>(name: T, displayName?: string) {
+        return this.withRequiredParam<PrimitiveValue[], T>({ kind: "array", items: "primitive" }, name, displayName);
     }
 
     public withExample(example: TParams) {

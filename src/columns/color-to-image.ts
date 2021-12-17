@@ -10,8 +10,9 @@ function getSvgForColor(color: string) {
 }
 
 export default glide
-    .columnNamed("Image from color")
+    .columnNamed("Image from Color")
     .withCategory("Image")
+    .withReleased("direct")
     .withDescription("Get an image based on a CSS color.")
     .withAbout("You can use any valid [CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color).")
     .withReleased("direct")

@@ -45,5 +45,4 @@ export default glide.column({
     about: `
       Given a URL to a Glide app or page, this column produces a link to the icon for that app or page.
     `,
-    icon: "glide",
 });

@@ -5,6 +5,7 @@ import repeat from "lodash/repeat";
 export default glide
     .columnNamed("Repeat Text")
     .withCategory("Text")
+    .withReleased("direct")
     .withDescription(`Repeats the given string n times.`)
     .withAuthor("lodash Project", "lodash.com")
 
