@@ -18,11 +18,11 @@ async function loadImage(uri) {
     });
 }
 
-const run: glide.Column = async imageUri => {
+const run = async ({ uri }: { uri: string }) => {
     // Load the model.
     const model = await mobilenet.load({ version, alpha });
 
-    var img = await loadImage(imageUri);
+    var img = await loadImage(uri);
 
     // Classify the image.
     const predictions = await model.classify(img);
