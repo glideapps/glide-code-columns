@@ -5,7 +5,6 @@ import wiki from "wikijs";
 export default glide
     .columnNamed("Wikipedia")
     .withCategory("Data & APIs")
-    .withReleased("sandboxed")
     .withDescription(`Get a relevant wikipedia article for search term`)
     .withStringResult()
     .withRequiredPrimitiveParam("searchTerm", "Wikipedia Search Term")
