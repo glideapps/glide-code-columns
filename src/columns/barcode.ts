@@ -1,60 +1,39 @@
 import * as glide from "../glide";
-import { url } from "../urls";
 
-// TODO support more from https://www.ruggedtabletpc.com/barcode-generator
+import JsBarcode from "jsbarcode";
+import svgToMiniDataURI from "mini-svg-data-uri";
 
-enum Symbology {
-    UPC_A = "UPC_A",
+function barcode(props: { content: string }): string {
+    const { content } = props;
+
+    const parent = document.createElement("div");
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    parent.appendChild(svg);
+
+    JsBarcode(svg, content);
+    return svgToMiniDataURI(parent.innerHTML);
 }
 
-const run: glide.Column = async (dataValue, sizeValue) => {
-    const { value: content } = dataValue;
-    const { value: size = 500 } = sizeValue;
+export default glide
+    .columnNamed("Barcode")
+    .withCategory("Image")
+    .withReleased("direct")
+    .withDescription("Generate barcodes.")
+    .withAuthor("lindell", "github.com/lindell/JsBarcode")
+    .withAbout(
+        `
+        JsBarcode is a barcode generator written in JavaScript. It supports multiple barcode formats and works in browsers and with Node.js.
+    
+    Learn more at [lindell.me/JsBarcode](https://lindell.me/JsBarcode/).
+    `
+    )
 
-    if (content === undefined) {
-        return undefined;
-    }
+    .withRequiredStringParam("content")
+    .withImageResult()
 
-    return url(`https://mobiledemand-barcode.azurewebsites.net/barcode/image`, {
-        content,
-        size,
-        symbology: Symbology.UPC_A,
-        format: "png",
-        text: true,
-    });
-};
+    .withFailingTest(
+        { content: "0123456890" },
+        "data:image/svg+xml,%3csvg width='200px' height='142px' x='0px' y='0px' viewBox='0 0 200 142' xmlns='http://www.w3.org/2000/svg' version='1.1' style='transform: translate(0%2c0)'%3e%3crect x='0' y='0' width='200' height='142' style='fill:white%3b'%3e%3c/rect%3e%3cg transform='translate(10%2c 10)' style='fill:black%3b'%3e%3crect x='0' y='0' width='4' height='100'%3e%3c/rect%3e%3crect x='6' y='0' width='2' height='100'%3e%3c/rect%3e%3crect x='12' y='0' width='6' height='100'%3e%3c/rect%3e%3crect x='22' y='0' width='4' height='100'%3e%3c/rect%3e%3crect x='30' y='0' width='4' height='100'%3e%3c/rect%3e%3crect x='36' y='0' width='4' height='100'%3e%3c/rect%3e%3crect x='44' y='0' width='6' height='100'%3e%3c/rect%3e%3crect x='52' y='0' width='4' height='100'%3e%3c/rect%3e%3crect x='58' y='0' width='6' height='100'%3e%3c/rect%3e%3crect x='66' y='0' width='2' height='100'%3e%3c/rect%3e%3crect x='70' y='0' width='6' height='100'%3e%3c/rect%3e%3crect x='78' y='0' width='4' height='100'%3e%3c/rect%3e%3crect x='88' y='0' width='2' height='100'%3e%3c/rect%3e%3crect x='98' y='0' width='2' height='100'%3e%3c/rect%3e%3crect x='104' y='0' width='4' height='100'%3e%3c/rect%3e%3crect x='110' y='0' width='4' height='100'%3e%3c/rect%3e%3crect x='116' y='0' width='8' height='100'%3e%3c/rect%3e%3crect x='126' y='0' width='4' height='100'%3e%3c/rect%3e%3crect x='132' y='0' width='2' height='100'%3e%3c/rect%3e%3crect x='138' y='0' width='2' height='100'%3e%3c/rect%3e%3crect x='144' y='0' width='8' height='100'%3e%3c/rect%3e%3crect x='154' y='0' width='4' height='100'%3e%3c/rect%3e%3crect x='164' y='0' width='6' height='100'%3e%3c/rect%3e%3crect x='172' y='0' width='2' height='100'%3e%3c/rect%3e%3crect x='176' y='0' width='4' height='100'%3e%3c/rect%3e%3ctext style='font: 20px monospace' text-anchor='middle' x='90' y='122'%3e0123456890%3c/text%3e%3c/g%3e%3c/svg%3e"
+    )
 
-export default glide.column({
-    name: "Barcode",
-    category: "Image",
-    description: "Generates barcode images",
-    about: `
-      Uses [ruggedtabletpc.com](https://ruggedtabletpc.com) to generate images of barcodes.
-
-      Only supports 11-digit barcodes for now.
-    `,
-    author: "David Siegel <david@glideapps.com>",
-    params: {
-        content: {
-            displayName: "Content",
-            type: "primitive",
-        },
-        size: {
-            displayName: "Size",
-            type: "number",
-        },
-    },
-    example: { content: 12345678910, size: 250 },
-    result: { type: "image-uri" },
-    run,
-    icon: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M3 4H1V44H3V4Z" fill="currentColor"/>
-    <path d="M47 4H45V44H47V4Z" fill="currentColor"/>
-    <path d="M8 4H6V39H8V4Z" fill="currentColor"/>
-    <path d="M42 4H40V39H42V4Z" fill="currentColor"/>
-    <path d="M37 4H35V39H37V4Z" fill="currentColor"/>
-    <path d="M18 4H11V39H18V4Z" fill="currentColor"/>
-    <path d="M33 4H27V39H33V4Z" fill="currentColor"/>
-    <path d="M24 4H21V39H24V4Z" fill="currentColor"/>
-    </svg>`,
-});
+    .run(({ content }) => barcode({ content }));

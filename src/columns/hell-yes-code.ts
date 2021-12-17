@@ -18,7 +18,7 @@ const run: glide.Column = async (code, ...params) => {
 };
 
 export default glide.column({
-    name: "Hell Yes-Code",
+    name: "JavaScript",
     category: "Code",
     released: "sandboxed",
     description: "Runs JavaScript",

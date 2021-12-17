@@ -1,34 +1,40 @@
 {
-    "compilerOptions": {
-        "target": "ES2015",
-        "module": "commonjs",
-        "lib": ["es6", "DOM"],
-        "declaration": true,
-        "removeComments": false,
-        "stripInternal": true,
-        "alwaysStrict": true,
-        "noImplicitAny": false,
-        "noImplicitThis": true,
-        "strictNullChecks": true,
-        "allowJs": true,
-        "skipLibCheck": true,
-        "strict": false,
-        "forceConsistentCasingInFileNames": true,
-        "esModuleInterop": true,
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "noEmit": true,
-        "jsx": "preserve",
-        "allowSyntheticDefaultImports": true
-    },
-    "include": [
-        "next-env.d.ts",
-        "src/**/*.ts",
-        "src/**/*.tsx",
-        "script/manifest.ts",
-        "src/pages-old/hyperformula",
-        "src/pages-old/hell-yes-code"
+  "compilerOptions": {
+    "target": "ES2015",
+    "module": "commonjs",
+    "lib": [
+      "es6",
+      "DOM"
     ],
-    "exclude": ["node_modules"]
+    "declaration": true,
+    "removeComments": false,
+    "stripInternal": true,
+    "alwaysStrict": true,
+    "noImplicitAny": false,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
+    "allowSyntheticDefaultImports": true,
+    "incremental": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "script/manifest.ts",
+    "src/pages-old/hyperformula",
+    "src/pages-old/hell-yes-code"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
