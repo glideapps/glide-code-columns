@@ -40,7 +40,6 @@ export default glide
     .columnNamed("Classify Images")
     .withCategory("Machine Learning")
     .withRequiredStringParam("uri")
-    .withReleased("direct")
     .withDescription("Returns an array of most likely predictions and their confidences")
     .withFailingTest({ uri: "https://images.unsplash.com/photo-1495360010541-f48722b34f7d" }, undefined)
     .run(run);
