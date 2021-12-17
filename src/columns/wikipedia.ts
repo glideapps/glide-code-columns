@@ -13,9 +13,9 @@ export default glide
     .run(async ({ searchTerm }) => {
         try {
             const result = await wiki().page(searchTerm);
-            if (result === undefined || result === null) return "";
-            return (result as any).fullurl ?? "";
+            if (result === undefined || result === null) return undefined;
+            return (result as any).fullurl ?? undefined;
         } catch {
-            return "";
+            return undefined;
         }
     });
