@@ -5,12 +5,9 @@ import FormulaParser, {FormulaHelpers, Types, FormulaError, MAX_ROW, MAX_COLUMN}
 var data: any[][] = [];
 
 const parser = new FormulaParser({
-    // retrieve cell value
     onCell: ({_, row, col}) => {
         return data[row - 1][col - 1];
     },
-
-    // retrieve range values
     onRange: (ref: { from: { row: any; col: any; }; to: { row: number; col: number; }; }) => {
         const arr: any[][] = [];
         for (let row = ref.from.row; row <= ref.to.row; row++) {
@@ -26,14 +23,13 @@ const parser = new FormulaParser({
     }
 });
 
-const run = async (formula: { value: undefined; } | undefined, ...params: any[]) => {
+const run = async (formula, ...params) => {
     if (formula === undefined || formula.value === undefined) return undefined;
     data = params.map(p => [p.value]);
     const position = {row: 1, col: 1, sheet: 0};
     try {
         return parser.parse(formula.value, position);
     } catch(err) {}
-
 };
 
 export default glide.column({
