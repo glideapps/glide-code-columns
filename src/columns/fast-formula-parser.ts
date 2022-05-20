@@ -7,7 +7,13 @@ const run: glide.Column = (formula, ...params) => {
 
     const parser = new FormulaParser({
         onCell: ({_, row, col}) => {
-            return data[row - 1][col - 1];
+            
+            try {
+                const res = JSON.parse(data[row - 1][col - 1]);
+                return typeof res === 'number' ? res : undefined;
+            } catch(err) {
+                return undefined;
+            }
         },
         onRange: (ref: { from: { row: number; col: number; }; to: { row: number; col: number; }; }) => {
             const arr: any[][] = [];
@@ -15,11 +21,17 @@ const run: glide.Column = (formula, ...params) => {
                 const innerArr: any[] = [];
                 if (data[row - 1]) {
                     for (let col = ref.from.col; col <= ref.to.col; col++) {
-                        innerArr.push(data[row - 1][col - 1]);
+                        try {
+                            const res = JSON.parse(data[row - 1][col - 1]);
+                            innerArr.push(typeof res === 'number' ? res : undefined);
+                        } catch(err) {
+                            innerArr.push(undefined);
+                        }
                     }
                 }
                 arr.push(innerArr);
             }
+            console.log(arr);
             return arr;
         }
     });
