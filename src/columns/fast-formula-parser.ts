@@ -2,18 +2,26 @@ import * as glide from "../glide";
 
 import FormulaParser from 'fast-formula-parser';
 
+function convertCell(cell: any): any {
+    try {
+        if (typeof cell === 'string') {
+            const res = JSON.parse(cell);
+            if (typeof res === 'number') {
+                return res
+            }
+        }
+        return cell;
+    } catch(err) {
+        return cell;
+    }
+}
+
 const run: glide.Column = (formula, ...params) => {
     const data: any[][] = params.map(p => [p.value]);
 
     const parser = new FormulaParser({
         onCell: ({_, row, col}) => {
-            
-            try {
-                const res = JSON.parse(data[row - 1][col - 1]);
-                return typeof res === 'number' ? res : undefined;
-            } catch(err) {
-                return undefined;
-            }
+            return convertCell(data[row - 1][col - 1]);
         },
         onRange: (ref: { from: { row: number; col: number; }; to: { row: number; col: number; }; }) => {
             const arr: any[][] = [];
@@ -21,12 +29,7 @@ const run: glide.Column = (formula, ...params) => {
                 const innerArr: any[] = [];
                 if (data[row - 1]) {
                     for (let col = ref.from.col; col <= ref.to.col; col++) {
-                        try {
-                            const res = JSON.parse(data[row - 1][col - 1]);
-                            innerArr.push(typeof res === 'number' ? res : undefined);
-                        } catch(err) {
-                            innerArr.push(undefined);
-                        }
+                        innerArr.push(convertCell(data[row - 1][col - 1]))
                     }
                 }
                 arr.push(innerArr);
@@ -91,5 +94,7 @@ export default glide.column({
         { params: { formula: 'A1 + A2', A1: 1, A2: 2 }, expectedResult: 3 },
         { params: { formula: 'SUM(A1:A3)', A1: 1, A2: 2, A3: 3 }, expectedResult: 6 },
         { params: { formula: 'AVERAGE(1, A1)', A1: 3 }, expectedResult: 2 },
+        { params: { formula: 'SUM(A1, A2)', A1: 4, A2: '4'}, expectedResult: 8},
+        { params: { formula: 'SUM(A1, A2, 5)', A1: '5', A2: '10'}, expectedResult: 20},
     ]
 })
