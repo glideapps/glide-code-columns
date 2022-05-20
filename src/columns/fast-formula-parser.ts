@@ -31,7 +31,6 @@ const run: glide.Column = (formula, ...params) => {
                 }
                 arr.push(innerArr);
             }
-            console.log(arr);
             return arr;
         }
     });
