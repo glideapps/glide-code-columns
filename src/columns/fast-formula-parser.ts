@@ -2,14 +2,14 @@ import * as glide from "../glide";
 
 import FormulaParser from 'fast-formula-parser';
 
-const run = async (formula, ...params) => {
-    var data: any[][] = [];
+const run: glide.Column = (formula, ...params) => {
+    const data: any[][] = params.map(p => [p.value]);
 
     const parser = new FormulaParser({
         onCell: ({_, row, col}) => {
             return data[row - 1][col - 1];
         },
-        onRange: (ref: { from: { row: any; col: any; }; to: { row: number; col: number; }; }) => {
+        onRange: (ref: { from: { row: number; col: number; }; to: { row: number; col: number; }; }) => {
             const arr: any[][] = [];
             for (let row = ref.from.row; row <= ref.to.row; row++) {
                 const innerArr: any[] = [];
@@ -24,8 +24,7 @@ const run = async (formula, ...params) => {
         }
     });
 
-    if (formula === undefined || formula.value === undefined) return undefined;
-    data = params.map(p => [p.value]);
+    if (formula?.value === undefined) return undefined;
     const position = {row: 1, col: 1, sheet: 0};
     try {
         return parser.parse(formula.value, position);
