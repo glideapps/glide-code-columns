@@ -1,29 +1,29 @@
 import * as glide from "../glide";
 
-import FormulaParser, {FormulaHelpers, Types, FormulaError, MAX_ROW, MAX_COLUMN} from 'fast-formula-parser';
-
-var data: any[][] = [];
-
-const parser = new FormulaParser({
-    onCell: ({_, row, col}) => {
-        return data[row - 1][col - 1];
-    },
-    onRange: (ref: { from: { row: any; col: any; }; to: { row: number; col: number; }; }) => {
-        const arr: any[][] = [];
-        for (let row = ref.from.row; row <= ref.to.row; row++) {
-            const innerArr: any[] = [];
-            if (data[row - 1]) {
-                for (let col = ref.from.col; col <= ref.to.col; col++) {
-                    innerArr.push(data[row - 1][col - 1]);
-                }
-            }
-            arr.push(innerArr);
-        }
-        return arr;
-    }
-});
+import FormulaParser from 'fast-formula-parser';
 
 const run = async (formula, ...params) => {
+    var data: any[][] = [];
+
+    const parser = new FormulaParser({
+        onCell: ({_, row, col}) => {
+            return data[row - 1][col - 1];
+        },
+        onRange: (ref: { from: { row: any; col: any; }; to: { row: number; col: number; }; }) => {
+            const arr: any[][] = [];
+            for (let row = ref.from.row; row <= ref.to.row; row++) {
+                const innerArr: any[] = [];
+                if (data[row - 1]) {
+                    for (let col = ref.from.col; col <= ref.to.col; col++) {
+                        innerArr.push(data[row - 1][col - 1]);
+                    }
+                }
+                arr.push(innerArr);
+            }
+            return arr;
+        }
+    });
+
     if (formula === undefined || formula.value === undefined) return undefined;
     data = params.map(p => [p.value]);
     const position = {row: 1, col: 1, sheet: 0};
@@ -37,7 +37,7 @@ export default glide.column({
     category: "Code",
     description: "Run Excel formulas",
     about: `Uses [lesterlyu.github.io/fast-formula-parser](lesterlyu.github.io/fast-formula-parser) to evaluate Excel formulas.`,
-    author: "Lester Lyu <lesterlyu.github.io/fast-formula-parser>",
+    author: "Chris Ozgo <chris.ozgo@heyglide.com>",
     params: {
         formula: {
             displayName: "Formula",
