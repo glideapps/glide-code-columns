@@ -46,8 +46,9 @@ const run: glide.Column = (formula, ...params) => {
 };
 
 export default glide.column({
-    name: "Fast Formula Parser",
+    name: "Excel Formula",
     category: "Code",
+    released: "direct",
     description: "Run Excel formulas",
     about: `Uses [lesterlyu.github.io/fast-formula-parser](lesterlyu.github.io/fast-formula-parser) to evaluate Excel formulas.`,
     author: "Chris Ozgo <chris.ozgo@heyglide.com>",
