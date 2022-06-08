@@ -1,17 +1,17 @@
 import * as glide from "../glide";
 
-import FormulaParser from 'fast-formula-parser';
+import FormulaParser from "fast-formula-parser";
 
 function convertCell(cell: any): any {
     try {
-        if (typeof cell === 'string') {
+        if (typeof cell === "string") {
             const res = JSON.parse(cell);
-            if (typeof res === 'number') {
-                return res
+            if (typeof res === "number") {
+                return res;
             }
         }
         return cell;
-    } catch(err) {
+    } catch (err) {
         return cell;
     }
 }
@@ -20,29 +20,29 @@ const run: glide.Column = (formula, ...params) => {
     const data: any[][] = params.map(p => [p.value]);
 
     const parser = new FormulaParser({
-        onCell: ({_, row, col}) => {
+        onCell: ({ _, row, col }) => {
             return convertCell(data[row - 1][col - 1]);
         },
-        onRange: (ref: { from: { row: number; col: number; }; to: { row: number; col: number; }; }) => {
+        onRange: (ref: { from: { row: number; col: number }; to: { row: number; col: number } }) => {
             const arr: any[][] = [];
             for (let row = ref.from.row; row <= ref.to.row; row++) {
                 const innerArr: any[] = [];
                 if (data[row - 1]) {
                     for (let col = ref.from.col; col <= ref.to.col; col++) {
-                        innerArr.push(convertCell(data[row - 1][col - 1]))
+                        innerArr.push(convertCell(data[row - 1][col - 1]));
                     }
                 }
                 arr.push(innerArr);
             }
             return arr;
-        }
+        },
     });
 
     if (formula?.value === undefined) return undefined;
-    const position = {row: 1, col: 1, sheet: 0};
+    const position = { row: 1, col: 1, sheet: 0 };
     try {
         return parser.parse(formula.value, position);
-    } catch(err) {}
+    } catch (err) {}
 };
 
 export default glide.column({
@@ -60,7 +60,6 @@ export default glide.column({
         A1: {
             displayName: "A1",
             type: "primitive",
-            
         },
         A2: {
             displayName: "A2",
@@ -80,19 +79,19 @@ export default glide.column({
         },
     },
     result: {
-        type: "primitive"
+        type: "primitive",
     },
     example: {
-        formula: 'SUM(A1, A2)',
+        formula: "SUM(A1, A2)",
         A1: 1,
         A2: 2,
     },
     run,
     tests: [
-        { params: { formula: 'A1 + A2', A1: 1, A2: 2 }, expectedResult: 3 },
-        { params: { formula: 'SUM(A1:A3)', A1: 1, A2: 2, A3: 3 }, expectedResult: 6 },
-        { params: { formula: 'AVERAGE(1, A1)', A1: 3 }, expectedResult: 2 },
-        { params: { formula: 'SUM(A1, A2)', A1: 4, A2: '4'}, expectedResult: 8},
-        { params: { formula: 'SUM(A1, A2, 5)', A1: '5', A2: '10'}, expectedResult: 20},
-    ]
-})
+        { params: { formula: "A1 + A2", A1: 1, A2: 2 }, expectedResult: 3 },
+        { params: { formula: "SUM(A1:A3)", A1: 1, A2: 2, A3: 3 }, expectedResult: 6 },
+        { params: { formula: "AVERAGE(1, A1)", A1: 3 }, expectedResult: 2 },
+        { params: { formula: "SUM(A1, A2)", A1: 4, A2: "4" }, expectedResult: 8 },
+        { params: { formula: "SUM(A1, A2, 5)", A1: "5", A2: "10" }, expectedResult: 20 },
+    ],
+});
