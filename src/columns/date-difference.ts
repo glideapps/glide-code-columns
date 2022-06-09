@@ -7,7 +7,9 @@ export default glide
     .columnNamed("Date Difference")
     .withCategory("Date & Time")
     .withReleased("direct")
-    .withDescription("Get the number of days, weeks, months, or years between dates.")
+    .withDescription(
+        "Get the number of days, weeks, months, or years between dates. Accuracy is casual by default, but you can use 'longterm' accuracy for a pedantic 400-year calendar."
+    )
 
     .withRequiredDateParam("startDate")
     .withRequiredDateParam("endDate")
