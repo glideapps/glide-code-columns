@@ -17,6 +17,7 @@ export default glide
 
     .withTest({ startDate: "6/1/2022", endDate: "6/2/2022", unit: "days" }, 1)
     .withTest({ startDate: "6/2/2022", endDate: "6/1/2022", unit: "days" }, -1)
+    .withTest({ startDate: "5/1/2022", endDate: "5/15/2022", unit: "weeks" }, 2)
 
     .run(({ startDate, endDate, unit = "days", conversionAccuracy = "casual" }) => {
         const start = DateTime.fromJSDate(new Date(startDate));
@@ -24,5 +25,5 @@ export default glide
         const diff = end.diff(start, unit as DurationUnit, {
             conversionAccuracy: conversionAccuracy as ConversionAccuracy,
         });
-        return diff.days;
+        return diff[unit];
     });
