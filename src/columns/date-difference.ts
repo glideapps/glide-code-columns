@@ -1,8 +1,7 @@
 import * as glide from "../glide";
 
-import { DATEDIF } from "fast-formula-parser/formulas/functions/date";
-
-const units = { days: "d", months: "m", years: "y", md: "md", yd: "yd", ym: "ym" };
+import { DateTime, DurationObjectUnits, DurationUnit } from "luxon";
+const units: Array<keyof DurationObjectUnits> = ["years", "months", "weeks", "days"];
 
 export default glide
     .columnNamed("Date Difference")
@@ -16,5 +15,11 @@ export default glide
     .withNumberResult()
 
     .withTest({ startDate: "6/1/2022", endDate: "6/2/2022", unit: "days" }, 1)
+    .withTest({ startDate: "6/2/2022", endDate: "6/1/2022", unit: "days" }, -1)
 
-    .run(({ startDate, endDate, unit = "days" }) => DATEDIF(startDate, endDate, units[unit] ?? unit));
+    .run(({ startDate, endDate, unit = "days" }) => {
+        const start = DateTime.fromJSDate(new Date(startDate));
+        const end = DateTime.fromJSDate(new Date(endDate));
+        const diff = end.diff(start, unit as DurationUnit);
+        return diff.days;
+    });
