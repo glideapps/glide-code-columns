@@ -1,7 +1,7 @@
 import * as glide from "../glide";
 
 import { DateTime, DurationObjectUnits, DurationUnit } from "luxon";
-const units: Array<keyof DurationObjectUnits> = ["years", "months", "weeks", "days"];
+const units: Array<keyof DurationObjectUnits> = ["days", "weeks", "months", "years"];
 
 export default glide
     .columnNamed("Date Difference")
@@ -11,7 +11,7 @@ export default glide
 
     .withRequiredDateParam("startDate")
     .withRequiredDateParam("endDate")
-    .withStringParam("unit", `Unit (${Object.keys(units).join(", ")})`)
+    .withStringParam("unit", `Unit (${units.join(", ")})`)
     .withNumberResult()
 
     .withTest({ startDate: "6/1/2022", endDate: "6/2/2022", unit: "days" }, 1)
