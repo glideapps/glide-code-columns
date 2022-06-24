@@ -50,7 +50,7 @@ export default glide.column({
     category: "Code",
     released: "direct",
     description: "Run Excel formulas",
-    about: `Uses [lesterlyu.github.io/fast-formula-parser](lesterlyu.github.io/fast-formula-parser) to evaluate Excel formulas.`,
+    about: `Uses [lesterlyu.github.io/fast-formula-parser](https://lesterlyu.github.io/fast-formula-parser) to evaluate Excel formulas.`,
     author: "Chris Ozgo <chris.ozgo@heyglide.com>",
     params: {
         formula: {
