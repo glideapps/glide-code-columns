@@ -12,6 +12,9 @@ export default glide
     // .withTest({ parameter: query }, false)
 
     .run(({ parameter }) => {
+        console.log("Getting query parameter", parameter);
+        console.log("window.location", window.location);
+        console.log("window.location.search", window.location.search);
         const params = new URLSearchParams(window.location.search);
         return params.get(parameter) ?? undefined;
     });
