@@ -35,8 +35,9 @@ export default glide
     .withTest({ uri: "https://www.glideapps.com?message=hello%20world", part: "message" }, "hello world")
 
     .run(({ uri, part = "all" }) => {
+        const realUri = uri === "current" ? window.location.href : uri;
         try {
-            const url = new URL(uri);
+            const url = new URL(realUri);
             const extractPart = parts[part];
             if (extractPart !== undefined) {
                 return extractPart(url);

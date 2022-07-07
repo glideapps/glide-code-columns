@@ -307,6 +307,10 @@ export class Col<TParams = {}, TResult = string> {
         return this.withRequiredParam<any, T>("primitive", name, displayName);
     }
 
+    public withURIParam<T extends string>(name: T, displayName?: string) {
+        return this.withParam<string, T>("uri", name, displayName);
+    }
+
     public withRequiredURIParam<T extends string>(name: T, displayName?: string) {
         return this.withRequiredParam<string, T>("uri", name, displayName);
     }
