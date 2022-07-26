@@ -1,6 +1,6 @@
 import * as glide from "../glide";
 
-import FormulaParser from "fast-formula-parser";
+import FormulaParser, { FormulaHelpers, Types } from "fast-formula-parser";
 
 function convertCell(cell: any): any {
     try {
@@ -20,6 +20,12 @@ const run: glide.Column = (formula, ...params) => {
     const data: any[][] = params.map(p => [p.value]);
 
     const parser = new FormulaParser({
+        functions: {
+            UPPER: text => {
+                text = FormulaHelpers.accept(text, Types.STRING);
+                return text.toUpperCase();
+            },
+        },
         onCell: ({ _, row, col }) => {
             return convertCell(data[row - 1][col - 1]);
         },
@@ -93,5 +99,6 @@ export default glide.column({
         { params: { formula: "AVERAGE(1, A1)", A1: 3 }, expectedResult: 2 },
         { params: { formula: "SUM(A1, A2)", A1: 4, A2: "4" }, expectedResult: 8 },
         { params: { formula: "SUM(A1, A2, 5)", A1: "5", A2: "10" }, expectedResult: 20 },
+        { params: { formula: 'UPPER("hello")' }, expectedResult: "HELLO" },
     ],
 });
