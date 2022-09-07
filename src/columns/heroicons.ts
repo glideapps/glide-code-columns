@@ -4,6 +4,7 @@ import React from "react";
 import ReactDOMServer from "react-dom/server";
 import * as Solid from "@heroicons/react/24/solid";
 import * as Outline from "@heroicons/react/24/outline";
+import * as Mini from "@heroicons/react/20/solid";
 
 import svgToMiniDataURI from "mini-svg-data-uri";
 import camelCase from "lodash/camelCase";
@@ -140,7 +141,7 @@ export default glide
     .withDescription("Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS.")
 
     .withRequiredStringParam("name", "Name (See heroicons.com)")
-    .withStringParam("style", "Style (solid, outline)")
+    .withStringParam("style", "Style (solid, outline, mini)")
     .withNumberParam("size")
 
     .withStringParam("color")
@@ -173,12 +174,12 @@ export default glide
         }) => {
             const name = iconsRenamedInV2[legacyName] ?? legacyName;
             const properName = name.endsWith("Icon") ? name : upperFirst(camelCase(name)) + "Icon";
-            const collection = style === "solid" ? Solid : Outline;
+            const collection = { solid: Solid, outline: Outline, mini: Mini }[style] ?? Solid;
             let component = collection[properName] ?? collection[defaultIcon];
 
             if (component === undefined) return undefined;
 
-            const baseSize = style === "solid" ? 20 : 24;
+            const baseSize = style === "mini" ? 20 : 24;
             const inset = baseSize * (padding / size);
             const icon = React.createElement(component, {
                 color,
