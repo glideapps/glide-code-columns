@@ -10,7 +10,7 @@ import svgToMiniDataURI from "mini-svg-data-uri";
 import camelCase from "lodash/camelCase";
 import upperFirst from "lodash/upperFirst";
 
-const defaultIcon = "Beaker";
+const defaultIcon = "QuestionMarkCircleIcon";
 
 const iconsRenamedInV2 = {
     adjustments: "adjustments-vertical",
