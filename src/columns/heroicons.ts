@@ -2,8 +2,8 @@ import * as glide from "../glide";
 
 import React from "react";
 import ReactDOMServer from "react-dom/server";
-import * as Solid from "@heroicons/react/solid";
-import * as Outline from "@heroicons/react/outline";
+import * as Solid from "@heroicons/react/24/solid";
+import * as Outline from "@heroicons/react/24/outline";
 
 import svgToMiniDataURI from "mini-svg-data-uri";
 import camelCase from "lodash/camelCase";
