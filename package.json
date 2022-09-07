@@ -51,7 +51,7 @@
         "ts-jest": "^27.0.5",
         "ts-node": "^10.2.1",
         "typescript": "^4.4.2",
-        "vercel": "^23.1.2"
+        "vercel": "^28.2.2"
     },
     "dependencies": {
         "@heroicons/react": "^2.0.10",
@@ -87,6 +87,6 @@
         "rrule": "^2.6.8",
         "seedrandom": "^3.0.5",
         "wink-eng-lite-web-model": "^1.2.2",
-        "wink-nlp": "^1.8.1"
+        "wink-nlp": "^1.12.0"
     }
 }
