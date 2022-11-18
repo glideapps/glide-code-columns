@@ -27,76 +27,67 @@ function convertDateToString(x: unknown): unknown {
     return x;
 }
 
-const run: glide.Column = async (code, ...params) => {
-    if (code?.value === undefined) return undefined;
+const run: glide.Column = (k1, v1, k2, v2, k3, v3) => {
+    const obj: any = {};
 
-    const functionCode = `async (p1,p2,p3)=>{ ${code.value} }`;
+    if (k1.value !== undefined) {
+        obj[k1.value.toString()] = v1.value;
+    }
 
-    // TODO https://esbuild.github.io/content-types/#direct-eval
-    const fn = (0, eval)(functionCode);
+    if (k2.value !== undefined) {
+        obj[k2.value.toString()] = v2.value;
+    }
 
-    functions.set(code.value.toString(), fn);
+    if (k3.value !== undefined) {
+        obj[k3.value.toString()] = v3.value;
+    }
 
-    const result = await fn(...params.map(p => p.value));
-    return convertDateToString(result);
+    return JSON.stringify(obj);
 };
 
 export default glide.column({
-    name: "JavaScript",
+    name: "Make JSON Object",
     category: "Code",
-    released: "sandboxed",
-    description: "Runs JavaScript",
-    about: `Inludes [lodash](https://lodash.com/docs).`,
-    author: "Mark Probst <mark@glideapps.com>",
-    video: "https://www.youtube.com/watch?v=c-I5S_zTwAc",
+    released: "direct",
+    description: "Returns a JSON Object String",
+    author: "Ian Leatherbury <ian@glideapps.com>",    
     params: {
-        code: {
-            displayName: "JavaScript code",
+        k1: {
+            displayName: "k1",
             type: "string",
         },
-        p1: {
-            displayName: "p1",
+        v1: {
+            displayName: "v1",
             type: "primitive",
         },
-        p2: {
-            displayName: "p2",
+        k2: {
+            displayName: "k2",
+            type: "string",
+        },
+        v2: {
+            displayName: "v2",
             type: "primitive",
         },
-        p3: {
-            displayName: "p3",
+        k3: {
+            displayName: "k3",
+            type: "string",
+        },
+        v3: {
+            displayName: "v3",
             type: "primitive",
         },
     },
     example: {
-        code: `return "Hell " + p1.replace("no", "yes") + "!".repeat(p2)`,
-        p1: `no-code`,
-        p2: 5,
+        k1: `no-code`,
+        v1: 5,
     },
     result: { type: "primitive" },
     run,
     tests: [
-        { params: { code: "return p1.toString();", p1: 20 }, expectedResult: "20" },
+        { params: {}, expectedResult: "{}" },
         {
-            params: { code: "return [p1.toString(), p2, p3.toString()];", p1: 21, p2: true, p3: 23 },
-            expectedResult: ["21", true, "23"],
-        },
-        { params: { code: "return p2['thing']", p2: { thing: 2022, stuff: false } }, expectedResult: 2022 },
-
-        {
-            params: { code: "return new Date(1650485510214);" },
-            expectedResult: "2022-04-20T20:11:50.214Z",
-        },
-        {
-            params: { code: "return { subkey: new Date('2022-04-20T20:13:29.514Z') } " },
-            expectedResult: { subkey: "2022-04-20T20:13:29.514Z" },
-        },
-        {
-            params: { code: "return [1, new Date(1650485510214), true];" },
-            expectedResult: [1, "2022-04-20T20:11:50.214Z", true],
-        },
-        {
-            params: { code: "return new Date(NaN)" },
-            expectedResult: "",
+            params: { k1: "foo", v1: "bar" },
+            expectedResult: `{"foo":"bar"}`,
         },
     ],
     icon: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
