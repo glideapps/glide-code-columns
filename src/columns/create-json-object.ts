@@ -3,16 +3,16 @@ import * as glide from "../glide";
 const run: glide.Column = (k1, v1, k2, v2, k3, v3) => {
     const obj: any = {};
 
-    if (k1.value !== undefined) {
-        obj[k1.value.toString()] = v1.value;
+    if (k1?.value !== undefined) {
+        obj[k1.value.toString()] = v1?.value;
     }
 
-    if (k2.value !== undefined) {
-        obj[k2.value.toString()] = v2.value;
+    if (k2?.value !== undefined) {
+        obj[k2.value.toString()] = v2?.value;
     }
 
-    if (k3.value !== undefined) {
-        obj[k3.value.toString()] = v3.value;
+    if (k3?.value !== undefined) {
+        obj[k3.value.toString()] = v3?.value;
     }
 
     return JSON.stringify(obj);
@@ -23,7 +23,7 @@ export default glide.column({
     category: "Code",
     released: "direct",
     description: "Returns a JSON Object String",
-    author: "Ian Leatherbury <ian@glideapps.com>",    
+    author: "Ian Leatherbury <ian@glideapps.com>",
     params: {
         k1: {
             displayName: "k1",
