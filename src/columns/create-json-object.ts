@@ -1,6 +1,31 @@
 import * as glide from "../glide";
 
-const run: glide.Column = (k1, v1, k2, v2, k3, v3) => {
+const run: glide.Column = (
+    k1,
+    v1,
+    k2,
+    v2,
+    k3,
+    v3,
+    k4,
+    v4,
+    k5,
+    v5,
+    k6,
+    v6,
+    k7,
+    v7,
+    k8,
+    v8,
+    k9,
+    v9,
+    k10,
+    v10,
+    k11,
+    v11,
+    k12,
+    v12
+) => {
     const obj: any = {};
 
     if (k1?.value !== undefined) {
@@ -13,6 +38,41 @@ const run: glide.Column = (k1, v1, k2, v2, k3, v3) => {
 
     if (k3?.value !== undefined) {
         obj[k3.value.toString()] = v3?.value;
+    }
+
+    if (k4?.value !== undefined) {
+        obj[k4.value.toString()] = v4?.value;
+    }
+
+    if (k5?.value !== undefined) {
+        obj[k5.value.toString()] = v5?.value;
+    }
+
+    if (k6?.value !== undefined) {
+        obj[k6.value.toString()] = v6?.value;
+    }
+
+    if (k7?.value !== undefined) {
+        obj[k7.value.toString()] = v7?.value;
+    }
+
+    if (k8?.value !== undefined) {
+        obj[k8.value.toString()] = v8?.value;
+    }
+
+    if (k9?.value !== undefined) {
+        obj[k9.value.toString()] = v9?.value;
+    }
+
+    if (k10?.value !== undefined) {
+        obj[k10.value.toString()] = v10?.value;
+    }
+
+    if (k11?.value !== undefined) {
+        obj[k11.value.toString()] = v11?.value;
+    }
+    if (k12?.value !== undefined) {
+        obj[k12.value.toString()] = v12?.value;
     }
 
     return JSON.stringify(obj);
@@ -49,6 +109,78 @@ export default glide.column({
             displayName: "v3",
             type: "primitive",
         },
+        k4: {
+            displayName: "k4",
+            type: "string",
+        },
+        v4: {
+            displayName: "v4",
+            type: "primitive",
+        },
+        k5: {
+            displayName: "k5",
+            type: "string",
+        },
+        v5: {
+            displayName: "v5",
+            type: "primitive",
+        },
+        k6: {
+            displayName: "k6",
+            type: "string",
+        },
+        v6: {
+            displayName: "v6",
+            type: "primitive",
+        },
+        k7: {
+            displayName: "k7",
+            type: "string",
+        },
+        v7: {
+            displayName: "v7",
+            type: "primitive",
+        },
+        k8: {
+            displayName: "k8",
+            type: "string",
+        },
+        v8: {
+            displayName: "v8",
+            type: "primitive",
+        },
+        k9: {
+            displayName: "k9",
+            type: "string",
+        },
+        v9: {
+            displayName: "v9",
+            type: "primitive",
+        },
+        k10: {
+            displayName: "k10",
+            type: "string",
+        },
+        v10: {
+            displayName: "v10",
+            type: "primitive",
+        },
+        k11: {
+            displayName: "k11",
+            type: "string",
+        },
+        v11: {
+            displayName: "v11",
+            type: "primitive",
+        },
+        k12: {
+            displayName: "k12",
+            type: "string",
+        },
+        v12: {
+            displayName: "v12",
+            type: "primitive",
+        },        
     },
     example: {
         k1: `no-code`,
