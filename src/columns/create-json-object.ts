@@ -1,31 +1,4 @@
-require("lodash");
-
 import * as glide from "../glide";
-
-const functions = new Map<string, any>();
-
-function convertDateToString(x: unknown): unknown {
-    if (x === null || x === undefined) return x;
-    if (Array.isArray(x)) {
-        return x.map(convertDateToString);
-    }
-    if (x instanceof Date) {
-        try {
-            return x.toISOString();
-        } catch {
-            // This happens for invalid dates
-            return "";
-        }
-    }
-    if (typeof x === "object" && x !== null) {
-        const kvs = {};
-        for (const [key, val] of Object.entries(x)) {
-            kvs[key] = convertDateToString(val);
-        }
-        return kvs;
-    }
-    return x;
-}
 
 const run: glide.Column = (k1, v1, k2, v2, k3, v3) => {
     const obj: any = {};
