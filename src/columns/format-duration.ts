@@ -18,6 +18,8 @@ export default glide
     .withRequiredStringParam("format", "Format (e.g. mm:ss)")
 
     .withTest({ seconds: 100, format: "mm:ss" }, "01:40")
+    .withTest({ seconds: 1, format: "ss" }, "01")
+    .withTest({ seconds: 1000000000, format: "yy:MM:dd:hh:mm:ss" }, "31:08:19:01:46:40")
 
     .run(({ seconds, format }) => {
         const duration = Duration.fromMillis(seconds * 1000);
