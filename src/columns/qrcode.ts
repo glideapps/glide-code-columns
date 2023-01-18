@@ -33,22 +33,27 @@ export default glide
 
     .withRequiredPrimitiveParam("content")
     .withNumberParam("size")
+    .withNumberParam("padding")
+    .withStringParam("color")
+    .withStringParam("background")
+    .withStringParam("ecl")
     .withImageResult()
 
     .withFailingTest({ content: "https://wwww.glideapps.com" }, "way too big to put here")
 
-    .run(({ content, size = 250 }) => {
+    .run(({ content, size = 250, padding = 4, color = "#000000", background = "#FFFFFF", ecl = "M" }) => {
+        if (ecl !== "L" && ecl !== "M" && ecl !== "Q" && ecl !== "H") {
+            return undefined;
+        }
         const svg = new QRCode({
             content,
             width: size,
             height: size,
             join: true,
-
-            // TODO support these parameters
-            // padding: 4,
-            // color: "#000000",
-            // background: "#ffffff",
-            // ecl: "M",
+            padding,
+            color,
+            background,
+            ecl,
         }).svg();
 
         return svgToMiniDataURI(svg);

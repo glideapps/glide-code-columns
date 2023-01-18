@@ -61,8 +61,9 @@ export async function listen(event: MessageEvent<any>, main: Column) {
         response.error = error;
     }
 
-    // TODO fix this type
-    (event.source?.postMessage as any)(response, "*");
+    if (event.source?.postMessage) {
+        event.source.postMessage([response, "*"]);
+    }
 }
 
 export type Category =
