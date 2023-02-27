@@ -47,8 +47,8 @@ export default glide.column({
     },
     result: { type: "primitive" },
     example: {
-        url: "https://api.icndb.com/jokes/random/3",
-        query: `.value[0].joke`,
+        url: "https://api.chucknorris.io/jokes/random",
+        query: `.value`,
     },
     run,
 });
