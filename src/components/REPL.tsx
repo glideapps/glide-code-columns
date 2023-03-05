@@ -47,7 +47,7 @@ const REPL: React.VFC<ColumnDefinition<any>> = props => {
                             onChange={e => {
                                 // TODO make this better
                                 // We need to coerce the value depending on the parameter type.
-                                let value: any = e.target.value;
+                                let value: string | undefined | number = e.target.value;
                                 if (value === "") {
                                     value = undefined;
                                 } else if (p.type === "number" || p.type === "primitive") {
