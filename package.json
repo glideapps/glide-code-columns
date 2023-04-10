@@ -77,7 +77,7 @@
         "lorem-ipsum": "^2.0.4",
         "luxon": "^2.0.2",
         "marked": "^3.0.8",
-        "mathjs": "^9.5.1",
+        "mathjs": "^11.8.0",
         "mini-svg-data-uri": "^1.4.4",
         "nanoid": "^3.1.30",
         "next": "^11.1.2",
