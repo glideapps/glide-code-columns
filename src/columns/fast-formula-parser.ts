@@ -47,7 +47,15 @@ const run: glide.Column = (formula, ...params) => {
     if (formula?.value === undefined) return undefined;
     const position = { row: 1, col: 1, sheet: 0 };
     try {
-        return parser.parse(formula.value, position);
+        const v = parser.parse(formula.value, position);
+        // fast-formula-parser can return non-primitives such as arrays, but
+        // also error objects, none of which we want to, or are allowed to,
+        // return.
+        if (typeof v === "number" || typeof v === "string" || typeof v === "boolean") {
+            return v;
+        } else {
+            return undefined;
+        }
     } catch (err) {}
 };
 
@@ -100,5 +108,9 @@ export default glide.column({
         { params: { formula: "SUM(A1, A2)", A1: 4, A2: "4" }, expectedResult: 8 },
         { params: { formula: "SUM(A1, A2, 5)", A1: "5", A2: "10" }, expectedResult: 20 },
         { params: { formula: 'UPPER("hello")' }, expectedResult: "HELLO" },
+        {
+            params: { formula: 'IF(ISBLANK(A1),"",REPLACE(A1,FIND(" ",A1),1,""))', A1: "Unknown" },
+            expectedResult: undefined,
+        },
     ],
 });
