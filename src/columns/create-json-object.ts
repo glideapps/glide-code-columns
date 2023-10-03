@@ -80,6 +80,7 @@ const run: glide.Column = (
 
 export default glide.column({
     name: "Make JSON Object",
+    deprecated: true,
     category: "Code",
     released: "direct",
     description: "Returns a JSON Object String",
