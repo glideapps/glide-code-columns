@@ -126,7 +126,7 @@ export function column<TColumnParams>(manifest: ColumnDefinition<TColumnParams>)
 export function toStrictManifest(convenient: ManifestConvenient<any>): Manifest {
     // We carefully pick out just the props in manifest, because more
     // could come in from the component.
-    const { name, category, released, description, author, result, params, about, video } = convenient;
+    const { name, category, released, description, author, result, params, about, video, deprecated } = convenient;
     const icon = getIconForManifest(convenient);
 
     return {
@@ -139,6 +139,7 @@ export function toStrictManifest(convenient: ManifestConvenient<any>): Manifest 
         about,
         icon,
         video,
+        deprecated,
         params: Object.entries(params).map(([name, param]) => ({
             name,
             ...param,
