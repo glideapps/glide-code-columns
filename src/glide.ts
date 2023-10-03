@@ -85,6 +85,7 @@ type Released = "direct" | "sandboxed";
 export type Manifest = {
     name: string;
     category: Category;
+    deprecated?: boolean;
     released?: Released;
     description: string;
     author: string;
