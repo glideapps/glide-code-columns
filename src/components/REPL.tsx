@@ -13,6 +13,7 @@ const REPL: React.VFC<ColumnDefinition<any>> = props => {
         run,
         tests = [],
         example = tests.length > 0 ? tests[0].params : {},
+        deprecated
     } = props;
 
     const [result, setResult] = useState<any>();
@@ -37,6 +38,12 @@ const REPL: React.VFC<ColumnDefinition<any>> = props => {
 
     return (
         <div className="p-5">
+            {deprecated ? (
+                <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4" role="alert">
+                    <p className="font-bold">Deprecated Column</p>
+                    <p className="my-2">Glide apps that already use this column will continue to work, but the column will no longer be available for new configurations.</p>
+                </div>
+            ) : null}
             <div className="space-y-6">
                 {Object.values(params).map((p, i) => (
                     <div key={i}>
