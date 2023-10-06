@@ -3,6 +3,9 @@
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
+    "engines": {
+        "node": "18.x"
+    },
     "scripts": {
         "manifest": "script/build.sh",
         "build": "npm test && npm run manifest && next build",

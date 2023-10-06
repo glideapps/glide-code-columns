@@ -8,6 +8,6 @@ public/**/glide.json
 .vercel
 build
 public/**/*.json
-public/**/*.js*
+public/**
 public/glide-brand-image/images.json
 out
