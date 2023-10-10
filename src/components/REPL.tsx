@@ -41,7 +41,7 @@ const REPL: React.VFC<ColumnDefinition<any>> = props => {
             {deprecated ? (
                 <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4" role="alert">
                     <p className="font-bold">Deprecated Column</p>
-                    <p className="my-2">This column will continue to work in existing apps for some time, but the column will no longer be available for new configurations.</p>
+                    <p className="my-2">This column has been deprecated. The feature will continue to work in apps that are currently using it, but new apps will be unable to add this column.</p>
                 </div>
             ) : null}
             <div className="space-y-6">
