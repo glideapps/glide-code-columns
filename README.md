@@ -1,8 +1,8 @@
 # Glide Code Columns
 
-- [column.sh/jq](https://column.sh/jq): transform JSON with [jq queries](https://stedolan.github.io/jq/tutorial/).
+Code columns are an open source way to create computations around your data in [Glide Apps](https://glideapps.com) 
 
-## Development
+## Develop
 
 ```
 $ npm install
