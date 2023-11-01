@@ -1,0 +1,44 @@
+{
+  "name": "Excel Formula",
+  "category": "Code",
+  "released": "direct",
+  "description": "Run Excel formulas",
+  "author": "Chris Ozgo <chris.ozgo@heyglide.com>",
+  "result": {
+    "type": "primitive"
+  },
+  "about": "Uses [lesterlyu.github.io/fast-formula-parser](https://lesterlyu.github.io/fast-formula-parser) to evaluate Excel formulas.",
+  "icon": "\n<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"48\" height=\"48\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">\n  <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4\" />\n</svg>\n    ",
+  "params": [
+    {
+      "name": "formula",
+      "displayName": "Formula",
+      "type": "string"
+    },
+    {
+      "name": "A1",
+      "displayName": "A1",
+      "type": "primitive"
+    },
+    {
+      "name": "A2",
+      "displayName": "A2",
+      "type": "primitive"
+    },
+    {
+      "name": "A3",
+      "displayName": "A3",
+      "type": "primitive"
+    },
+    {
+      "name": "A4",
+      "displayName": "A4",
+      "type": "primitive"
+    },
+    {
+      "name": "A5",
+      "displayName": "A5",
+      "type": "primitive"
+    }
+  ]
+}

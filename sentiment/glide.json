@@ -1,0 +1,29 @@
+{
+  "name": "Text Sentiment",
+  "category": "Data & APIs",
+  "description": "Is this comment positive or negative? Find out the tone.",
+  "author": "twinword inc. <help@twinword.com>",
+  "result": {
+    "type": "primitive"
+  },
+  "about": "\n    Subscribe and get an API key at [rapidapi.com/twinword/api/sentiment-analysis](https://rapidapi.com/twinword/api/sentiment-analysis/).\n  ",
+  "icon": "\n<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"48\" height=\"48\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">\n  <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z\" />\n</svg>\n",
+  "video": "https://www.loom.com/share/39ab84c058e14adea79ca4442f450351",
+  "params": [
+    {
+      "name": "text",
+      "type": "string",
+      "displayName": "Text"
+    },
+    {
+      "name": "apiKey",
+      "type": "string",
+      "displayName": "API Key"
+    },
+    {
+      "name": "interpretation",
+      "type": "string",
+      "displayName": "Result (sentiment, score, full)"
+    }
+  ]
+}

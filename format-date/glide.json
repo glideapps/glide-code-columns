@@ -1,0 +1,25 @@
+{
+  "name": "Format Date",
+  "category": "Date & Time",
+  "released": "direct",
+  "description": "Powerful date & time formatting with luxon.",
+  "author": "luxon <https://moment.github.io/luxon>",
+  "result": {
+    "type": "string"
+  },
+  "about": "\n    Learn about date formatting in [luxon's documentation](https://moment.github.io/luxon/#/formatting?id=table-of-tokens).\n  ",
+  "icon": "\n<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"48\" height=\"48\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">\n  <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z\" />\n</svg>\n",
+  "video": "https://www.loom.com/share/39ab84c058e14adea79ca4442f450351",
+  "params": [
+    {
+      "name": "date",
+      "type": "date-time",
+      "displayName": "Date"
+    },
+    {
+      "name": "format",
+      "type": "string",
+      "displayName": "Format"
+    }
+  ]
+}

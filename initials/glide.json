@@ -1,0 +1,29 @@
+{
+  "name": "Initials",
+  "category": "Text",
+  "released": "direct",
+  "description": "Get initials for text.",
+  "author": "Glide <hello@glideapps.com>",
+  "result": {
+    "type": "string"
+  },
+  "icon": "\n<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"48\" height=\"48\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">\n  <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z\" />\n</svg>\n",
+  "video": "https://www.loom.com/share/39ab84c058e14adea79ca4442f450351",
+  "params": [
+    {
+      "name": "text",
+      "type": "string",
+      "displayName": "Text"
+    },
+    {
+      "name": "separator",
+      "type": "string",
+      "displayName": "Separator"
+    },
+    {
+      "name": "ignoreLowercase",
+      "type": "boolean",
+      "displayName": "Ignore Lowercase"
+    }
+  ]
+}

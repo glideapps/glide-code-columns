@@ -1,0 +1,26 @@
+{
+  "name": "Fetch JSON",
+  "category": "Data & APIs",
+  "released": "sandboxed",
+  "description": "Fetch and optionally transform JSON",
+  "author": "David Siegel <david@glideapps.com>",
+  "result": {
+    "type": "primitive"
+  },
+  "about": "\n      Given a URL, this column fetches JSON data at that URL. An optional [jq query](https://stedolan.github.io/jq/manual/#Basicfilters) transforms the JSON.\n    ",
+  "icon": "\n<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"48\" height=\"48\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">\n  <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z\" />\n</svg>\n",
+  "video": "https://www.youtube.com/watch?v=EvpwhGeiH0U",
+  "deprecated": true,
+  "params": [
+    {
+      "name": "url",
+      "displayName": "URL",
+      "type": "string"
+    },
+    {
+      "name": "query",
+      "displayName": "JQ Query",
+      "type": "string"
+    }
+  ]
+}

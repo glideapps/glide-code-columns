@@ -1,0 +1,24 @@
+{
+  "name": "Urbit Name",
+  "category": "Fun",
+  "description": "Galaxy, star, and planet names in the Urbit computational metaverse.",
+  "author": "urbit Project <urbit.org>",
+  "result": {
+    "type": "string"
+  },
+  "about": "\n    This is just a playful implementation of Urbit names. Don't expect reliable or faithful\n    results when compared to official implementation.\n\n\n    More details [on Stack Overflow](https://stackoverflow.com/questions/38139453/how-are-urbit-phonetic-names-encoded).\n  ",
+  "icon": "\n  <svg width=\"48\" height=\"48\" viewBox=\"0 0 32 32\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n    <circle cx=\"16\" cy=\"16\" r=\"13\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/>\n    <path d=\"M22 14.0488H19.6306C19.4522 15.0976 18.9936 15.7317 18.1783 15.7317C16.7006 15.7317 15.8599 14 13.5669 14C11.3503 14 10.1783 15.3659 10 17.9756H12.3694C12.5478 16.9024 13.0064 16.2683 13.8471 16.2683C15.3248 16.2683 16.1146 18 18.4586 18C20.6242 18 21.8217 16.6341 22 14.0488Z\" fill=\"currentColor\"/>\n  </svg>\n  ",
+  "video": "https://www.youtube.com/watch?v=M04AKTCDavc",
+  "params": [
+    {
+      "name": "value",
+      "type": "primitive",
+      "displayName": "Value"
+    },
+    {
+      "name": "kind",
+      "type": "string",
+      "displayName": "Kind (galaxy, star, planet)"
+    }
+  ]
+}

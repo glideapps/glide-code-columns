@@ -1,0 +1,18 @@
+{
+  "name": "Glide App Icon",
+  "category": "Glide",
+  "description": "Gets a Glide app's icon",
+  "author": "David Siegel <david@glideapps.com>",
+  "result": {
+    "type": "image-uri"
+  },
+  "about": "\n      Given a URL to a Glide app or page, this column produces a link to the icon for that app or page.\n    ",
+  "icon": "\n        <svg\n          width=\"48\"\n          height=\"48\"\n          viewBox=\"0 0 26 27\"\n          fill=\"none\"\n          xmlns=\"http://www.w3.org/2000/svg\"\n        >\n          <path\n            d=\"M0 14.85L14.3 0V7.29C14.3 11.4653 11.0406 14.85 7.02 14.85H0Z\"\n            fill=\"currentColor\"\n          />\n          <path\n            d=\"M11.7 19.71C11.7 15.5347 14.9594 12.15 18.98 12.15H26L11.7 27V19.71Z\"\n            fill=\"currentColor\"\n          />\n        </svg>\n    ",
+  "params": [
+    {
+      "name": "url",
+      "displayName": "Glide URL",
+      "type": "uri"
+    }
+  ]
+}

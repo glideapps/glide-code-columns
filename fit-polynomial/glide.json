@@ -1,0 +1,34 @@
+{
+  "name": "Interpolate (Polynomial)",
+  "category": "Number",
+  "description": "Given some example points, interpolate the value for an input. This uses a polynomial to exactly fit all the given example points.",
+  "author": "Glide <hello@glideapps.com>",
+  "result": {
+    "type": "number"
+  },
+  "icon": "\n<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"48\"\n          height=\"48\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">\n  <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z\" />\n</svg>\n",
+  "video": "https://www.loom.com/share/39ab84c058e14adea79ca4442f450351",
+  "params": [
+    {
+      "name": "input",
+      "type": "number",
+      "displayName": "Input"
+    },
+    {
+      "name": "fit_inputs",
+      "type": {
+        "kind": "array",
+        "items": "number"
+      },
+      "displayName": "Example Inputs"
+    },
+    {
+      "name": "fit_outputs",
+      "type": {
+        "kind": "array",
+        "items": "number"
+      },
+      "displayName": "Example Outputs"
+    }
+  ]
+}
