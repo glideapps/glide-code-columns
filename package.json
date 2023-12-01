@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "manifest": "script/build.sh",
-        "build": "npm test && npm run manifest && next build",
+        "build": "NODE_OPTIONS=--openssl-legacy-provider npm test && npm run manifest && NODE_OPTIONS=--openssl-legacy-provider next build",
         "export": "npm run manifest",
         "dev": "jest --watchAll & next dev",
         "start": "npm run dev",
@@ -54,7 +54,7 @@
         "vercel": "^28.2.2"
     },
     "dependencies": {
-        "@heroicons/react": "^2.0.10",
+        "@heroicons/react": "^2.0.16",
         "@jcubic/lips": "^1.0.0-beta.14",
         "axios": "^0.23.0",
         "bayes": "^1.0.0",
