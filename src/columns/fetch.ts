@@ -27,6 +27,7 @@ const run: glide.Column = async (url, query) => {
 
 export default glide.column({
     name: "Fetch JSON",
+    deprecated: true,
     category: "Data & APIs",
     released: "sandboxed",
     description: "Fetch and optionally transform JSON",
