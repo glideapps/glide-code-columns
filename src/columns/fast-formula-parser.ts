@@ -2,6 +2,8 @@ import * as glide from "../glide";
 
 import FormulaParser, { FormulaHelpers, Types } from "fast-formula-parser";
 
+let data: any[][] = [];
+
 function convertCell(cell: any): any {
     try {
         if (typeof cell === "string") {
@@ -16,38 +18,50 @@ function convertCell(cell: any): any {
     }
 }
 
-const run: glide.Column = (formula, ...params) => {
-    const data: any[][] = params.map(p => [p.value]);
-
-    const parser = new FormulaParser({
-        functions: {
-            UPPER: text => {
-                text = FormulaHelpers.accept(text, Types.STRING);
-                return text.toUpperCase();
-            },
+// We keep a single instance of this because it caches parsed formulas. Making
+// a new one for each invocation makes running lots of these about 2 order of
+// magnitude slower.
+const parser = new FormulaParser({
+    functions: {
+        UPPER: text => {
+            text = FormulaHelpers.accept(text, Types.STRING);
+            return text.toUpperCase();
         },
-        onCell: ({ _, row, col }) => {
-            return convertCell(data[row - 1][col - 1]);
-        },
-        onRange: (ref: { from: { row: number; col: number }; to: { row: number; col: number } }) => {
-            const arr: any[][] = [];
-            for (let row = ref.from.row; row <= ref.to.row; row++) {
-                const innerArr: any[] = [];
-                if (data[row - 1]) {
-                    for (let col = ref.from.col; col <= ref.to.col; col++) {
-                        innerArr.push(convertCell(data[row - 1][col - 1]));
-                    }
+    },
+    onCell: ({ _, row, col }) => {
+        return convertCell(data[row - 1][col - 1]);
+    },
+    onRange: (ref: { from: { row: number; col: number }; to: { row: number; col: number } }) => {
+        const arr: any[][] = [];
+        for (let row = ref.from.row; row <= ref.to.row; row++) {
+            const innerArr: any[] = [];
+            if (data[row - 1]) {
+                for (let col = ref.from.col; col <= ref.to.col; col++) {
+                    innerArr.push(convertCell(data[row - 1][col - 1]));
                 }
-                arr.push(innerArr);
             }
-            return arr;
-        },
-    });
+            arr.push(innerArr);
+        }
+        return arr;
+    },
+});
 
+const run: glide.Column = (formula, ...params) => {
     if (formula?.value === undefined) return undefined;
+
+    data = params.map(p => [p.value]);
+
     const position = { row: 1, col: 1, sheet: 0 };
     try {
-        return parser.parse(formula.value, position);
+        const v = parser.parse(formula.value, position);
+        // fast-formula-parser can return non-primitives such as arrays, but
+        // also error objects, none of which we want to, or are allowed to,
+        // return.
+        if (typeof v === "number" || typeof v === "string" || typeof v === "boolean") {
+            return v;
+        } else {
+            return undefined;
+        }
     } catch (err) {}
 };
 
@@ -100,5 +114,9 @@ export default glide.column({
         { params: { formula: "SUM(A1, A2)", A1: 4, A2: "4" }, expectedResult: 8 },
         { params: { formula: "SUM(A1, A2, 5)", A1: "5", A2: "10" }, expectedResult: 20 },
         { params: { formula: 'UPPER("hello")' }, expectedResult: "HELLO" },
+        {
+            params: { formula: 'IF(ISBLANK(A1),"",REPLACE(A1,FIND(" ",A1),1,""))', A1: "Unknown" },
+            expectedResult: undefined,
+        },
     ],
 });
