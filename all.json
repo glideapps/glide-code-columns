@@ -651,7 +651,7 @@
       {
         "name": "part",
         "type": "string",
-        "displayName": "Part (all, hash, host, hostname, pathname, protocol, search, or parameter name)"
+        "displayName": "Part (all, filename, hash, host, hostname, pathname, protocol, search, or parameter name)"
       }
     ]
   },
