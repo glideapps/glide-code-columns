@@ -7,6 +7,7 @@ const parts: Record<string, (url: URL) => string> = {
     protocol: x => x.protocol,
     search: x => x.search,
     hash: x => x.hash,
+    filename: x => x.pathname.split("/").pop() ?? "",
     all: getAllParts,
 };
 
@@ -33,6 +34,10 @@ export default glide
     .withTest({ uri: "https://www.glideapps.com", part: "protocol" }, "https:")
     .withTest({ uri: "https://www.glideapps.com/blog", part: "pathname" }, "/blog")
     .withTest({ uri: "https://www.glideapps.com?message=hello%20world", part: "message" }, "hello world")
+
+    .withTest({ uri: "https://www.glideapps.com/blog/post/123", part: "filename" }, "123")
+    .withTest({ uri: "https://www.glideapps.com/blog/post/123.pdf", part: "filename" }, "123.pdf")
+    .withTest({ uri: "https://www.glideapps.com/blog/post/123.pdf?message=hello%20world", part: "filename" }, "123.pdf")
 
     .run(({ uri, part = "all" }) => {
         try {
