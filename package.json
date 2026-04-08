@@ -55,7 +55,7 @@
         "vercel": "^28.2.2"
     },
     "dependencies": {
-        "@heroicons/react": "^2.0.16",
+        "@heroicons/react": "^2.2.0",
         "@jcubic/lips": "^1.0.0-beta.14",
         "axios": "^0.23.0",
         "bayes": "^1.0.0",
