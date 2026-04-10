@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "manifest": "script/build.sh",
-        "build": "NODE_OPTIONS=--openssl-legacy-provider npm test && npm run manifest && NODE_OPTIONS=--openssl-legacy-provider next build",
+        "build": "npm test && npm run manifest && NODE_OPTIONS=--openssl-legacy-provider next build",
         "export": "npm run manifest",
         "dev": "jest --watchAll & next dev",
         "start": "npm run dev",
@@ -38,7 +38,7 @@
         "@types/luxon": "^2.0.5",
         "@types/marked": "^3.0.2",
         "@types/qrcode-svg": "^1.1.1",
-        "@types/react": "^17.0.91",
+        "@types/react": "^17.0.40",
         "@types/react-dom": "^17.0.26",
         "@types/seedrandom": "^3.0.1",
         "autoprefixer": "^10.3.4",
