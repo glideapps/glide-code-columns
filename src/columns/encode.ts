@@ -15,8 +15,8 @@ function getEncoding(type: EncodingType): Encoding {
     switch (type) {
         case "base64":
             return {
-                encode: btoa.bind(window),
-                decode: atob.bind(window),
+                encode: btoa.bind(globalThis),
+                decode: atob.bind(globalThis),
             };
         case "url":
             return {
