@@ -6,7 +6,7 @@ import "iframe-resizer";
 
 export * from "../glide";
 
-const REPL: React.VFC<ColumnDefinition<any>> = props => {
+const REPL: React.FC<ColumnDefinition<any>> = props => {
     const {
         params,
         result: { type: resultType },

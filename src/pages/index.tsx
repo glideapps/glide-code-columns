@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-    const manifests = getColumnManifests();
+    const manifests = await getColumnManifests();
     return {
         props: {
             manifests: removeUndefineds(manifests),

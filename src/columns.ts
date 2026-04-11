@@ -11,6 +11,7 @@ export function getColumnSlugs(): string[] {
         .map(p => p.replace(".ts", ""));
 }
 
+// Synchronous version — works in Jest/ts-jest where ESM deps are transpiled to CJS.
 export function getColumnDefinition(slug: string): ColumnDefinition<any> {
     const { default: manifest } = require(`${__dirname}/columns/${slug}`) as {
         default: ColumnDefinition<any>;
@@ -18,19 +19,19 @@ export function getColumnDefinition(slug: string): ColumnDefinition<any> {
     return manifest;
 }
 
-export function getColumnDefinitions(): Record<string, ColumnDefinition<any>> {
-    const defs = {};
-    const slugs = getColumnSlugs();
-    for (const slug of slugs) {
-        defs[slug] = getColumnDefinition(slug);
-    }
-    return defs;
+// Async version — works in Next.js webpack server context where ESM packages
+// may be compiled as async modules (using import() properly awaits them).
+export async function getColumnDefinitionAsync(slug: string): Promise<ColumnDefinition<any>> {
+    const { default: manifest } = await import(`./columns/${slug}`) as {
+        default: ColumnDefinition<any>;
+    };
+    return manifest;
 }
 
-export function getColumnManifests(): Record<string, Manifest> {
-    const definitions = getColumnDefinitions();
-    const manifests = Object.fromEntries(
-        Object.entries(definitions).map(([slug, def]) => [slug, toStrictManifest(def)])
+export async function getColumnManifests(): Promise<Record<string, Manifest>> {
+    const slugs = getColumnSlugs();
+    const pairs = await Promise.all(
+        slugs.map(async slug => [slug, toStrictManifest(await getColumnDefinitionAsync(slug))] as const)
     );
-    return manifests;
+    return Object.fromEntries(pairs);
 }

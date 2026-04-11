@@ -1,5 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from "next";
-import { getColumnSlugs, getColumnDefinition } from "../../columns";
+import { useState, useEffect } from "react";
+import { getColumnSlugs, getColumnDefinitionAsync } from "../../columns";
+import { ColumnDefinition } from "../../glide";
 import REPL from "../../components/REPL";
 
 interface Props {
@@ -24,7 +26,13 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
 
 const PreviewPage = (props: Props) => {
     const { slug } = props;
-    const manifest = getColumnDefinition(slug);
+    const [manifest, setManifest] = useState<ColumnDefinition<any> | null>(null);
+
+    useEffect(() => {
+        getColumnDefinitionAsync(slug).then(setManifest);
+    }, [slug]);
+
+    if (!manifest) return null;
     return <REPL key={slug} {...manifest} />;
 };
 
