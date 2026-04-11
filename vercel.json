@@ -1,0 +1,56 @@
+{
+    "headers": [
+        {
+            "source": "/:slug/index.js",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=31536000, immutable"
+                },
+                {
+                    "key": "CDN-Cache-Control",
+                    "value": "public, max-age=31536000, immutable"
+                }
+            ]
+        },
+        {
+            "source": "/:slug/function.js",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=31536000, immutable"
+                },
+                {
+                    "key": "CDN-Cache-Control",
+                    "value": "public, max-age=31536000, immutable"
+                }
+            ]
+        },
+        {
+            "source": "/:slug/glide.json",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=31536000, immutable"
+                },
+                {
+                    "key": "CDN-Cache-Control",
+                    "value": "public, max-age=31536000, immutable"
+                }
+            ]
+        },
+        {
+            "source": "/all.json",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, s-maxage=86400, stale-while-revalidate=3600"
+                },
+                {
+                    "key": "CDN-Cache-Control",
+                    "value": "public, s-maxage=86400, stale-while-revalidate=3600"
+                }
+            ]
+        }
+    ]
+}
